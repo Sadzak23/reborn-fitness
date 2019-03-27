@@ -2,31 +2,37 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { startLogout } from '../actions/auth';
 import { connect } from 'react-redux';
-import { firebase } from '../firebase/firebase'
 
-const user = firebase.auth().onAuthStateChanged((user) => {
-  // if (user) {
-    //   return user
-    // }
-  console.log(user.displayName)
-  return user.displayName.toString()
-});
+const toggle = () => {
+  const toggle = document.getElementById("logout");
+  if (toggle.style.display === "block") {
+    toggle.style.display = "none";
+  } else {
+    toggle.style.display = "block";
+  }
+};
 
-export const Header = ({ startLogout }) => (
+export const Header = ({ startLogout, userName, userPhoto }) => (
   <header className="header">
     <div className="content-container">
       <div className="header__content">
         <Link className="header__title" to="/dashboard">
-        <img className="header__img" src="/images/logo-header.png" alt="Reborn Fitness" />
+          <img className="header__img" src="/images/logo-header.png" alt="Reborn Fitness" />
         </Link>
-        <h1>p + {user()}</h1>
-        <button className="btn-logout" onClick={startLogout}>Logout</button>
+        <a className="avatar" onClick={toggle}>
+          <button className="btn-logout" id="logout" onClick={startLogout}>Logout</button>
+          <img title={userName} className="avatar__img" src={userPhoto} />
+        </a>
       </div>
     </div>
   </header>
 );
 
+const mapStateToProps = (state) => ({
+  userName: state.auth.userName,
+  userPhoto: state.auth.userPhoto
+});
 const mapDispatchToProps = (dispatch) => ({
   startLogout: () => dispatch(startLogout())
 });
-export default connect(undefined, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
