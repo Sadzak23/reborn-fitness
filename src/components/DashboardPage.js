@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const DashboardPage = () => (
-  <div>
-    Dashboard Page content
+  <div className="content-container">
+  <Link className="list-item" to="/workouts">
+    Workouts
+  </Link>
   </div>
 );
 

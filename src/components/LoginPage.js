@@ -6,7 +6,7 @@ export const LoginPage = ({ startLogin }) => (
   <div className="box-layout">
     <div className="box-layout__box">
       <h1 className="box-layout__title">
-      <img src="/images/logo.png" alt="Reborn Fitness" onerror="this.style.display='none'"/>
+      <img src="/images/logo.png" alt="Reborn Fitness" />
       </h1>
       <p>It's time to change your life!</p>
       <button className="big-button" onClick={startLogin}>Login with Google</button>

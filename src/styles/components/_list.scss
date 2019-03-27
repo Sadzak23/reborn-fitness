@@ -1,26 +1,25 @@
+.list-body {
+  margin-bottom: $l-size;
+}
 
-.expense-list-header {
+.list-header {
   align-items: center;
-  border: 1px solid darken($color: $off-white, $amount: 7%);
-  background: $off-white;
-  color: $gray;
+  border: 2px solid darken($color: $off-white, $amount: 9%);
+  background: $light-blue;
+  color: $off-white;
   display: flex;
   justify-content: space-between;
   padding: $s-size $m-size;
   p {
     margin: 0;
-  }
+  }  
   @media (max-width: $mobile-breakpoint) {
     flex-direction: column;
-  }
-}
+  }  
+}  
 
-.expense-list-body {
-  margin-bottom: $l-size;
-}
-
-.expense-list-item {
-  @extend .expense-list-header;
+.list-item {
+  @extend .list-header;
   background: none;
   border-top: none;
   color: $dark-gray;
@@ -31,7 +30,9 @@
   }
 }
 
-.expense-list-exp {
+
+
+.list-exp {
   h3 {
     margin: 0;
   };
@@ -45,15 +46,15 @@
   }
 }
 
-.expense-list-no-exp {
-  @extend .expense-list-header;
+.list-no-exp {
+  @extend .list-header;
   align-items: center;
   background: none;
   color: $gray;
   margin: 0;
 }
 
-.expense-list-amount {
+.list-amount {
   font-weight: bold;
   margin: 0;
   @media (max-width: $mobile-breakpoint) {
