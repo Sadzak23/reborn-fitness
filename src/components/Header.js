@@ -20,7 +20,10 @@ export const Header = ({ startLogout, userName, userPhoto }) => (
           <img className="header__img" src="/images/logo-header.png" alt="Reborn Fitness" />
         </Link>
         <a className="avatar" onClick={toggle}>
-          <button className="btn-logout" id="logout" onClick={startLogout}>Logout</button>
+          <div id="logout">
+            <p>{userName}</p>
+            <button className="btn-logout" onClick={startLogout}>Logout</button>
+          </div>
           <img title={userName} className="avatar__img" src={userPhoto} />
         </a>
       </div>

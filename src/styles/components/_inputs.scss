@@ -1,17 +1,28 @@
 .text-input {
   border: 1px solid #cacccd;
-  border-radius: 2px;
+  border-radius: 10px;
   height: 47.5px;
   font-size: $m-size;
   font-weight: 300;
   padding: $s-size;
+  &:focus {
+    outline: none;
+  }
 }
 
 .select {
   @extend .text-input;
+};
+
+.interval-input {
+  @extend .text-input;
+  margin-right: $s-size;
+}
+.interval-time-set {
+  @extend .interval-input;
+  width: 70px;
 }
 
-.textarea {
-  @extend .text-input;
-  height: 10rem;
-}
+.add-interval {
+  display: flex;
+};

@@ -1,6 +1,6 @@
-.list-body {
-  margin-bottom: $l-size;
-}
+// .list-body {
+//   margin-bottom: $l-size;
+// }
 
 .list-header {
   align-items: center;
@@ -9,7 +9,7 @@
   color: $off-white;
   display: flex;
   justify-content: space-between;
-  padding: $s-size $m-size;
+  padding: $s-size $l-size;
   p {
     margin: 0;
   }  
@@ -25,14 +25,13 @@
   color: $dark-gray;
   text-decoration: none;
   transition: background .3s ease;
+  padding: 0 $l-size;
   &:hover {
     background: $off-white;
   }
 }
 
-
-
-.list-exp {
+.list-int {
   h3 {
     margin: 0;
   };
@@ -46,7 +45,7 @@
   }
 }
 
-.list-no-exp {
+.list-no-int {
   @extend .list-header;
   align-items: center;
   background: none;
@@ -54,10 +53,15 @@
   margin: 0;
 }
 
-.list-amount {
+.list-duration {
   font-weight: bold;
   margin: 0;
   @media (max-width: $mobile-breakpoint) {
     margin: $s-size 0 0 0;
   }
-}
+};
+
+.form-label {
+  align-self: center;
+  padding-right: 5px;
+};

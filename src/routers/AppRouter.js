@@ -7,6 +7,9 @@ import NotFoundPage from '../components/NotFoundPage'
 import LoginPage from '../components/LoginPage.js';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import Timer from '../components/Timers/Timer';
+import TimersList from '../components/Timers/TimersList'
+import CreateTimerPage from '../components/Timers/CreateTimerPage';
 
 export const history = createBrowserHistory();
 
@@ -17,6 +20,9 @@ const AppRouter = () => (
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
         <PrivateRoute path="/workouts" component={WorkoutPage} />
+        <PrivateRoute path="/timer/:id" component={Timer} />
+        <PrivateRoute path="/timers" component={TimersList} />
+        <PrivateRoute path="/create-timer" component={CreateTimerPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
