@@ -4,7 +4,7 @@ import TimerForm from './TimerForm';
 import { createTimer } from '../../actions/timers'
 
 export class CreateTimerPage extends React.Component {
-  onSubmit = (timer) => {
+  onCreateTimer = (timer) => {
     this.props.createTimer(timer);
     this.props.history.push('/timers');
   };
@@ -18,7 +18,7 @@ export class CreateTimerPage extends React.Component {
         </div>
         <div className="content-container">
           <TimerForm
-            onSubmit={this.onSubmit}
+            onSubmit={this.onCreateTimer}
           />
         </div>
       </div>
@@ -28,7 +28,7 @@ export class CreateTimerPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   createTimer: (timer) => dispatch(createTimer(timer)),
-  startAddtimer: (timer) => dispatch(startAddtimer(timer))
+  //startAddtimer: (timer) => dispatch(startAddtimer(timer))
 });
 
 export default connect(undefined, mapDispatchToProps)(CreateTimerPage);

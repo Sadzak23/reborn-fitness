@@ -11,12 +11,12 @@ export default class TimerForm extends React.Component {
       warmupTime: props.timer ? props.timer.warmupTime : 10,
       cooldownTime: props.timer ? props.timer.cooldownTime : 0,
       intervals: props.timer ? props.timer.workout : [],
-      currentIndex: null,
+      error: "",
       currentIntervalName: "",
       currentIntervalMin: 0,
       currentIntervalSec: 0,
       currentIntervalType: "exercise",
-      currentIntervalColor: "#2bd99f"
+      currentIntervalColor: "#63d313"
     };
   };
   onNameChange = (e) => {
@@ -68,22 +68,29 @@ export default class TimerForm extends React.Component {
       this.setState({ error: "Please set valid duration." })
     } else {
       this.setState({ error: "" });
-      this.state.intervals.push({
-        intervalName: this.state.currentIntervalName,
-        intervalMin: this.state.currentIntervalMin,
-        intervalSec: this.state.currentIntervalSec,
-        intervalType: this.state.currentIntervalType,
-        intervalColor: this.state.currentIntervalColor
+      this.setState(() => {
+        this.state.intervals.push({
+          key: uuid(),
+          intervalName: this.state.currentIntervalName,
+          intervalMin: this.state.currentIntervalMin,
+          intervalSec: this.state.currentIntervalSec,
+          intervalType: this.state.currentIntervalType,
+          intervalColor: this.state.currentIntervalColor
+        });
       });
       this.setState({
         currentIntervalName: "",
         currentIntervalMin: 0,
         currentIntervalSec: 0,
         currentIntervalType: "exercise",
-        currentIntervalColor: "green"
+        currentIntervalColor: "#63d313"
       });
     };
-    console.log(this.state)
+  };
+
+  // Interval editing
+  onRemoveInterval = (id) => {
+    this.setState({ intervals: this.state.intervals.filter(interval => interval.key !== id) });
   };
 
   onSubmit = (e) => {
@@ -145,10 +152,12 @@ export default class TimerForm extends React.Component {
           <div className="list-body">
             {this.state.intervals.length === 0 ? (
               <p className="list-no-int">No Intervals Added</p>
-              ) : (
+            ) : (
                 this.state.intervals.map(interval =>
                   (<SingleInterval
-                    key={interval.intervalId}
+                    onRemove={this.onRemoveInterval}
+                    key={interval.key}
+                    id={interval.key}
                     {...interval}
                   />))
               )}

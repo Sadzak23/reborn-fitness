@@ -35,18 +35,18 @@ store.dispatch(createTimer({
   intervals: [{
     intervalName: "Vezba 1",
     intervalMin: 1,
-    intervalSec: 4,
+    intervalSec: 5,
     intervalType: "exercise",
     intervalColor: "#2bd99f"
   },{
     intervalName: "Pauza",
     intervalMin: 0,
-    intervalSec: 2,
+    intervalSec: 6,
     intervalType: "rest",
     intervalColor: "#1dc4f2"
   },{
     intervalName: "Vezba 2",
-    intervalMin: 0,
+    intervalMin: 2,
     intervalSec: 4,
     intervalType: "exercise",
     intervalColor: "#63d313"

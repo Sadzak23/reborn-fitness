@@ -107,7 +107,7 @@ class Timer extends React.Component {
       this.setState({
         color: this.props.timer.intervals[this.state.intervalNo - 1].intervalColor,
         phase: this.props.timer.intervals[this.state.intervalNo - 1].intervalName,
-        miliseconds: this.props.timer.intervals[this.state.intervalNo - 1].intervalSec * 1000,
+        miliseconds: this.props.timer.intervals[this.state.intervalNo - 1].intervalSec * 1000 + this.props.timer.intervals[this.state.intervalNo - 1].intervalMin * 60000,
         type: this.props.timer.intervals[this.state.intervalNo - 1].intervalType,
         intervalNo: this.state.intervalNo - 1
       });

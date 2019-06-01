@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SingleTimer from './SingleTimer'
+import {Link} from 'react-router-dom'
 
 const TimersListPage = (props) => (
   <div>
@@ -10,14 +11,17 @@ const TimersListPage = (props) => (
       </div>
     </div>
     <div className="content-container list-body">
-    <div className="list-header">
-    <p>Select Timer Workout</p>
-    </div>
-    <div className="list-body">
-    {
-              props.timers.length === 0 ? (
-                <p className="expense-list-no-exp">No timers</p>
-              ) : (
+      <div className="list-header">
+        <p>Select Timer Workout</p>
+        <Link to="/create-timer">
+        <button className="btn-logou">+</button>
+        </Link>
+      </div>
+      <div className="list-body">
+        {
+          props.timers.length === 0 ? (
+            <p className="expense-list-no-exp">No timers</p>
+          ) : (
               props.timers.map(timer =>
                 (<SingleTimer
                   key={timer.id}

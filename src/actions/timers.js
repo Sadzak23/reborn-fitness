@@ -6,32 +6,32 @@ export const createTimer = (timer) => ({
   timer
 });
 
-export const startCreateTimer = (workoutData = {}) => {
-  return (dispatch, getState) => {
-    const uid = getState().auth.uid;
-    const {
-      name = '',
-      warmupTime = 10,
-      cooldownTime = 0,
-      intervals = []      
-    } = workoutData;
+// export const startCreateTimer = (workoutData = {}) => {
+//   return (dispatch, getState) => {
+//     const uid = getState().auth.uid;
+//     const {
+//       name = '',
+//       warmupTime = 10,
+//       cooldownTime = 0,
+//       intervals = []      
+//     } = workoutData;
 
-    const timer = { name, warmupTime, cooldownTime, intervals };
+//     const timer = { name, warmupTime, cooldownTime, intervals };
 
-    return database.ref(`users/${uid}/expenses`).push(timer).then((ref) => {
-      dispatch(addExpense({
-        id: ref.key,
-        ...timer
-      }))
-    });
-  };
-};
+//     return database.ref(`users/${uid}/expenses`).push(timer).then((ref) => {
+//       dispatch(addExpense({
+//         id: ref.key,
+//         ...timer
+//       }))
+//     });
+//   };
+// };
 
-// // REMOVE_EXPENSE
-// export const removeExpense = ({ id } = {}) => ({
-//   type: 'REMOVE_EXPENSE',
-//   id
-// });
+// REMOVE_TIMER
+export const removeTimer = (id = null) => ({
+  type: 'REMOVE_TIMER',
+  id
+});
 
 // export const startRemoveExpense = ({ id }) => {
 //   return (dispatch, setState) => {
