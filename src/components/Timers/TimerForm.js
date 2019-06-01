@@ -68,15 +68,14 @@ export default class TimerForm extends React.Component {
       this.setState({ error: "Please set valid duration." })
     } else {
       this.setState({ error: "" });
-      this.setState(() => {
-        this.state.intervals.push({
-          key: uuid(),
-          intervalName: this.state.currentIntervalName,
-          intervalMin: this.state.currentIntervalMin,
-          intervalSec: this.state.currentIntervalSec,
-          intervalType: this.state.currentIntervalType,
-          intervalColor: this.state.currentIntervalColor
-        });
+      this.setState({ intervals: [...this.state.intervals, {
+        key: uuid(),
+        intervalName: this.state.currentIntervalName,
+        intervalMin: this.state.currentIntervalMin,
+        intervalSec: this.state.currentIntervalSec,
+        intervalType: this.state.currentIntervalType,
+        intervalColor: this.state.currentIntervalColor
+        }]
       });
       this.setState({
         currentIntervalName: "",
@@ -88,7 +87,6 @@ export default class TimerForm extends React.Component {
     };
   };
 
-  // Interval editing
   onRemoveInterval = (id) => {
     this.setState({ intervals: this.state.intervals.filter(interval => interval.key !== id) });
   };
