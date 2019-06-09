@@ -12,11 +12,13 @@ export default class TimerForm extends React.Component {
       cooldownTime: props.timer ? props.timer.cooldownTime : 0,
       intervals: props.timer ? props.timer.workout : [],
       error: "",
+      currentIntervalId: null,
       currentIntervalName: "",
       currentIntervalMin: 0,
       currentIntervalSec: 0,
       currentIntervalType: "exercise",
-      currentIntervalColor: "#63d313"
+      currentIntervalColor: "#63d313",
+      editInterval: false
     };
   };
   onNameChange = (e) => {
@@ -68,13 +70,14 @@ export default class TimerForm extends React.Component {
       this.setState({ error: "Please set valid duration." })
     } else {
       this.setState({ error: "" });
-      this.setState({ intervals: [...this.state.intervals, {
-        key: uuid(),
-        intervalName: this.state.currentIntervalName,
-        intervalMin: this.state.currentIntervalMin,
-        intervalSec: this.state.currentIntervalSec,
-        intervalType: this.state.currentIntervalType,
-        intervalColor: this.state.currentIntervalColor
+      this.setState({
+        intervals: [...this.state.intervals, {
+          key: uuid(),
+          intervalName: this.state.currentIntervalName,
+          intervalMin: this.state.currentIntervalMin,
+          intervalSec: this.state.currentIntervalSec,
+          intervalType: this.state.currentIntervalType,
+          intervalColor: this.state.currentIntervalColor
         }]
       });
       this.setState({
@@ -82,13 +85,62 @@ export default class TimerForm extends React.Component {
         currentIntervalMin: 0,
         currentIntervalSec: 0,
         currentIntervalType: "exercise",
-        currentIntervalColor: "#63d313"
+        currentIntervalColor: "#63d313",
+        currentIntervalId: null,
+        editInterval: false
       });
     };
   };
 
   onRemoveInterval = (id) => {
     this.setState({ intervals: this.state.intervals.filter(interval => interval.key !== id) });
+  };
+
+  onEditInterval = (id, intervalName, intervalMin, intervalSec, intervalType, intervalColor) => {
+    this.setState({
+      currentIntervalId: id,
+      currentIntervalName: intervalName,
+      currentIntervalMin: intervalMin,
+      currentIntervalSec: intervalSec,
+      currentIntervalType: intervalType,
+      currentIntervalColor: intervalColor,
+      editInterval: true
+    });
+  };
+
+  onReplaceInterval = () => {
+    if (!this.state.currentIntervalName) {
+      this.setState({ error: "Please provide name." });
+    } else if (this.state.currentIntervalMin === 0 & this.state.currentIntervalSec === 0) {
+      this.setState({ error: "Please set valid duration." })
+    } else {
+      this.setState({ error: "" });
+      const newIntervals = this.state.intervals.map((interval) => {
+        if (interval.key === this.state.currentIntervalId) {
+          return {
+            key: this.state.currentIntervalId,
+            intervalName: this.state.currentIntervalName,
+            intervalMin: this.state.currentIntervalMin,
+            intervalSec: this.state.currentIntervalSec,
+            intervalType: this.state.currentIntervalType,
+            intervalColor: this.state.currentIntervalColor
+          }
+        }
+        else {
+          return interval
+        }
+      })      
+      this.setState({
+        intervals: newIntervals,
+        currentIntervalName: "",
+        currentIntervalMin: 0,
+        currentIntervalSec: 0,
+        currentIntervalType: "exercise",
+        currentIntervalColor: "#63d313",
+        currentIntervalId: null,
+        editInterval: false
+      });
+    }
   };
 
   onSubmit = (e) => {
@@ -154,6 +206,7 @@ export default class TimerForm extends React.Component {
                 this.state.intervals.map(interval =>
                   (<SingleInterval
                     onRemove={this.onRemoveInterval}
+                    onEdit={this.onEditInterval}
                     key={interval.key}
                     id={interval.key}
                     {...interval}
@@ -220,6 +273,7 @@ export default class TimerForm extends React.Component {
             <option value="#e62222">Red</option>
             <option value="#1dc4f2">Blue</option>
           </select>
+          <button disabled={!this.state.editInterval} onClick={this.onReplaceInterval}>Replace</button>
           <button className="big-button" onClick={this.onAddInterval}>Add Interval</button>
         </div>
         <div>
