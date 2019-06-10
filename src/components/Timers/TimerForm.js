@@ -116,20 +116,18 @@ export default class TimerForm extends React.Component {
     } else {
       this.setState({ error: "" });
       const newIntervals = this.state.intervals.map((interval) => {
-        if (interval.key === this.state.currentIntervalId) {
-          return {
-            key: this.state.currentIntervalId,
-            intervalName: this.state.currentIntervalName,
-            intervalMin: this.state.currentIntervalMin,
-            intervalSec: this.state.currentIntervalSec,
-            intervalType: this.state.currentIntervalType,
-            intervalColor: this.state.currentIntervalColor
-          }
-        }
-        else {
+        if (interval.key !== this.state.currentIntervalId) {
           return interval
         }
-      })      
+        return {
+          key: this.state.currentIntervalId,
+          intervalName: this.state.currentIntervalName,
+          intervalMin: this.state.currentIntervalMin,
+          intervalSec: this.state.currentIntervalSec,
+          intervalType: this.state.currentIntervalType,
+          intervalColor: this.state.currentIntervalColor
+        }
+      })
       this.setState({
         intervals: newIntervals,
         currentIntervalName: "",
