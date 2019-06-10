@@ -165,30 +165,32 @@ export default class TimerForm extends React.Component {
       <div className="form" onSubmit={this.onSubmit}>
         {this.state.error && <p className="form__error">{this.state.error}</p>}
         <input
-          name="workout-name"
-          className="text-input"
-          type="text"
-          placeholder="Workout Name"
           autoFocus
-          value={this.state.description}
+          autoComplete="off"
+          className="text-input"
+          name="workout-name"
           onChange={this.onNameChange}
+          placeholder="Workout Name"
+          type="text"
+          value={this.state.description}
         />
         <div>
           <label htmlFor="warmup" className="form-label">Warmup Time</label>
           <input
-            name="warmup"
+            autoComplete="off"
             className="text-input interval-input"
+            name="warmup"
+            onChange={this.onWarmupChange}
             type="number"
             value={this.state.warmupTime}
-            onChange={this.onWarmupChange}
           />
           <label htmlFor="cooldown" className="form-label">Cooldown Time</label>
           <input
-            name="cooldown"
             className="text-input"
+            name="cooldown"
+            onChange={this.onCooldownChange}
             type="number"
             value={this.state.cooldownTime}
-            onChange={this.onCooldownChange}
           />
         </div>
         <div name="interval-list">
@@ -216,44 +218,44 @@ export default class TimerForm extends React.Component {
         <div className="add-interval">
           <label htmlFor="intervalName" className="form-label">Interval name</label>
           <input
-            name="intervalName"
-            className="interval-input"
-            type="text"
-            id="interval-name"
-            placeholder=""
             autoComplete="off"
-            value={this.state.currentIntervalName}
+            className="interval-input"
+            name="intervalName"
+            id="interval-name"
             onChange={this.onIntervalNameChange}
+            placeholder=""
+            type="text"
+            value={this.state.currentIntervalName}
           />
           <label htmlFor="min" className="form-label">Min</label>
           <input
-            className="interval-time-set"
-            type="number"
-            min="0"
-            id="interval-duration"
-            placeholder="min"
             autoComplete="off"
-            value={this.state.currentIntervalMin}
+            className="interval-time-set"
+            id="interval-duration"
+            min="0"
             onChange={this.onIntervalMinChange}
+            placeholder="min"
+            type="number"
+            value={this.state.currentIntervalMin}
           />
           <label htmlFor="sec" className="form-label">Sec</label>
           <input
+            autoComplete="off"
             className="interval-time-set"
-            type="number"
+            id="interval-duration"
             min="0"
             max="59"
-            id="interval-duration"
-            placeholder="sec"
-            autoComplete="off"
-            value={this.state.currentIntervalSec}
             onChange={this.onIntervalSecChange}
+            placeholder="sec"
+            type="number"
+            value={this.state.currentIntervalSec}
           />
           <select
             className="interval-input"
-            name="type"
             id="interval-type"
-            value={this.state.currentIntervalType}
+            name="type"
             onChange={this.onIntervalTypeChange}
+            value={this.state.currentIntervalType}
           >
             <option value="exercise">Exercise</option>
             <option value="rest">Rest</option>
@@ -262,8 +264,8 @@ export default class TimerForm extends React.Component {
             className="interval-input"
             name="color"
             id="interval-color"
-            value={this.state.currentIntervalColor}
             onChange={this.onIntervalColorChange}
+            value={this.state.currentIntervalColor}
           >
             <option value="#63d313">Green</option>
             <option value="#2bd99f">Mint</option>
