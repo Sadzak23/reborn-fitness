@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { faForward, faBackward, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faForward, faBackward, faPause, faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -144,6 +145,11 @@ class Timer extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: this.state.color }}>
+        <Link to="/timers">
+          <button className="btn-x">
+            <FontAwesomeIcon icon={faTimes} className="timer-x" />
+          </button>
+        </Link>
         <div className="content-container timer-container">
           <h1 className="timer-clock">{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
           <h3 className="interval-name">- {this.state.phase} -</h3>

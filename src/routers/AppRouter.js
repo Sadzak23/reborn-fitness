@@ -5,6 +5,7 @@ import DashboardPage from '../components/DashboardPage';
 import WorkoutPage from '../components/Workouts';
 import NotFoundPage from '../components/NotFoundPage'
 import LoginPage from '../components/LoginPage.js';
+import FullScreenRoute from './FullScreenRoute';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import Timer from '../components/timers/Timer';
@@ -20,7 +21,7 @@ const AppRouter = () => (
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
         <PrivateRoute path="/workouts" component={WorkoutPage} />
-        <PrivateRoute path="/timer/:id" component={Timer} />
+        <FullScreenRoute path="/timer/:id" component={Timer} />
         <PrivateRoute path="/timers" component={TimersList} />
         <PrivateRoute path="/create-timer" component={CreateTimerPage} />
         <Route component={NotFoundPage} />
