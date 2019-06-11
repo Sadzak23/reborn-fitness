@@ -12,9 +12,6 @@ const DashboardPage = () => (
       <div className="list-header">
         <p>Welcome to Reborn Fitness App</p>
       </div>
-      <Link className="list-item" to="/create-timer">
-        New Timer
-      </Link>
       <Link className="list-item" to="/timers">
         Timers
       </Link>
