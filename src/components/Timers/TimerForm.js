@@ -1,6 +1,7 @@
 import React from "react";
 import uuid from 'uuid';
 import SingleInterval from "./SingleInterval";
+import { colorMap } from '../ColorMap';
 
 export default class TimerForm extends React.Component {
   constructor(props) {
@@ -267,11 +268,11 @@ export default class TimerForm extends React.Component {
             onChange={this.onIntervalColorChange}
             value={this.state.currentIntervalColor}
           >
-            <option value="#63d313">Green</option>
-            <option value="#2bd99f">Mint</option>
-            <option value="#cccccc">Gray</option>
-            <option value="#e62222">Red</option>
-            <option value="#1dc4f2">Blue</option>
+            <option value={Object.keys(colorMap)[0]}>{colorMap[Object.keys(colorMap)[0]]}</option>
+            <option value={Object.keys(colorMap)[1]}>{colorMap[Object.keys(colorMap)[1]]}</option>
+            <option value={Object.keys(colorMap)[2]}>{colorMap[Object.keys(colorMap)[2]]}</option>
+            <option value={Object.keys(colorMap)[3]}>{colorMap[Object.keys(colorMap)[3]]}</option>
+            <option value={Object.keys(colorMap)[4]}>{colorMap[Object.keys(colorMap)[4]]}</option>
           </select>
           <button disabled={!this.state.editInterval} onClick={this.onReplaceInterval}>Replace</button>
           <button className="big-button" onClick={this.onAddInterval}>Add Interval</button>
