@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SingleTimer from './SingleTimer'
-import {Link} from 'react-router-dom'
+import SingleTimer from './SingleTimer';
+import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const TimersListPage = (props) => (
   <div>
@@ -14,7 +16,7 @@ const TimersListPage = (props) => (
       <div className="list-header">
         <p>Select Timer Workout</p>
         <Link to="/create-timer">
-        <button className="btn-logou">+</button>
+        <FontAwesomeIcon icon={faPlusCircle} style={{ color: '#fff' }} size="2x" />
         </Link>
       </div>
       <div className="list-body">

@@ -1,14 +1,25 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faPlay } from '@fortawesome/free-solid-svg-icons'
 
 const SingleTimer = ({ id, name, warmupTime, intervals }) => (
-  <Link className="list-item" to={`/timer/${id}`}>
+  <div className="list-item">
     <div className="list-int">
       <h3>{name}</h3>
-      <p>Warmup time: {warmupTime}</p>
+      <p>{intervals.length} intervals - Warmup time: {warmupTime}</p>
     </div>
-      <h3 className="list-duration">{intervals.length} intervals</h3>
-  </Link>
+    <div>
+      <Link to={`/timer/${id}`}>
+        <button className="btn-play">
+          <FontAwesomeIcon icon={faPlay} style={{ color: '#fff' }} />
+        </button>
+      </Link>
+      <button className="btn-edit">
+        <FontAwesomeIcon icon={faEdit} style={{ color: '#fff' }} />
+      </button>
+    </div>
+  </div>
 );
 
 export default SingleTimer;

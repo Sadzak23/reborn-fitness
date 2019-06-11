@@ -16,5 +16,28 @@
 
 .btn-remove {
   @extend .big-button;
-  background: #ac1c1c;
+  background: #b92828;
+}
+
+.btn-play {
+  background: #40d47e;
+  margin: 7px;
+  border-radius: 20px;
+  height: 4rem;
+  width: 9rem;
+}
+
+.btn-pause {
+  @extend .btn-play;
+  background: #b92828;
+}
+
+.btn-edit {
+  @extend .btn-play;
+  background: #e2df3f;
+}
+
+.btn-next-prev {
+  @extend .btn-play;
+  background: #1dc4f2;
 }

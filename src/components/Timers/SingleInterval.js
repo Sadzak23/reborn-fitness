@@ -31,7 +31,7 @@ const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, inter
       </div>
       <div>
         <button onClick={onEditInterval}>Edit</button>
-        <button onClick={onRemoveInterval}>X</button>
+        <button className="btn-remove" onClick={onRemoveInterval}>X</button>
       </div>
     </div>
   )

@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { faForward, faBackward, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 class Timer extends React.Component {
@@ -141,23 +143,25 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="page-header">
-          <div className="content-container">
-            <h1 className="page-header__title">Timer</h1>
+      <div style={{ backgroundColor: this.state.color }}>
+        <div className="content-container timer-container">
+          <h1 className="timer-clock">{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
+          <h3 className="interval-name">- {this.state.phase} -</h3>
+          <div className="timer-intervals">
+            <h2>Interval: {this.state.intervalNo + 1}</h2>
+            <h2>Exercise: {this.state.exerciseNo}</h2>
           </div>
-        </div>
-        <div className="content-container">
-          <div style={{ backgroundColor: this.state.color }} className="timer-clock">
-            <h1>{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
-          </div>
-          <h3>- {this.state.phase} -</h3>
-          <p>Interval: {this.state.intervalNo + 1}</p>
-          <p>Exercise: {this.state.exerciseNo}</p>
           <p>Type: {this.state.type}</p>
-          <button onClick={this.handlePrevious} className="button">Previous</button>
-          <button onClick={this.togglePause} className="big-button">{this.state.paused ? 'Play' : 'Pause'}</button>
-          <button onClick={this.handleNext} className="button">Next</button>
+          <div className="timer-controls">
+            <button onClick={this.handlePrevious} className="btn-next-prev">
+              <FontAwesomeIcon icon={faBackward} style={{ color: '#fff' }} />
+            </button>
+            <button onClick={this.togglePause} className={this.state.paused ? "btn-play" : "btn-pause"}>
+              {this.state.paused ? <FontAwesomeIcon icon={faPlay} style={{ color: '#fff' }} /> : <FontAwesomeIcon icon={faPause} style={{ color: '#fff' }} />}</button>
+            <button onClick={this.handleNext} className="btn-next-prev">
+              <FontAwesomeIcon icon={faForward} style={{ color: '#fff' }} />
+            </button>
+          </div>
         </div>
       </div>
     );
