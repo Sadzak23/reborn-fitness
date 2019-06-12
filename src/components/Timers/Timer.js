@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { faForward, faBackward, faPause, faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 class Timer extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +11,6 @@ class Timer extends React.Component {
       this.state = {
         color: "#1dc4f2",
         intervalNo: -1,
-        exerciseNo: 0,
         paused: true,
         phase: "Warmup",
         miliseconds: props.timer.warmupTime * 1000,
@@ -23,7 +21,6 @@ class Timer extends React.Component {
       this.state = {
         color: props.timer.intervals[0].intervalColor,
         intervalNo: 0,
-        exerciseNo: 1,
         paused: true,
         phase: props.timer.intervals[0].intervalName,
         miliseconds: props.timer.intervals[0].intervalSec * 1000 + props.timer.intervals[0].intervalMin * 60000,
@@ -46,12 +43,6 @@ class Timer extends React.Component {
           intervalNo: this.state.intervalNo + 1
         });
 
-        // Exercise number  
-        if (this.state.type === "exercise") {
-          this.setState({
-            exerciseNo: this.state.exerciseNo + 1
-          });
-        };
         // Play sound on 0
         new Audio('../assets/beep0.mp3').play();
       };
@@ -97,11 +88,6 @@ class Timer extends React.Component {
         type: this.props.timer.intervals[this.state.intervalNo + 1].intervalType,
         intervalNo: this.state.intervalNo + 1
       });
-      // if (this.state.type === "exercise") {
-      //   this.setState({
-      //     exerciseNo: this.state.exerciseNo + 1
-      //   });
-      // };
     };
   };
 
@@ -114,48 +100,63 @@ class Timer extends React.Component {
         type: this.props.timer.intervals[this.state.intervalNo - 1].intervalType,
         intervalNo: this.state.intervalNo - 1
       });
-      if (this.state.type === "exercise") {
-        this.setState({
-          exerciseNo: this.state.exerciseNo - 1
-        });
-      };
     };
   };
 
   formatTime = (seconds) => {
     const add0 = (num) => ("0" + num).slice(-2);
 
-    if (seconds >= 60 && seconds < 3600) {
+    if (seconds < 3600) {
       const minutes = Math.floor(seconds / 60);
       seconds = seconds % 60;
       return `${add0(minutes)}:${add0(seconds)}`;
     }
-    else if (seconds >= 3600) {
+    else {
       let minutes = Math.floor(seconds / 60);
       seconds = seconds % 60;
       const hours = Math.floor(minutes / 60)
       minutes = minutes % 60;
       return `${add0(hours)}:${add0(minutes)}:${add0(seconds)}`;
     }
-    else {
-      return seconds
-    };
   };
 
   render() {
+    //Exercise number calculator
+    const exerciseNo = this.props.timer.intervals.slice(0, this.state.intervalNo + 1).reduce((count, interval) =>
+      interval.intervalType === "exercise" ? count + 1 : count, 0);
+
+    //Total exercise number
+    const totalExercisesNo = this.props.timer.intervals.reduce((count, interval) =>
+      interval.intervalType === "exercise" ? count + 1 : count, 0);
+
+    //Elapsed Time
+    const elapsedTime = this.props.timer.intervals.slice(
+      0, this.state.intervalNo + 1).reduce(
+        (time, interval) => interval.intervalSec + interval.intervalMin * 60 + time,0) - 
+        Math.ceil(this.state.miliseconds / 1000);
+
+    //Remaining time
+    const remainingTime = this.props.timer.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time,0) - elapsedTime;
+
     return (
       <div style={{ backgroundColor: this.state.color }}>
         <Link to="/timers">
           <button className="btn-x">
             <FontAwesomeIcon icon={faTimes} className="timer-x" />
           </button>
-        </Link>
+          </Link>
         <div className="content-container timer-container">
           <h1 className="timer-clock">{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
           <h3 className="interval-name">- {this.state.phase} -</h3>
           <div className="timer-intervals">
-            <h2>Interval: {this.state.intervalNo + 1}</h2>
-            <h2>Exercise: {this.state.exerciseNo}</h2>
+            <div>
+              <h2>Interval: {this.state.intervalNo + 1}</h2>
+              <h2>Exercise: {exerciseNo} / {totalExercisesNo}</h2>
+            </div>
+            <div>
+            <h2>Elapsed Time: {elapsedTime < 0 ? "00:00" : this.formatTime(elapsedTime )}</h2>
+            <h2>Time Remaining: {this.formatTime(remainingTime)}</h2>
+            </div>
           </div>
           <p>Type: {this.state.type}</p>
           <div className="timer-controls">

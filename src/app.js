@@ -75,7 +75,7 @@ store.dispatch(createTimer({
     intervalMin: 0,
     intervalSec: 6,
     intervalType: "exercise",
-    intervalColor: "#e62222"
+    intervalColor: "#f54c4c"
   },]
 }));
 
