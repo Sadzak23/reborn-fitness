@@ -10,3 +10,16 @@
 margin: 0 0 $m-size 0;
 font-style: italic;
 }
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-timer-name {
+  width: 30vw;
+}
+
+.form-interval-name {
+  width: -webkit-fill-available;
+}

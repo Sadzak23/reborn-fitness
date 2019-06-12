@@ -3,7 +3,7 @@ import uuid from 'uuid';
 import SingleInterval from "./SingleInterval";
 import { colorMap } from '../ColorMap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileMedical, faSyncAlt, faPlusCircle, faSave } from "@fortawesome/free-solid-svg-icons";
+import { faFileMedical, faSyncAlt, faPlusCircle, faSave, faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 export default class TimerForm extends React.Component {
   constructor(props) {
@@ -12,7 +12,6 @@ export default class TimerForm extends React.Component {
     this.state = {
       name: props.timer ? props.timer.name : '',
       warmupTime: props.timer ? props.timer.warmupTime : 10,
-      cooldownTime: props.timer ? props.timer.cooldownTime : 0,
       intervals: props.timer ? props.timer.workout : [],
       error: "",
       currentIntervalId: null,
@@ -34,12 +33,6 @@ export default class TimerForm extends React.Component {
     const warmupTime = parseInt(e.target.value);
     this.setState({
       warmupTime
-    });
-  };
-  onCooldownChange = (e) => {
-    const cooldownTime = parseInt(e.target.value);
-    this.setState({
-      cooldownTime
     });
   };
 
@@ -158,49 +151,40 @@ export default class TimerForm extends React.Component {
         id: uuid(),
         name: this.state.name,
         warmupTime: this.state.warmupTime,
-        cooldownTime: this.state.cooldownTime,
         intervals: this.state.intervals
       });
     }
   };
   render() {
     return (
-      <div className="form" onSubmit={this.onSubmit}>
+      <div className="form">
         {this.state.error && <p className="form__error">{this.state.error}</p>}
-        <input
-          autoFocus
-          autoComplete="off"
-          className="text-input"
-          name="workout-name"
-          onChange={this.onNameChange}
-          placeholder="Workout Name"
-          type="text"
-          value={this.state.description}
-        />
-        <div>
-          <label htmlFor="warmup" className="form-label">Warmup Time</label>
+        <div className="form-header">
           <input
+            autoFocus
             autoComplete="off"
-            className="text-input interval-input"
-            name="warmup"
-            onChange={this.onWarmupChange}
-            type="number"
-            value={this.state.warmupTime}
+            className="text-input form-timer-name"
+            name="workout-name"
+            onChange={this.onNameChange}
+            placeholder="Workout Name"
+            type="text"
+            value={this.state.description}
           />
-          <label htmlFor="cooldown" className="form-label">Cooldown Time</label>
-          <input
-            className="text-input"
-            name="cooldown"
-            onChange={this.onCooldownChange}
-            type="number"
-            value={this.state.cooldownTime}
-          />
+          <div>
+            <label htmlFor="warmup" className="form-label">Warmup Time</label>
+            <input
+              autoComplete="off"
+              className="text-input"
+              name="warmup"
+              onChange={this.onWarmupChange}
+              type="number"
+              value={this.state.warmupTime}
+            />
+          </div>
         </div>
         <div name="interval-list">
           <div className="list-header">
-            <p className="show-mobile">Intervals</p>
-            <p className="show-desktop">Interval</p>
-            <p className="show-desktop">Duration</p>
+            <p><FontAwesomeIcon icon={faClipboardList}/> Intervals</p>
           </div>
           <div className="list-body">
             {this.state.intervals.length === 0 ? (
@@ -219,25 +203,23 @@ export default class TimerForm extends React.Component {
         </div>
 
         <div className="add-interval">
-          <label htmlFor="intervalName" className="form-label">Interval name</label>
           <input
             autoComplete="off"
-            className="interval-input"
+            className="interval-input form-interval-name"
             name="intervalName"
             id="interval-name"
             onChange={this.onIntervalNameChange}
-            placeholder=""
+            placeholder="Interval name"
             type="text"
             value={this.state.currentIntervalName}
           />
           <label htmlFor="min" className="form-label">Min</label>
           <input
             autoComplete="off"
-            className="interval-time-set"
+            className="interval-time-set form-min"
             id="interval-duration"
             min="0"
             onChange={this.onIntervalMinChange}
-            placeholder="min"
             type="number"
             value={this.state.currentIntervalMin}
           />
@@ -249,7 +231,6 @@ export default class TimerForm extends React.Component {
             min="0"
             max="59"
             onChange={this.onIntervalSecChange}
-            placeholder="sec"
             type="number"
             value={this.state.currentIntervalSec}
           />

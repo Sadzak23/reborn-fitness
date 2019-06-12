@@ -147,7 +147,7 @@ class Timer extends React.Component {
           </Link>
         <div className="content-container timer-container">
           <h1 className="timer-clock">{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
-          <h3 className="interval-name">- {this.state.phase} -</h3>
+          <h3 className="timer-interval-name">- {this.state.phase} -</h3>
           <div className="timer-intervals">
             <div>
               <h2>Interval: {this.state.intervalNo + 1}</h2>
