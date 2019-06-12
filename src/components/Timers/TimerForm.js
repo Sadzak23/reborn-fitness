@@ -2,6 +2,8 @@ import React from "react";
 import uuid from 'uuid';
 import SingleInterval from "./SingleInterval";
 import { colorMap } from '../ColorMap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileMedical, faSyncAlt, faPlusCircle, faSave } from "@fortawesome/free-solid-svg-icons";
 
 export default class TimerForm extends React.Component {
   constructor(props) {
@@ -274,11 +276,17 @@ export default class TimerForm extends React.Component {
             <option value={Object.keys(colorMap)[3]}>{colorMap[Object.keys(colorMap)[3]]}</option>
             <option value={Object.keys(colorMap)[4]}>{colorMap[Object.keys(colorMap)[4]]}</option>
           </select>
-          <button disabled={!this.state.editInterval} onClick={this.onReplaceInterval}>Replace</button>
-          <button className="big-button" onClick={this.onAddInterval}>Add Interval</button>
+          <button disabled={!this.state.editInterval} className="btn-replace-int" onClick={this.onReplaceInterval}>
+            <FontAwesomeIcon icon={faSyncAlt} /> Replace
+          </button>
+          <button className="btn-add-int" onClick={this.onAddInterval}>
+            <FontAwesomeIcon icon={faPlusCircle} /> Add New
+          </button>
         </div>
         <div>
-          <button className="big-button" onClick={this.onSubmit}>Save Timer</button>
+          <button className="btn-save" onClick={this.onSubmit}>
+            <FontAwesomeIcon icon={faSave} /> Save Timer
+          </button>
         </div>
       </div>
     )

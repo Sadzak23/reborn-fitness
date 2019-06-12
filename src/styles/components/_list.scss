@@ -5,6 +5,8 @@
 .list-header {
   align-items: center;
   border: 2px solid darken($color: $off-white, $amount: 9%);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   background: $light-blue;
   color: $off-white;
   display: flex;
@@ -22,6 +24,7 @@
   @extend .list-header;
   background: none;
   border-top: none;
+  border-radius: 0px;
   color: $dark-gray;
   text-decoration: none;
   transition: background .3s ease;

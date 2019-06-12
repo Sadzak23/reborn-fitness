@@ -1,5 +1,7 @@
 import React from 'react';
 import { colorMap } from '../ColorMap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, intervalColor, intervalSec, intervalType, }) => {
   const onRemoveInterval = () => {
@@ -8,7 +10,7 @@ const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, inter
   const onEditInterval = () => {
     onEdit(id, intervalName, intervalMin, intervalSec, intervalType, intervalColor)
   };
-  
+
   return (
     <div className="list-item">
       <div className="list-int">
@@ -16,8 +18,12 @@ const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, inter
         <p>{intervalType} - {colorMap[intervalColor]}</p>
       </div>
       <div>
-        <button onClick={onEditInterval}>Edit</button>
-        <button className="btn-remove" onClick={onRemoveInterval}>X</button>
+        <button className="btn-edit-s" onClick={onEditInterval}>
+          <FontAwesomeIcon icon={faPen} style={{ color: '#fff' }} />
+        </button>
+        <button className="btn-remove-s" onClick={onRemoveInterval}>
+          <FontAwesomeIcon icon={faTimes} style={{ color: '#fff' }} />
+        </button>
       </div>
     </div>
   )

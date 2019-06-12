@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPen } from '@fortawesome/free-solid-svg-icons'
 
 const SingleTimer = ({ id, name, warmupTime, intervals }) => (
   <div className="list-item">
@@ -15,8 +15,8 @@ const SingleTimer = ({ id, name, warmupTime, intervals }) => (
           <FontAwesomeIcon icon={faPlay} style={{ color: '#fff' }} />
         </button>
       </Link>
-      <button className="btn-edit">
-        <FontAwesomeIcon icon={faEdit} style={{ color: '#fff' }} />
+      <button className="btn-edit-m">
+        <FontAwesomeIcon icon={faPen} style={{ color: '#fff' }} />
       </button>
     </div>
   </div>

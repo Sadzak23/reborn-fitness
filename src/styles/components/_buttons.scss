@@ -14,11 +14,26 @@
   color: white;
 };
 
-.btn-remove {
-  @extend .big-button;
+.btn-remove-s {
   background: #b92828;
+  border-radius: 100%;
+  height: 3rem;
+  width: 3rem;
+  margin-left: 7px;
 }
 
+.btn-edit-s {
+  @extend .btn-remove-s;
+  background: #1e83d6;
+}
+
+.btn-edit-m {
+  @extend .btn-edit-s;
+  height: 4rem;
+  width: 4rem;
+}
+
+//Timer
 .btn-play {
   background: #40d47e;
   margin: 7px;
@@ -30,11 +45,6 @@
 .btn-pause {
   @extend .btn-play;
   background: #b92828;
-}
-
-.btn-edit {
-  @extend .btn-play;
-  background: #e2df3f;
 }
 
 .btn-next-prev {
@@ -51,4 +61,37 @@
   border-radius: 100%;
   height: 4rem;
   width: 4rem;
+}
+
+// Timer Form
+.btn-add-int {
+  background: #1e83d6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 7px;
+  border-radius: 20px;
+  color: #fff;
+  height: 5rem;
+  width: 10rem;
+};
+
+.btn-replace-int {
+  @extend .btn-add-int;
+  &:disabled {
+    background: #ccc;
+    border: 0px;
+  }
+}
+
+.btn-save {
+  background: #1e83d6;
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 20px;
+  margin: $m-size 0;
+  height: 5rem;
+  width: -webkit-fill-available;
 }
