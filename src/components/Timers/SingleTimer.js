@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { removeTimer } from '../../actions/timers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPen, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-const SingleTimer = ({ id, name, warmupTime, intervals }) => (
+export const SingleTimer = ({ id, name, warmupTime, intervals, removeTimer }) => {
+  const onRemoveTimer = () => {
+    removeTimer(id)
+  };
+  
+  return (
   <div className="list-item">
     <div className="list-int">
       <h3>{name}</h3>
@@ -18,8 +25,15 @@ const SingleTimer = ({ id, name, warmupTime, intervals }) => (
       <button className="btn-edit-m">
         <FontAwesomeIcon icon={faPen} style={{ color: '#fff' }} />
       </button>
+      <button className="btn-remove-m" onClick={onRemoveTimer}>
+        <FontAwesomeIcon icon={faTimes} style={{ color: '#fff' }} />
+      </button>
     </div>
   </div>
-);
+)};
 
-export default SingleTimer;
+const mapDispatchToProps = (dispatch) => ({
+  removeTimer: (id) => dispatch(removeTimer(id))
+});
+
+export default connect(undefined, mapDispatchToProps)(SingleTimer);

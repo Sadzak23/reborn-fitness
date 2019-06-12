@@ -18,8 +18,8 @@ export const createTimer = (timer) => ({
 
 //     const timer = { name, warmupTime, cooldownTime, intervals };
 
-//     return database.ref(`users/${uid}/expenses`).push(timer).then((ref) => {
-//       dispatch(addExpense({
+//     return database.ref(`users/${uid}/timers`).push(timer).then((ref) => {
+//       dispatch(createTimer({
 //         id: ref.key,
 //         ...timer
 //       }))
@@ -57,29 +57,5 @@ export const removeTimer = (id = null) => ({
 //     }).then(() => {
 //       dispatch(editExpense(id, updates));
 //     })
-//   };
-// };
-
-// // SET_EXPENSES
-// export const setExpenses = (expenses) => ({
-//   type: 'SET_EXPENSES',
-//   expenses
-// });
-
-// export const startSetExpenses = () => {
-//   return (dispatch, setState) => {
-//     const uid = setState().auth.uid;
-//     return database.ref(`users/${uid}/expenses`)
-//       .once('value')
-//       .then((snapshot) => {
-//         const expensesData = [];
-//         snapshot.forEach((child) => {
-//           expensesData.push({
-//             id: child.key,
-//             ...child.val()
-//           });
-//         });
-//         dispatch(setExpenses(expensesData));
-//       });
 //   };
 // };

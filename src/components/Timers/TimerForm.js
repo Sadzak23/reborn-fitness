@@ -3,7 +3,7 @@ import uuid from 'uuid';
 import SingleInterval from "./SingleInterval";
 import { colorMap } from '../ColorMap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileMedical, faSyncAlt, faPlusCircle, faSave, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import { faSyncAlt, faPlusCircle, faSave, faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 export default class TimerForm extends React.Component {
   constructor(props) {

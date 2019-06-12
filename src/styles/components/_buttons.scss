@@ -22,6 +22,11 @@
   margin-left: 7px;
 }
 
+.btn-remove-m {
+  @extend .btn-remove-s;
+  height: 4rem;
+  width: 4rem;
+}
 .btn-edit-s {
   @extend .btn-remove-s;
   background: #1e83d6;

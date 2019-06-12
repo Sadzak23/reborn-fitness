@@ -172,8 +172,8 @@ class Timer extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = (state, props) => {
   return {
