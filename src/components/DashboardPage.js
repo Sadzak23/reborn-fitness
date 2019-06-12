@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStopwatch, faDumbbell, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
 
 const DashboardPage = () => (
-  <div className="dashboard-container">
+  <div>
     <div className="content-container">
       <div className="list-header">
         <p>Welcome to Reborn Fitness App</p>

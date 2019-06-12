@@ -7,11 +7,6 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const TimersListPage = (props) => (
   <div>
-    <div className="page-header">
-      <div className="content-container">
-        <h1 className="page-header__title">Timer Workouts</h1>
-      </div>
-    </div>
     <div className="content-container list-body">
       <div className="list-header">
         <p>Select Timer Workout</p>
@@ -22,7 +17,7 @@ const TimersListPage = (props) => (
       <div className="list-body">
         {
           props.timers.length === 0 ? (
-            <p className="expense-list-no-exp">No timers</p>
+            <p className="list-no-int">No timers</p>
           ) : (
               props.timers.map(timer =>
                 (<SingleTimer
