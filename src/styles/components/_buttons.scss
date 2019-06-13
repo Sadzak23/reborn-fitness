@@ -100,3 +100,10 @@
   height: 5rem;
   width: -webkit-fill-available;
 }
+
+.btn-alert-delete {
+  background: #f27474;
+  &:hover {
+    background-color: #db6a6a !important; 
+  }
+}
