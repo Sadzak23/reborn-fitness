@@ -1,8 +1,11 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 const LoadingPage = () => (
   <div className="loader">
-    <img src="/images/loader.gif" className="loader__img"/>
+  <FontAwesomeIcon icon={faSyncAlt} className="loader__img" spin />
   </div>
 );
 
