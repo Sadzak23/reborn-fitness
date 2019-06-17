@@ -103,6 +103,7 @@ export default class TimerForm extends React.Component {
       currentIntervalColor: intervalColor,
       editInterval: true
     });
+    this.state.currentIntervalId
   };
 
   onReplaceInterval = () => {
@@ -209,6 +210,7 @@ export default class TimerForm extends React.Component {
             ) : (
                 this.state.intervals.map(interval =>
                   (<SingleInterval
+                    editingClass={this.state.editInterval &&this.state.currentIntervalId == interval.id && "form-edit-interval"}
                     onRemove={this.onRemoveInterval}
                     onEdit={this.onEditInterval}
                     key={interval.id}
@@ -220,9 +222,9 @@ export default class TimerForm extends React.Component {
 
         <div className="form-interval">
           <input
+            name="intervalName"
             autoComplete="off"
             className="interval-input form-interval-name"
-            name="intervalName"
             id="interval-name"
             onChange={this.onIntervalNameChange}
             placeholder="Interval name"
@@ -280,14 +282,14 @@ export default class TimerForm extends React.Component {
             <FontAwesomeIcon icon={faPlusCircle} /> Add New
           </button>
         </div>
-        <div style={{display: "flex"}}>
-        {!this.props.timer ?
-          <button className="btn-save" onClick={this.onAddTimer}>
-            <FontAwesomeIcon icon={faSave} /> Add New Timer
+        <div style={{ display: "flex" }}>
+          {!this.props.timer ?
+            <button className="btn-save" onClick={this.onAddTimer}>
+              <FontAwesomeIcon icon={faSave} /> Add New Timer
           </button> :
-          <button className="btn-save" onClick={this.onEditTimer}>
-            <FontAwesomeIcon icon={faSave} /> Save Changes
-          </button> }
+            <button className="btn-save" onClick={this.onEditTimer}>
+              <FontAwesomeIcon icon={faSave} /> Save Changes
+          </button>}
           <Link className="form-cancel" to="/timers">
             <button className="btn-cancel">
               <FontAwesomeIcon icon={faBan} /> Cancel

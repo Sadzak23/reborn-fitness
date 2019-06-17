@@ -3,7 +3,7 @@ import { colorMap } from '../ColorMap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faPen } from '@fortawesome/free-solid-svg-icons';
 
-const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, intervalColor, intervalSec, intervalType, }) => {
+const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, intervalColor, intervalSec, intervalType, editingClass }) => {
   const onRemoveInterval = () => {
     onRemove(id)
   };
@@ -12,7 +12,7 @@ const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, inter
   };
 
   return (
-    <div className="list-item">
+    <div className={`list-item ${editingClass}`}>
       <div className="list-int">
         <h3>{intervalMin}:{intervalSec < 10 ? "0" + intervalSec : intervalSec} - {intervalName}</h3>
         <p>{intervalType} - {colorMap[intervalColor]}</p>
