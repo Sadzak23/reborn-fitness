@@ -13,7 +13,7 @@ export class CreateTimerPage extends React.Component {
       <div>
         <div className="content-container">
           <TimerForm
-            onSubmit={this.onCreateTimer}
+            onAddTimer={this.onCreateTimer}
           />
         </div>
       </div>

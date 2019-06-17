@@ -10,6 +10,7 @@ import PublicRoute from './PublicRoute';
 import Timer from '../components/timers/Timer';
 import TimersList from '../components/timers/TimersList'
 import CreateTimerPage from '../components/timers/CreateTimerPage';
+import EditTimerPage from '../components/timers/EditTimerPage';
 
 export const history = createBrowserHistory();
 
@@ -22,6 +23,7 @@ const AppRouter = () => (
         <FullScreenRoute path="/timer/:id" component={Timer} />
         <PrivateRoute path="/timers" component={TimersList} />
         <PrivateRoute path="/create-timer" component={CreateTimerPage} />
+        <PrivateRoute path="/edit-timer/:id" component={EditTimerPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

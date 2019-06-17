@@ -20,9 +20,11 @@
 }
 .interval-time-set {
   @extend .interval-input;
-  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
 }
 
-.add-interval {
-  display: flex;
-};
+.interval-select {
+  @extend .interval-input;
+  min-width: 110px;
+}

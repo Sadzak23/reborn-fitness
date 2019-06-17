@@ -19,7 +19,15 @@ font-style: italic;
 .form-timer-name {
   width: 30vw;
 }
+.form-interval {
+  display: flex;
+};
 
 .form-interval-name {
-  width: -webkit-fill-available;
+  width: 100%;
+}
+
+.form-cancel {
+  margin-left: 15px;
+  width: 40%;
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import uuid from 'uuid';
+import { Link } from 'react-router-dom';
 import SingleInterval from "./SingleInterval";
 import { colorMap } from '../ColorMap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSyncAlt, faPlusCircle, faSave, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import { faSyncAlt, faPlusCircle, faSave, faClipboardList, faBan } from "@fortawesome/free-solid-svg-icons";
 
 export default class TimerForm extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class TimerForm extends React.Component {
     this.state = {
       name: props.timer ? props.timer.name : '',
       warmupTime: props.timer ? props.timer.warmupTime : 10,
-      intervals: props.timer ? props.timer.workout : [],
+      intervals: props.timer ? props.timer.intervals : [],
       error: "",
       currentIntervalId: null,
       currentIntervalName: "",
@@ -68,7 +69,7 @@ export default class TimerForm extends React.Component {
       this.setState({ error: "" });
       this.setState({
         intervals: [...this.state.intervals, {
-          key: uuid(),
+          id: uuid(),
           intervalName: this.state.currentIntervalName,
           intervalMin: this.state.currentIntervalMin,
           intervalSec: this.state.currentIntervalSec,
@@ -89,7 +90,7 @@ export default class TimerForm extends React.Component {
   };
 
   onRemoveInterval = (id) => {
-    this.setState({ intervals: this.state.intervals.filter(interval => interval.key !== id) });
+    this.setState({ intervals: this.state.intervals.filter(interval => interval.id !== id) });
   };
 
   onEditInterval = (id, intervalName, intervalMin, intervalSec, intervalType, intervalColor) => {
@@ -112,11 +113,11 @@ export default class TimerForm extends React.Component {
     } else {
       this.setState({ error: "" });
       const newIntervals = this.state.intervals.map((interval) => {
-        if (interval.key !== this.state.currentIntervalId) {
+        if (interval.id !== this.state.currentIntervalId) {
           return interval
         }
         return {
-          key: this.state.currentIntervalId,
+          id: this.state.currentIntervalId,
           intervalName: this.state.currentIntervalName,
           intervalMin: this.state.currentIntervalMin,
           intervalSec: this.state.currentIntervalSec,
@@ -137,9 +138,7 @@ export default class TimerForm extends React.Component {
     }
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-
+  onAddTimer = () => {
     if (!this.state.name) {
       this.setState({ error: "Please provide name." });
     } else if (this.state.intervals.length === 0) {
@@ -147,7 +146,7 @@ export default class TimerForm extends React.Component {
     }
     else {
       this.setState({ error: "" });
-      this.props.onSubmit({
+      this.props.onAddTimer({
         id: uuid(),
         name: this.state.name,
         warmupTime: this.state.warmupTime,
@@ -155,6 +154,24 @@ export default class TimerForm extends React.Component {
       });
     }
   };
+
+  onEditTimer = () => {
+    console.log(this.props.timer)
+    if (!this.state.name) {
+      this.setState({ error: "Please provide name." });
+    } else if (this.state.intervals.length === 0) {
+      this.setState({ error: "Please add intervals." });
+    }
+    else {
+      this.setState({ error: "" });
+      this.props.onEditTimer(this.props.timer.id, {
+        name: this.state.name,
+        warmupTime: this.state.warmupTime,
+        intervals: this.state.intervals
+      });
+    }
+  };
+
   render() {
     return (
       <div className="form">
@@ -168,7 +185,7 @@ export default class TimerForm extends React.Component {
             onChange={this.onNameChange}
             placeholder="Workout Name"
             type="text"
-            value={this.state.description}
+            value={this.state.name}
           />
           <div>
             <label htmlFor="warmup" className="form-label">Warmup Time</label>
@@ -184,7 +201,7 @@ export default class TimerForm extends React.Component {
         </div>
         <div name="interval-list">
           <div className="list-header">
-            <p><FontAwesomeIcon icon={faClipboardList}/> Intervals</p>
+            <p><FontAwesomeIcon icon={faClipboardList} /> Intervals</p>
           </div>
           <div className="list-body">
             {this.state.intervals.length === 0 ? (
@@ -194,15 +211,14 @@ export default class TimerForm extends React.Component {
                   (<SingleInterval
                     onRemove={this.onRemoveInterval}
                     onEdit={this.onEditInterval}
-                    key={interval.key}
-                    id={interval.key}
+                    key={interval.id}
                     {...interval}
                   />))
               )}
           </div>
         </div>
 
-        <div className="add-interval">
+        <div className="form-interval">
           <input
             autoComplete="off"
             className="interval-input form-interval-name"
@@ -235,7 +251,7 @@ export default class TimerForm extends React.Component {
             value={this.state.currentIntervalSec}
           />
           <select
-            className="interval-input"
+            className="interval-select"
             id="interval-type"
             name="type"
             onChange={this.onIntervalTypeChange}
@@ -245,7 +261,7 @@ export default class TimerForm extends React.Component {
             <option value="rest">Rest</option>
           </select>
           <select
-            className="interval-input"
+            className="interval-select"
             name="color"
             id="interval-color"
             onChange={this.onIntervalColorChange}
@@ -264,10 +280,19 @@ export default class TimerForm extends React.Component {
             <FontAwesomeIcon icon={faPlusCircle} /> Add New
           </button>
         </div>
-        <div>
-          <button className="btn-save" onClick={this.onSubmit}>
-            <FontAwesomeIcon icon={faSave} /> Save Timer
+        <div style={{display: "flex"}}>
+        {!this.props.timer ?
+          <button className="btn-save" onClick={this.onAddTimer}>
+            <FontAwesomeIcon icon={faSave} /> Add New Timer
+          </button> :
+          <button className="btn-save" onClick={this.onEditTimer}>
+            <FontAwesomeIcon icon={faSave} /> Save Changes
+          </button> }
+          <Link className="form-cancel" to="/timers">
+            <button className="btn-cancel">
+              <FontAwesomeIcon icon={faBan} /> Cancel
           </button>
+          </Link>
         </div>
       </div>
     )

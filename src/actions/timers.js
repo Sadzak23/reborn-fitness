@@ -42,12 +42,12 @@ export const removeTimer = (id = null) => ({
 //   };
 // };
 
-// // EDIT_EXPENSE
-// export const editExpense = (id, updates) => ({
-//   type: 'EDIT_EXPENSE',
-//   id,
-//   updates
-// });
+// // EDIT_TIMER
+export const editTimer = (id, updates) => ({
+  type: 'EDIT_TIMER',
+  id,
+  updates
+});
 
 // export const startEditExpense = (id, updates) => {
 //   return (dispatch, setState) => {
