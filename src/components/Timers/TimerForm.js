@@ -90,7 +90,16 @@ export default class TimerForm extends React.Component {
   };
 
   onRemoveInterval = (id) => {
-    this.setState({ intervals: this.state.intervals.filter(interval => interval.id !== id) });
+    this.setState({
+      intervals: this.state.intervals.filter(interval => interval.id !== id),
+      currentIntervalName: "",
+      currentIntervalMin: 0,
+      currentIntervalSec: 0,
+      currentIntervalType: "exercise",
+      currentIntervalColor: "#63d313",
+      currentIntervalId: null,
+      editInterval: false
+    });
   };
 
   onEditInterval = (id, intervalName, intervalMin, intervalSec, intervalType, intervalColor) => {
@@ -210,7 +219,7 @@ export default class TimerForm extends React.Component {
             ) : (
                 this.state.intervals.map(interval =>
                   (<SingleInterval
-                    editingClass={this.state.editInterval &&this.state.currentIntervalId == interval.id && "form-edit-interval"}
+                    editingClass={this.state.editInterval && this.state.currentIntervalId == interval.id && "form-edit-interval"}
                     onRemove={this.onRemoveInterval}
                     onEdit={this.onEditInterval}
                     key={interval.id}
