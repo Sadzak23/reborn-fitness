@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TimerForm from './TimerForm';
-import { createTimer } from '../../actions/timers'
+import { startCreateTimer } from '../../actions/timers'
 
 export class CreateTimerPage extends React.Component {
   onCreateTimer = (timer) => {
-    this.props.createTimer(timer);
+    this.props.startCreateTimer(timer);
     this.props.history.push('/timers');
   };
   render() {
@@ -22,8 +22,7 @@ export class CreateTimerPage extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  createTimer: (timer) => dispatch(createTimer(timer)),
-  //startAddtimer: (timer) => dispatch(startAddtimer(timer))
+  startCreateTimer: (timer) => dispatch(startCreateTimer(timer))
 });
 
 export default connect(undefined, mapDispatchToProps)(CreateTimerPage);

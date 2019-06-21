@@ -6,26 +6,18 @@ export const createTimer = (timer) => ({
   timer
 });
 
-// export const startCreateTimer = (workoutData = {}) => {
-//   return (dispatch, getState) => {
-//     const uid = getState().auth.uid;
-//     const {
-//       name = '',
-//       warmupTime = 10,
-//       cooldownTime = 0,
-//       intervals = []      
-//     } = workoutData;
-
-//     const timer = { name, warmupTime, cooldownTime, intervals };
-
-//     return database.ref(`users/${uid}/timers`).push(timer).then((ref) => {
-//       dispatch(createTimer({
-//         id: ref.key,
-//         ...timer
-//       }))
-//     });
-//   };
-// };
+export const startCreateTimer = (timer) => {
+  return (dispatch, setState) => {
+    const uid = setState().auth.uid;
+    return database.ref(`users/${uid}/timers`).push(timer)
+      .then((ref) => {
+        dispatch(createTimer({
+          id: ref.key,
+          ...timer
+        }));
+      })
+  };
+};
 
 // REMOVE_TIMER
 export const removeTimer = (id = null) => ({
@@ -33,29 +25,54 @@ export const removeTimer = (id = null) => ({
   id
 });
 
-// export const startRemoveExpense = ({ id }) => {
-//   return (dispatch, setState) => {
-//     const uid = setState().auth.uid;
-//     return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
-//       dispatch(removeExpense({ id }));
-//     })
-//   };
-// };
+export const startRemoveTimer = (id) => {
+  return (dispatch, setState) => {
+    const uid = setState().auth.uid;
+    return database.ref(`users/${uid}/timers/${id}`).remove()
+      .then(() => {
+        dispatch(removeTimer(id));
+      })
+  };
+};
 
-// // EDIT_TIMER
+// EDIT_TIMER
 export const editTimer = (id, updates) => ({
   type: 'EDIT_TIMER',
   id,
   updates
 });
 
-// export const startEditExpense = (id, updates) => {
-//   return (dispatch, setState) => {
-//     const uid = setState().auth.uid;
-//     return database.ref(`users/${uid}/expenses/${id}`).update({
-//       ...updates
-//     }).then(() => {
-//       dispatch(editExpense(id, updates));
-//     })
-//   };
-// };
+export const startEditTimer = (id, updates) => {
+  return (dispatch, setState) => {
+    const uid = setState().auth.uid;
+    return database.ref(`users/${uid}/timers/${id}`).update({
+      ...updates
+    }).then(() => {
+      dispatch(editTimer(id, updates));
+    })
+  };
+};
+
+// SET_TIMERS
+export const setTimers = (timers) => ({
+  type: "SET_TIMERS",
+  timers
+});
+
+export const startSetTimers = () => {
+  return (dispatch, setState) => {
+    const uid = setState().auth.uid;
+    return database.ref(`users/${uid}/timers`)
+      .once('value')
+      .then((snapshot) => {
+        const timers = [];
+        snapshot.forEach((child) => {
+          timers.push({
+            id: child.key,
+            ...child.val()
+          })
+        })
+        dispatch(setTimers(timers))
+      })
+  };
+};

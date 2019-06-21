@@ -157,7 +157,6 @@ export default class TimerForm extends React.Component {
     else {
       this.setState({ error: "" });
       this.props.onAddTimer({
-        id: uuid(),
         name: this.state.name,
         warmupTime: this.state.warmupTime,
         intervals: this.state.intervals
@@ -166,7 +165,6 @@ export default class TimerForm extends React.Component {
   };
 
   onEditTimer = () => {
-    console.log(this.props.timer)
     if (!this.state.name) {
       this.setState({ error: "Please provide name." });
     } else if (this.state.intervals.length === 0) {

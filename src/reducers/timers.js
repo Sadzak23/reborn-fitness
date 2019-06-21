@@ -16,6 +16,8 @@ export default (state = [], action) => {
           return timer
         }
       });
+    case 'SET_TIMERS':
+      return action.timers
     default:
       return state;
   };

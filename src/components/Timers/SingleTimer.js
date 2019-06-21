@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
-import { removeTimer } from '../../actions/timers';
+import { startRemoveTimer } from '../../actions/timers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-export const SingleTimer = ({ id, name, warmupTime, intervals, removeTimer }) => {
+export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer }) => {
 
 // Delete timer confirmation
   const onConfirm = () => swal({
@@ -25,7 +25,7 @@ export const SingleTimer = ({ id, name, warmupTime, intervals, removeTimer }) =>
     .then((value) =>
       value === "delete" ?
         swal("Deleted!", "Your timer has been deleted!", "success") &&
-        removeTimer(id) : swal("Your timer is safe!", "", "success")
+        startRemoveTimer(id) : swal("Your timer is safe!", "", "success")
     );
 //
   return (
@@ -54,7 +54,7 @@ export const SingleTimer = ({ id, name, warmupTime, intervals, removeTimer }) =>
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  removeTimer: (id) => dispatch(removeTimer(id))
+  startRemoveTimer: (id) => dispatch(startRemoveTimer(id))
 });
 
 export default connect(undefined, mapDispatchToProps)(SingleTimer);
