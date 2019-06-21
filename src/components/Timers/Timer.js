@@ -102,10 +102,10 @@ class Timer extends React.Component {
       });
     };
   };
-
+  
   formatTime = (seconds) => {
     const add0 = (num) => ("0" + num).slice(-2);
-
+    
     if (seconds < 3600) {
       const minutes = Math.floor(seconds / 60);
       seconds = seconds % 60;
@@ -118,6 +118,10 @@ class Timer extends React.Component {
       minutes = minutes % 60;
       return `${add0(hours)}:${add0(minutes)}:${add0(seconds)}`;
     }
+  };
+  
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
   };
 
   render() {
@@ -132,11 +136,11 @@ class Timer extends React.Component {
     //Elapsed Time
     const elapsedTime = this.props.timer.intervals.slice(
       0, this.state.intervalNo + 1).reduce(
-        (time, interval) => interval.intervalSec + interval.intervalMin * 60 + time,0) - 
-        Math.ceil(this.state.miliseconds / 1000);
+        (time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) -
+      Math.ceil(this.state.miliseconds / 1000);
 
     //Remaining time
-    const remainingTime = this.props.timer.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time,0) - elapsedTime;
+    const remainingTime = this.props.timer.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) - elapsedTime;
 
     return (
       <div style={{ backgroundColor: this.state.color }}>
@@ -144,7 +148,7 @@ class Timer extends React.Component {
           <button className="btn-x">
             <FontAwesomeIcon icon={faTimes} className="timer-x" />
           </button>
-          </Link>
+        </Link>
         <div className="content-container timer-container">
           <h1 className="timer-clock">{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
           <h3 className="timer-interval-name">- {this.state.phase} -</h3>
@@ -154,8 +158,8 @@ class Timer extends React.Component {
               <h2>Exercise: {exerciseNo} / {totalExercisesNo}</h2>
             </div>
             <div>
-            <h2>Elapsed Time: {elapsedTime < 0 ? "00:00" : this.formatTime(elapsedTime )}</h2>
-            <h2>Time Remaining: {this.formatTime(remainingTime)}</h2>
+              <h2>Elapsed Time: {elapsedTime < 0 ? "00:00" : this.formatTime(elapsedTime)}</h2>
+              <h2>Time Remaining: {this.formatTime(remainingTime)}</h2>
             </div>
           </div>
           <p>Type: {this.state.type}</p>
