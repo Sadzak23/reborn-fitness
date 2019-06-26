@@ -55,7 +55,6 @@ class Timer extends React.Component {
         // Play sound on 0
         /////// END TIMER BEEP
         new Audio('../assets/beep0.mp3').play();
-        console.log("beep, beep, beeeep!");
         this.setState({
           paused: true
         });
@@ -64,6 +63,11 @@ class Timer extends React.Component {
 
     // Play sound on 3,2,1
     if (this.state.miliseconds === 3000 || this.state.miliseconds === 2000 || this.state.miliseconds === 1000) {
+      new Audio('../assets/beep.mp3').play();
+    };
+
+    // Play sound on 10
+    if (this.state.miliseconds === 10000) {
       new Audio('../assets/beep.mp3').play();
     };
   };
