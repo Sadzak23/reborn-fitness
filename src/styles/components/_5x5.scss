@@ -1,11 +1,8 @@
-.timer5x5 {
-  @extend .workout-exercise;
-  margin: $l-size auto 0 auto;
-  width: fit-content;
-  > h1 {
-    margin: 0;
-  }
-};
+.header5x5 {
+  display: flex;
+  justify-content: space-between;
+  margin: $l-size 0 0 0;
+}
 
 .workout-exercise {
   border: solid;
@@ -15,10 +12,18 @@
   box-shadow: 6px 5px 5px 5px rgba(0, 0, 0, 0.5);
 };
 
+.timer5x5 {
+  @extend .workout-exercise;
+  padding: 20px 60px;
+  > h1 {
+    margin: 0;
+  }
+};
+
 .workout-bodyweight {
   @extend .workout-exercise;
-  width: fit-content;
-  margin: 20px auto;
+  display: flex;
+  align-items: center;
   > h2 {
     margin: 0;
   }
