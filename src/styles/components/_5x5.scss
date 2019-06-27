@@ -1,0 +1,40 @@
+.timer5x5 {
+  @extend .workout-exercise;
+  margin: $l-size auto 0 auto;
+  width: fit-content;
+  > h1 {
+    margin: 0;
+  }
+};
+
+.workout-exercise {
+  border: solid;
+  border-radius: 20px;
+  margin-bottom: $m-size;
+  padding: 20px;
+  box-shadow: 6px 5px 5px 5px rgba(0, 0, 0, 0.5);
+};
+
+.workout-bodyweight {
+  @extend .workout-exercise;
+  width: fit-content;
+  margin: 20px auto;
+  > h2 {
+    margin: 0;
+  }
+};
+
+.exercise-title-5x5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > h2, h3 {
+    margin: 0;
+  }
+};
+
+.counter5x5 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+};
