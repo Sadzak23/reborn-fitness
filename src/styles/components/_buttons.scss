@@ -113,6 +113,14 @@
   }
 }
 
+.btn-alert-exit {
+  background: #f8bb86;
+  &:hover {
+    color: #fff;
+    background-color: #e2ab7c !important; 
+  }
+}
+
 // 5x5
 
 .btn-exercise-count {
