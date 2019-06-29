@@ -137,7 +137,7 @@ class Timer extends React.Component {
       buttons: {
         cancel: "Cancel",
         exit: {
-          text: "Yes, quit!",
+          text: "Yes, I quit!",
           value: "exit",
           className: "btn-alert-exit"
         },
