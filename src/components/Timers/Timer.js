@@ -129,6 +129,24 @@ class Timer extends React.Component {
   };
 
   render() {
+    //Exit timer confirmation
+    const onExit = () => swal({
+      title: "You're not a quitter!",
+      text: "Are you?!",
+      icon: "warning",
+      buttons: {
+        cancel: "Cancel!",
+        exit: {
+          text: "Yes, quit!",
+          value: "exit",
+          className: "btn-alert-delete"
+        },
+      },
+    })
+      .then((value) =>
+        value === "exit" && this.props.history.push('/timers')          
+      );
+
     //Exercise number calculator
     const exerciseNo = this.props.timer.intervals.slice(0, this.state.intervalNo + 1).reduce((count, interval) =>
       interval.intervalType === "exercise" ? count + 1 : count, 0);
@@ -148,11 +166,9 @@ class Timer extends React.Component {
 
     return (
       <div style={{ backgroundColor: this.state.color }}>
-        <Link to="/timers">
-          <button className="btn-x">
+          <button className="btn-x" onClick={onExit}>
             <FontAwesomeIcon icon={faTimes} className="timer-x" />
           </button>
-        </Link>
         <div className="content-container timer-container">
           <h1 className="timer-clock">{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
           <h3 className="timer-interval-name">- {this.state.phase} -</h3>

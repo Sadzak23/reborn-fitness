@@ -117,17 +117,32 @@ export default class Workout5x5 extends React.Component {
   };
 
   render() {
+    //Exit workout confirmation
+    const onExit = () => swal({
+      title: "You're not a quitter!",
+      text: "Are you?!",
+      icon: "warning",
+      buttons: {
+        cancel: "Cancel!",
+        exit: {
+          text: "Yes, quit!",
+          value: "exit",
+          className: "btn-alert-delete"
+        },
+      },
+    })
+      .then((value) =>
+        value === "exit" && this.props.history.push('/dashboard5x5')
+      );
     const exercise2Name = this.state.workout.type === 'a' ? "Bench Press" : "Overhead Press";
     const exercise2Weight = this.state.workout.type === 'a' ? this.state.userData.benchPress : this.state.userData.overheadPress;
     const exercise3Name = this.state.workout.type === 'a' ? "Barbell Row" : "Dead Lift";
     const exercise3Weight = this.state.workout.type === 'a' ? this.state.userData.barbellRow : this.state.userData.deadLift;
     return (
       <div className="content-container">
-        <Link to="/dashboard5x5">
-          <button className="btn-x">
-            <FontAwesomeIcon icon={faTimes} className="timer-x" />
-          </button>
-        </Link>
+        <button className="btn-x" onClick={onExit}>
+          <FontAwesomeIcon icon={faTimes} className="timer-x" />
+        </button>
         <div className="header5x5">
           <div className="timer5x5">
             <h1>Rest: 01:00</h1>
