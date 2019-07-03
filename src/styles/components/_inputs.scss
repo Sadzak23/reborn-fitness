@@ -10,21 +10,33 @@
   }
 }
 
-.select {
-  @extend .text-input;
-};
-
-.interval-input {
+.margin-right-input {
   @extend .text-input;
   margin-right: $s-size;
 }
+
 .interval-time-set {
-  @extend .interval-input;
+  @extend .margin-right-input;
   min-width: 70px;
   max-width: 70px;
+  margin-right: 0px;
 }
 
 .interval-select {
-  @extend .interval-input;
-  min-width: 110px;
+  @extend .margin-right-input;
+  min-width: 115px;
+}
+
+.margin-right {
+  margin-right: $s-size;
+}
+
+.inline-input {
+  border: none;
+  border-bottom: 1px solid;
+  width: 40px;
+  text-align: right;
+  &:focus {
+    outline: none;
+  }
 }

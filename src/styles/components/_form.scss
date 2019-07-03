@@ -17,7 +17,7 @@ font-style: italic;
 }
 
 .form-timer-name {
-  width: 30vw;
+  width: 45rem;
 }
 .form-interval {
   display: flex;
@@ -34,4 +34,8 @@ font-style: italic;
 .form-cancel {
   margin-left: 15px;
   width: 40%;
+}
+
+.form-label {
+  margin: 0 $s-size 0 5px;
 }

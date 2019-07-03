@@ -231,34 +231,34 @@ export default class TimerForm extends React.Component {
           <input
             name="intervalName"
             autoComplete="off"
-            className="interval-input form-interval-name"
+            className="margin-right-input form-interval-name"
             id="interval-name"
             onChange={this.onIntervalNameChange}
             placeholder="Interval name"
             type="text"
             value={this.state.currentIntervalName}
           />
-          <label htmlFor="min" className="form-label">Min</label>
           <input
             autoComplete="off"
             className="interval-time-set form-min"
-            id="interval-duration"
+            id="interval-minutes"
             min="0"
             onChange={this.onIntervalMinChange}
             type="number"
             value={this.state.currentIntervalMin}
           />
-          <label htmlFor="sec" className="form-label">Sec</label>
+          <label htmlFor="interval-minutes" className="form-label"> min</label>
           <input
             autoComplete="off"
             className="interval-time-set"
-            id="interval-duration"
+            id="interval-seconds"
             min="0"
             max="59"
             onChange={this.onIntervalSecChange}
             type="number"
             value={this.state.currentIntervalSec}
           />
+          <label htmlFor="interval-seconds" className="form-label"> sec</label>
           <select
             className="interval-select"
             id="interval-type"
