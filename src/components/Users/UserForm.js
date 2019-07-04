@@ -1,30 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { colorMapGender } from './ColorMap';
+import { colorMapGender } from '../ColorMap';
 import { Birthdate } from './Birthdate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFemale, faMale } from '@fortawesome/free-solid-svg-icons';
 
-export class UserEdit extends React.Component {
+export class UserForm extends React.Component {
   constructor(props) {
     super(props);
-    const name = this.props.auth.userName.split(" ")
     this.state = {
-      firstName: name[0],
-      lastName: name[name.length - 1],
+      firstName: '',
+      lastName: '',
       weight: 70,
       height: 23,
       gender: 'male',
-      birthdate: {
-        date: '',
-        day: '1',
-        month: '1',
-        year: '1990',
-      },
+      birthdate: '123',
     };
   };
 
-  // Name
   onFirstNameChange = (e) => {
     const firstName = e.target.value;
     this.setState({ firstName });
@@ -34,35 +26,45 @@ export class UserEdit extends React.Component {
     this.setState({ lastName });
   };
 
-  // Height & Weight
   onWeightChange = (e) => {
     const weight = e.target.value;
     if (!weight || weight.match(/^\d{1,3}$/)) {
       this.setState({ weight });
     };
   };
+  
   onHeightChange = (e) => {
     const height = e.target.value;
     if (!height || height.match(/^\d{1,3}$/)) {
       this.setState({ height });
     };
   };
-
-  // Birthdate
+  
   onBirthdateChange = (birthdate) => {
     this.setState({ birthdate })
   }
-
-  // Gender
+  
   onGenderChange = () => {
     const gender = this.state.gender === "male" ? "female" : "male";
     this.setState({ gender });
   };
 
-  onSubmit = () => {
+  onCreateUser = () => {
     // Validate Birthdate from Birthdate.js
     this.refs.child.validateBirthdate();
-
+    
+    
+    ///////////////////////////////////////////////////    Kako drugacije ovo da se sredi???    /////////////////////////////////////////////////////////////
+    setTimeout(() => {
+      this.props.onAddUser({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        birthdate: this.state.birthdate,
+        height: this.state.height,
+        weight: this.state.weight,
+        gender: this.state.gender
+      })      
+    }, 500);
   };
 
   render() {
@@ -71,7 +73,7 @@ export class UserEdit extends React.Component {
     return (
       <div>
         <div className="content-container form">
-          <h2>Hello {genderPrefix} {this.props.auth.userName.split(" ")[0]}</h2>
+          <h2>Hello {genderPrefix} {this.state.firstName}</h2>
           <div className="form-header">
             <div>
               <input type="text" onChange={this.onFirstNameChange} className="margin-right-input" id="firstName" placeholder="First Name" />
@@ -102,21 +104,9 @@ export class UserEdit extends React.Component {
             </button>
           </div>
 
-          <button className="btn-save" onClick={this.onSubmit}>Update</button>
+          <button className="btn-save" onClick={this.onCreateUser}>Create New User</button>
         </div>
       </div>
     );
   }
 };
-
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserEdit);

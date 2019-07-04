@@ -8,8 +8,8 @@ const DashboardPage = () => (
     <div className="list-header">
       <p>Welcome to Reborn Fitness App</p>
     </div>
-    <Link className="list-dashboard" to="/user-edit">
-      <FontAwesomeIcon icon={faUserCog} /> User Settings
+    <Link className="list-dashboard" to="/create-user">
+      <FontAwesomeIcon icon={faUserCog} /> New User
     </Link>
     <Link className="list-dashboard" to="/timers">
       <FontAwesomeIcon icon={faStopwatch} /> Timer Workout

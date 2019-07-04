@@ -14,7 +14,7 @@ import EditTimerPage from '../components/timers/EditTimerPage';
 import Dashboard5x5 from '../components/5x5/Dashboard5x5';
 import History5x5 from '../components/5x5/History5x5';
 import Workout5x5 from '../components/5x5/Workout5x5';
-import UserEdit from '../components/UserEdit';
+import UserEdit from '../components/Users/CreateUserPage';
 
 export const history = createBrowserHistory();
 
@@ -24,7 +24,7 @@ const AppRouter = () => (
       <Switch>
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
-        <PrivateRoute path="/user-edit" component={UserEdit} />
+        <PrivateRoute path="/create-user" component={UserEdit} />
         <PrivateRoute path="/timers" component={TimersList} />
         <FullScreenRoute path="/timer/:id" component={Timer} />
         <PrivateRoute path="/create-timer" component={CreateTimerPage} />
