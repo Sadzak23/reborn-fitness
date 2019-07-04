@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createUser } from '../../actions/users'
+import { startCreateUser } from '../../actions/users'
 import { UserForm } from './UserForm';
 
 export class CreateUserPage extends React.Component {
 
   onCreateUser = (user) => {
-    this.props.createUser(user);
+    this.props.startCreateUser(user);
   };
 
   render() {
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createUser: (user) => dispatch(createUser(user))
+  startCreateUser: (user) => dispatch(startCreateUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUserPage);

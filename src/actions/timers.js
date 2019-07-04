@@ -9,7 +9,7 @@ export const createTimer = (timer) => ({
 export const startCreateTimer = (timer) => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
-    return database.ref(`users/${uid}/timers`).push(timer)
+    return database.ref(`admins/${uid}/timers`).push(timer)
       .then((ref) => {
         dispatch(createTimer({
           id: ref.key,
@@ -28,7 +28,7 @@ export const removeTimer = (id = null) => ({
 export const startRemoveTimer = (id) => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
-    return database.ref(`users/${uid}/timers/${id}`).remove()
+    return database.ref(`admins/${uid}/timers/${id}`).remove()
       .then(() => {
         dispatch(removeTimer(id));
       })
@@ -45,7 +45,7 @@ export const editTimer = (id, updates) => ({
 export const startEditTimer = (id, updates) => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
-    return database.ref(`users/${uid}/timers/${id}`).update({
+    return database.ref(`admins/${uid}/timers/${id}`).update({
       ...updates
     }).then(() => {
       dispatch(editTimer(id, updates));
@@ -62,7 +62,7 @@ export const setTimers = (timers) => ({
 export const startSetTimers = () => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
-    return database.ref(`users/${uid}/timers`)
+    return database.ref(`admins/${uid}/timers`)
       .once('value')
       .then((snapshot) => {
         const timers = [];
