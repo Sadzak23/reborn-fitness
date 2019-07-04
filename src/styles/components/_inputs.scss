@@ -10,16 +10,11 @@
   }
 }
 
-.margin-right-input {
-  @extend .text-input;
-  margin-right: $s-size;
-}
-
 .interval-time-set {
   @extend .margin-right-input;
   min-width: 70px;
   max-width: 70px;
-  margin-right: 0px;
+  margin-right: 0px !important;
 }
 
 .interval-select {
@@ -27,16 +22,34 @@
   min-width: 115px;
 }
 
-.margin-right {
-  margin-right: $s-size;
-}
-
 .inline-input {
   border: none;
   border-bottom: 1px solid;
-  width: 40px;
+  width: 35px;
   text-align: right;
   &:focus {
     outline: none;
   }
+}
+
+.inline-input2 {
+  @extend .inline-input;
+  width: 25px;
+}
+.inline-input4 {
+  @extend .inline-input;
+  width: 40px;
+}
+
+.margin-right-input {
+  @extend .text-input;
+  margin-right: $s-size;
+}
+
+.margin-right {
+  margin-right: $s-size;
+}
+
+.fit-content {
+  width: max-content;
 }

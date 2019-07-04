@@ -227,7 +227,7 @@ export default class TimerForm extends React.Component {
           </div>
         </div>
 
-        <div className="form-interval">
+        <div className="flex">
           <input
             name="intervalName"
             autoComplete="off"

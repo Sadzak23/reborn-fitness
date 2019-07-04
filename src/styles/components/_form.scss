@@ -1,10 +1,6 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  > * {
+.form > * {
     margin-bottom: $m-size;
   }
-}
 
 .form__error {
 margin: 0 0 $m-size 0;
@@ -19,7 +15,7 @@ font-style: italic;
 .form-timer-name {
   width: 45rem;
 }
-.form-interval {
+.flex {
   display: flex;
 };
 
@@ -38,4 +34,9 @@ font-style: italic;
 
 .form-label {
   margin: 0 $s-size 0 5px;
+}
+
+.gender-label {
+  display: flex;
+  align-items: center;
 }
