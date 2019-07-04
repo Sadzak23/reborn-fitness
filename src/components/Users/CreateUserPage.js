@@ -7,6 +7,7 @@ export class CreateUserPage extends React.Component {
 
   onCreateUser = (user) => {
     this.props.startCreateUser(user);
+    this.props.history.push('/users');
   };
 
   render() {

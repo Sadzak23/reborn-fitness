@@ -10,10 +10,10 @@ export class UserForm extends React.Component {
     this.state = {
       firstName: '',
       lastName: '',
-      weight: 70,
-      height: 23,
+      weight: 0,
+      height: 0,
       gender: 'male',
-      birthdate: '123',
+      birthdate: '',
     };
   };
 

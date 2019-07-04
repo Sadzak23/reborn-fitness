@@ -15,6 +15,7 @@ import Dashboard5x5 from '../components/5x5/Dashboard5x5';
 import History5x5 from '../components/5x5/History5x5';
 import Workout5x5 from '../components/5x5/Workout5x5';
 import UserEdit from '../components/Users/CreateUserPage';
+import UsersList from '../components/Users/UsersList';
 
 export const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ const AppRouter = () => (
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
         <PrivateRoute path="/create-user" component={UserEdit} />
+        <PrivateRoute path="/users" component={UsersList} />
         <PrivateRoute path="/timers" component={TimersList} />
         <FullScreenRoute path="/timer/:id" component={Timer} />
         <PrivateRoute path="/create-timer" component={CreateTimerPage} />

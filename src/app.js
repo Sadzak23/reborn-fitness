@@ -10,6 +10,7 @@ import { login, logout } from './actions/auth'
 import configureStore from './store/configureStore';
 import LoadingPage from './components/LoadingPage'
 import { startSetTimers } from './actions/timers';
+import { startSetUsers } from './actions/users';
 
 const store = configureStore();
 
@@ -29,10 +30,14 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    store.dispatch(login(user.uid, user.displayName, user.photoURL));
-    store.dispatch(startSetTimers()).then(() => {
+firebase.auth().onAuthStateChanged((admin) => {
+  if (admin) {
+    store.dispatch(login(admin.uid, admin.displayName, admin.photoURL));
+    store.dispatch(startSetTimers())
+    .then(() => {
+      store.dispatch(startSetUsers())
+    })
+    .then(() => {
       renderApp();
       if (history.location.pathname === '/') {
         history.push('/dashboard');
