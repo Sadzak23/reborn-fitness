@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStopwatch, faDumbbell, faHeartbeat, faUserCog } from '@fortawesome/free-solid-svg-icons';
+import { faStopwatch, faDumbbell, faHeartbeat, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const DashboardPage = () => (
   <div className="content-container">
     <div className="list-header">
       <p>Welcome to Reborn Fitness App</p>
     </div>
-    <Link className="list-dashboard" to="/create-user">
-      <FontAwesomeIcon icon={faUserCog} /> New User
+    <Link className="list-dashboard" to="/users">
+      <FontAwesomeIcon icon={faUsers} /> Users
     </Link>
     <Link className="list-dashboard" to="/timers">
       <FontAwesomeIcon icon={faStopwatch} /> Timer Workout

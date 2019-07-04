@@ -19,11 +19,21 @@ export const startCreateUser = (user) => {
   };
 };
 
-// UPDATE_USER
-export const updateUser = (user) => ({
-  type: 'UPDATE_USER',
-  user
+// REMOVE_USER
+export const removeUser = (id = null) => ({
+  type: 'REMOVE_USER',
+  id
 });
+
+export const startRemoveUser = (id) => {
+  return (dispatch, setState) => {
+    const uid = setState().auth.uid;
+    return database.ref(`admins/${uid}/users/${id}`).remove()
+      .then(() => {
+        dispatch(removeUser(id));
+      })
+  };
+};
 
 // SET_USERS
 export const setUsers = (users) => ({
