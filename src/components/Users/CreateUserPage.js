@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startCreateUser } from '../../actions/users'
-import { UserForm } from './UserForm';
+import UserForm from './UserForm';
 
 export class CreateUserPage extends React.Component {
 

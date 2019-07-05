@@ -1,19 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { colorMapGender } from '../ColorMap';
 import { Birthdate } from './Birthdate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFemale, faMale } from '@fortawesome/free-solid-svg-icons';
+import { faFemale, faMale, faSave, faUserPlus, faBan } from '@fortawesome/free-solid-svg-icons';
 
-export class UserForm extends React.Component {
+export default class UserForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      firstName: '',
-      lastName: '',
-      weight: 0,
-      height: 0,
-      gender: 'male',
-      birthdate: '',
+      firstName: props.user ? props.user.firstName : '',
+      lastName: props.user ? props.user.lastName : '',
+      weight: props.user ? props.user.weight : 0,
+      height: props.user ? props.user.height : 0,
+      gender: props.user ? props.user.gender : 'male',
+      birthdate: props.user ? props.user.birthdate : 631148400000,
     };
   };
 
@@ -32,18 +34,18 @@ export class UserForm extends React.Component {
       this.setState({ weight });
     };
   };
-  
+
   onHeightChange = (e) => {
     const height = e.target.value;
     if (!height || height.match(/^\d{1,3}$/)) {
       this.setState({ height });
     };
   };
-  
+
   onBirthdateChange = (birthdate) => {
     this.setState({ birthdate })
   }
-  
+
   onGenderChange = () => {
     const gender = this.state.gender === "male" ? "female" : "male";
     this.setState({ gender });
@@ -52,8 +54,7 @@ export class UserForm extends React.Component {
   onCreateUser = () => {
     // Validate Birthdate from Birthdate.js
     this.refs.child.validateBirthdate();
-    
-    
+
     ///////////////////////////////////////////////////    Kako drugacije ovo da se sredi???    /////////////////////////////////////////////////////////////
     setTimeout(() => {
       this.props.onAddUser({
@@ -63,24 +64,64 @@ export class UserForm extends React.Component {
         height: this.state.height,
         weight: this.state.weight,
         gender: this.state.gender
-      })      
+      })
     }, 500);
   };
 
+  onEditUser = () => {
+    // if (!this.state.firstName || !this.state.lastName) {
+    //   this.setState({ error: "Please provide name." });
+    // } else if (this.state.intervals.length === 0) {
+    //   this.setState({ error: "Please add intervals." });
+    // }
+    // else {
+      // Validate Birthdate from Birthdate.js
+    this.refs.child.validateBirthdate();
+
+    ///////////////////////////////////////////////////    Kako drugacije ovo da se sredi???    /////////////////////////////////////////////////////////////
+    setTimeout(() => {
+    // this.setState({ error: "" });
+    this.props.onEditUser(this.props.user.id, {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      birthdate: this.state.birthdate,
+      height: this.state.height,
+      weight: this.state.weight,
+      gender: this.state.gender
+    });
+  }, 500);
+    // }
+  };
+
   render() {
-    const genderColor = this.state.gender === "male" ? `${Object.keys(colorMapGender)[0]}` : `${Object.keys(colorMapGender)[1]}`
-    const genderPrefix = this.state.gender === "male" ? "Sir " : "Lady "
+    const genderColor = this.state.gender === "male" ? `${Object.keys(colorMapGender)[0]}` : `${Object.keys(colorMapGender)[1]}`;
+    const genderPrefix = this.state.gender === "male" ? "Sir " : "Lady ";
     return (
       <div>
         <div className="content-container form">
           <h2>Hello {genderPrefix} {this.state.firstName}</h2>
           <div className="form-header">
             <div>
-              <input type="text" onChange={this.onFirstNameChange} className="margin-right-input" id="firstName" placeholder="First Name" />
-              <input type="text" onChange={this.onLastNameChange} className="text-input" id="lastName" placeholder="Last Name" />
+              <input
+                id="firstName"
+                type="text"
+                onChange={this.onFirstNameChange}
+                className="margin-right-input"
+                placeholder="First Name"
+                value={this.state.firstName}
+              />
+              <input
+                id="lastName"
+                type="text"
+                onChange={this.onLastNameChange}
+                className="text-input"
+                placeholder="Last Name"
+                value={this.state.lastName}
+              />
             </div>
           </div>
           <Birthdate
+            birthdate={this.state.birthdate}
             ref="child"
             onBdayChange={this.onBirthdateChange}
           />
@@ -103,8 +144,19 @@ export class UserForm extends React.Component {
               {this.state.gender === "male" ? <FontAwesomeIcon icon={faMale} size='3x' color="#fff" /> : <FontAwesomeIcon icon={faFemale} size='3x' color="#fff" />}
             </button>
           </div>
-
-          <button className="btn-save" onClick={this.onCreateUser}>Create New User</button>
+          <div style={{ display: "flex" }}>
+            {!this.props.user ?
+              <button className="btn-save" onClick={this.onCreateUser}>
+                <FontAwesomeIcon icon={faUserPlus} /> Create New User</button> :
+              <button className="btn-save" onClick={this.onEditUser}>
+                <FontAwesomeIcon icon={faSave} /> Save Changes
+              </button>}
+            <Link className="form-cancel" to="/users">
+              <button className="btn-cancel">
+                <FontAwesomeIcon icon={faBan} /> Cancel
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     );

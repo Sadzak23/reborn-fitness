@@ -1,13 +1,15 @@
 import React from 'react';
+import * as moment from 'moment';
 
 export class Birthdate extends React.Component {
   constructor(props) {
     super(props);
+    const birthdate = moment(props.birthdate).format('D M YYYY').split(' ')
     this.state = {
       date: '',
-      day: '1',
-      month: '1',
-      year: '1990',
+      day: birthdate[0],
+      month: birthdate[1],
+      year: birthdate[2],
     }
   };
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import { startRemoveUser } from '../../actions/users';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faTimes, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 
 export const SingleUser = ({ id, firstName, lastName, birthdate, gender, height, weight, startRemoveUser }) => {
 
@@ -33,18 +33,13 @@ export const SingleUser = ({ id, firstName, lastName, birthdate, gender, height,
         <h3>{firstName} {lastName}</h3>
       </div>
       <div>
-        <Link to={`/user/${id}`}>
-          <button className="btn-play">
-            <FontAwesomeIcon icon={faPlay} style={{ color: '#fff' }} />
-          </button>
-        </Link>
         <Link to={`/edit-user/${id}`}>
           <button className="btn-edit-m">
             <FontAwesomeIcon icon={faUserEdit} style={{ color: '#fff' }} />
           </button>
         </Link>
         <button className="btn-remove-m" onClick={onConfirm}>
-          <FontAwesomeIcon icon={faTimes} style={{ color: '#fff' }} />
+          <FontAwesomeIcon icon={faUserTimes} style={{ color: '#fff' }} />
         </button>
       </div>
     </div>

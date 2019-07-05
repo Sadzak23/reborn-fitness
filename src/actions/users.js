@@ -35,6 +35,26 @@ export const startRemoveUser = (id) => {
   };
 };
 
+// EDIT_USER
+export const editUser = (id, updates) => ({
+  type: 'EDIT_USER',
+  id,
+  updates
+});
+
+export const startEditUser = (id, updates) => {
+  console.log('start');
+  return (dispatch, setState) => {
+    console.log('editing');
+    const uid = setState().auth.uid;
+    return database.ref(`admins/${uid}/users/${id}`).update({
+      ...updates
+    }).then(() => {
+      dispatch(editUser(id, updates));
+    })
+  };
+};
+
 // SET_USERS
 export const setUsers = (users) => ({
   type: "SET_USERS",
