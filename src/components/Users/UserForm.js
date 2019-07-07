@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { colorMapGender } from '../ColorMap';
+import { userFormAlerts } from '../Alerts';
 import { Birthdate } from './Birthdate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFemale, faMale, faSave, faUserPlus, faBan } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +16,7 @@ export default class UserForm extends React.Component {
       weight: props.user ? props.user.weight : 0,
       height: props.user ? props.user.height : 0,
       gender: props.user ? props.user.gender : 'male',
-      birthdate: props.user ? props.user.birthdate : 631148400000,
+      birthdate: props.user ? props.user.birthdate : 631148400000
     };
   };
 
@@ -52,11 +53,17 @@ export default class UserForm extends React.Component {
   };
 
   onCreateUser = () => {
-    // Validate Birthdate from Birthdate.js
-    this.refs.child.validateBirthdate();
-
-    ///////////////////////////////////////////////////    Kako drugacije ovo da se sredi???    /////////////////////////////////////////////////////////////
-    setTimeout(() => {
+    const now = new Date();
+    if (!this.state.firstName || !this.state.lastName) {
+      swal(userFormAlerts.title, userFormAlerts.noName, "error", { dangerMode: true, })
+    } else if (!this.state.birthdate || this.state.birthdate > now) {
+      swal(userFormAlerts.bDateTitle, userFormAlerts.bDate, "error", { dangerMode: true, })
+    } else if (this.state.weight < 20) {
+      swal(userFormAlerts.title, userFormAlerts.lowWeight, "error", { dangerMode: true, })
+    } else if (this.state.height < 100 || this.state.height > 250) {
+      swal(userFormAlerts.title, userFormAlerts.lowHeight, "error", { dangerMode: true, })
+    }
+    else {
       this.props.onAddUser({
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -65,32 +72,30 @@ export default class UserForm extends React.Component {
         weight: this.state.weight,
         gender: this.state.gender
       })
-    }, 500);
+    }
   };
 
   onEditUser = () => {
-    // if (!this.state.firstName || !this.state.lastName) {
-    //   this.setState({ error: "Please provide name." });
-    // } else if (this.state.intervals.length === 0) {
-    //   this.setState({ error: "Please add intervals." });
-    // }
-    // else {
-      // Validate Birthdate from Birthdate.js
-    this.refs.child.validateBirthdate();
-
-    ///////////////////////////////////////////////////    Kako drugacije ovo da se sredi???    /////////////////////////////////////////////////////////////
-    setTimeout(() => {
-    // this.setState({ error: "" });
-    this.props.onEditUser(this.props.user.id, {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      birthdate: this.state.birthdate,
-      height: this.state.height,
-      weight: this.state.weight,
-      gender: this.state.gender
-    });
-  }, 500);
-    // }
+    const now = new Date();
+    if (!this.state.firstName || !this.state.lastName) {
+      swal(userFormAlerts.title, userFormAlerts.noName, "error", { dangerMode: true, })
+    } else if (!this.state.birthdate || this.state.birthdate > now) {
+      swal(userFormAlerts.bDateTitle, userFormAlerts.bDate, "error", { dangerMode: true, })
+    } else if (this.state.weight < 20) {
+      swal(userFormAlerts.title, userFormAlerts.lowWeight, "error", { dangerMode: true, })
+    } else if (this.state.height < 100 || this.state.height > 250) {
+      swal(userFormAlerts.title, userFormAlerts.lowHeight, "error", { dangerMode: true, })
+    }
+    else {
+        this.props.onEditUser(this.props.user.id, {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          birthdate: this.state.birthdate,
+          height: this.state.height,
+          weight: this.state.weight,
+          gender: this.state.gender
+        });
+    }
   };
 
   render() {

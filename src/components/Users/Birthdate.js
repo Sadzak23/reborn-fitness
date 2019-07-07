@@ -16,53 +16,34 @@ export class Birthdate extends React.Component {
   onDayChange = (e) => {
     const day = e.target.value;
     if (!day || day.match(/^\d{1,2}$/)) {
-      this.setState({ day });
+      this.setState({ day }, () => {
+        this.setState({ date: Date.parse(`${this.state.month} ${this.state.day} ${this.state.year}`) }, () => {
+          this.props.onBdayChange(this.state.date)
+        })
+      });
     }
   };
   onMonthChange = (e) => {
     const month = e.target.value;
     if (!month || month.match(/^\d{1,2}$/)) {
-      this.setState({ month });
+      this.setState({ month }, () => {
+        this.setState({ date: Date.parse(`${this.state.month} ${this.state.day} ${this.state.year}`) }, () => {
+          this.props.onBdayChange(this.state.date)
+        })
+      });
     }
   };
   onYearChange = (e) => {
     const year = e.target.value;
     if (!year || year.match(/^\d{1,4}$/)) {
-      this.setState({ year });
+      this.setState({ year }, () => {
+        this.setState({ date: Date.parse(`${this.state.month} ${this.state.day} ${this.state.year}`) }, () => {
+          this.props.onBdayChange(this.state.date)
+        })
+      });
     }
   };
 
-  validateBirthdate = () => {
-    const date = Date.parse(`${this.state.month} ${this.state.day} ${this.state.year}`)
-    const now = new Date()
-    if (date && date < now) {
-      this.props.onBdayChange(date)
-    } else if (date && date > now) {
-      swal({
-        title: "WOW! You're from future!",
-        text: "Please enter valid birthdate",
-        icon: "error",
-        buttons: {
-          ok: {
-            text: "Ok!",
-            className: "btn-alert-delete"
-          },
-        },
-      })
-    } else {
-      swal({
-        title: "Birthdate invalid!",
-        text: "Please enter valid birthdate",
-        icon: "error",
-        buttons: {
-          ok: {
-            text: "Ok!",
-            className: "btn-alert-delete"
-          },
-        },
-      })
-    }
-  };
 
   render() {
     return (

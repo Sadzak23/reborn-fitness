@@ -3,6 +3,7 @@ import uuid from 'uuid';
 import { Link } from 'react-router-dom';
 import SingleInterval from "./SingleInterval";
 import { colorMap } from '../ColorMap';
+import { timerFormAlerts } from '../Alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt, faPlusCircle, faSave, faClipboardList, faBan } from "@fortawesome/free-solid-svg-icons";
 
@@ -62,11 +63,10 @@ export default class TimerForm extends React.Component {
   // Buttons
   onAddInterval = () => {
     if (!this.state.currentIntervalName) {
-      this.setState({ error: "Please provide name." });
+      swal(timerFormAlerts.intTitle, timerFormAlerts.intNoName, "error", { dangerMode: true, })
     } else if (this.state.currentIntervalMin === 0 & this.state.currentIntervalSec === 0) {
-      this.setState({ error: "Please set valid duration." })
+      swal(timerFormAlerts.intTitle, timerFormAlerts.intDuration, "error", { dangerMode: true, })
     } else {
-      this.setState({ error: "" });
       this.setState({
         intervals: [...this.state.intervals, {
           id: uuid(),
@@ -117,11 +117,10 @@ export default class TimerForm extends React.Component {
 
   onReplaceInterval = () => {
     if (!this.state.currentIntervalName) {
-      this.setState({ error: "Please provide name." });
+      swal(timerFormAlerts.intTitle, timerFormAlerts.intNoName, "error", { dangerMode: true, })
     } else if (this.state.currentIntervalMin === 0 & this.state.currentIntervalSec === 0) {
-      this.setState({ error: "Please set valid duration." })
+      swal(timerFormAlerts.intTitle, timerFormAlerts.intDuration, "error", { dangerMode: true, })
     } else {
-      this.setState({ error: "" });
       const newIntervals = this.state.intervals.map((interval) => {
         if (interval.id !== this.state.currentIntervalId) {
           return interval
@@ -150,12 +149,11 @@ export default class TimerForm extends React.Component {
 
   onAddTimer = () => {
     if (!this.state.name) {
-      this.setState({ error: "Please provide name." });
+      swal(timerFormAlerts.title, timerFormAlerts.noName, "error", { dangerMode: true, })
     } else if (this.state.intervals.length === 0) {
-      this.setState({ error: "Please add intervals." });
+      swal(timerFormAlerts.title, timerFormAlerts.noIntreval, "error", { dangerMode: true, })
     }
     else {
-      this.setState({ error: "" });
       this.props.onAddTimer({
         name: this.state.name,
         warmupTime: this.state.warmupTime,
@@ -166,12 +164,11 @@ export default class TimerForm extends React.Component {
 
   onEditTimer = () => {
     if (!this.state.name) {
-      this.setState({ error: "Please provide name." });
+      swal(timerFormAlerts.title, timerFormAlerts.noName, "error", { dangerMode: true, })
     } else if (this.state.intervals.length === 0) {
-      this.setState({ error: "Please add intervals." });
+      swal(timerFormAlerts.title, timerFormAlerts.noIntreval, "error", { dangerMode: true, })
     }
     else {
-      this.setState({ error: "" });
       this.props.onEditTimer(this.props.timer.id, {
         name: this.state.name,
         warmupTime: this.state.warmupTime,
@@ -183,7 +180,6 @@ export default class TimerForm extends React.Component {
   render() {
     return (
       <div className="form">
-        {this.state.error && <p className="form__error">{this.state.error}</p>}
         <div className="form-header">
           <input
             autoFocus
