@@ -184,12 +184,12 @@ class Timer extends React.Component {
           <p>Type: {this.state.type}</p>
           <div className="timer-controls">
             <button onClick={this.handlePrevious} className="btn-next-prev">
-              <FontAwesomeIcon icon={faBackward} style={{ color: '#fff' }} />
+              <FontAwesomeIcon icon={faBackward} />
             </button>
             <button onClick={this.togglePause} className={this.state.paused ? "btn-play" : "btn-pause"}>
-              {this.state.paused ? <FontAwesomeIcon icon={faPlay} style={{ color: '#fff' }} /> : <FontAwesomeIcon icon={faPause} style={{ color: '#fff' }} />}</button>
+              {this.state.paused ? <FontAwesomeIcon icon={faPlay} /> : <FontAwesomeIcon icon={faPause} />}</button>
             <button onClick={this.handleNext} className="btn-next-prev">
-              <FontAwesomeIcon icon={faForward} style={{ color: '#fff' }} />
+              <FontAwesomeIcon icon={faForward} />
             </button>
           </div>
         </div>

@@ -37,7 +37,7 @@ export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer 
       <div>
         <Link to={`/timer/${id}`}>
           <button className="btn-play">
-            <FontAwesomeIcon icon={faPlay} style={{ color: '#fff' }} />
+            <FontAwesomeIcon icon={faPlay} />
           </button>
         </Link>
         <Link to={`/edit-timer/${id}`}>

@@ -7,7 +7,7 @@
   border: 2px solid darken($color: $off-white, $amount: 9%);
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  background: $light-blue;
+  background: $blue;
   color: $off-white;
   display: flex;
   justify-content: space-between;
@@ -81,7 +81,19 @@
   }
 };
 
+.list-inactive-user {
+  @extend .list-item;
+  background: #eee;
+  color: #999;
+}
+
 .form-label {
   align-self: center;
   padding-right: 5px;
 };
+
+// User
+.list-userName {
+  display: flex;
+  align-items: center;
+}

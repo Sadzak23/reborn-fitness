@@ -19,10 +19,10 @@ const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, inter
       </div>
       <div>
         <button className="btn-edit-s" onClick={onEditInterval}>
-          <FontAwesomeIcon icon={faPen} style={{ color: '#fff' }} />
+          <FontAwesomeIcon icon={faPen} />
         </button>
         <button className="btn-remove-s" onClick={onRemoveInterval}>
-          <FontAwesomeIcon icon={faTimes} style={{ color: '#fff' }} />
+          <FontAwesomeIcon icon={faTimes} />
         </button>
       </div>
     </div>

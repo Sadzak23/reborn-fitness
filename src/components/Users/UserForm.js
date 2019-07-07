@@ -70,7 +70,8 @@ export default class UserForm extends React.Component {
         birthdate: this.state.birthdate,
         height: this.state.height,
         weight: this.state.weight,
-        gender: this.state.gender
+        gender: this.state.gender,
+        activeUser: false
       })
     }
   };
@@ -93,7 +94,8 @@ export default class UserForm extends React.Component {
           birthdate: this.state.birthdate,
           height: this.state.height,
           weight: this.state.weight,
-          gender: this.state.gender
+          gender: this.state.gender,
+          activeUser: false
         });
     }
   };
@@ -146,7 +148,7 @@ export default class UserForm extends React.Component {
               onClick={this.onGenderChange}
               style={{ background: genderColor }}
             >
-              {this.state.gender === "male" ? <FontAwesomeIcon icon={faMale} size='3x' color="#fff" /> : <FontAwesomeIcon icon={faFemale} size='3x' color="#fff" />}
+              {this.state.gender === "male" ? <FontAwesomeIcon icon={faMale} size='3x' /> : <FontAwesomeIcon icon={faFemale} size='3x' />}
             </button>
           </div>
           <div style={{ display: "flex" }}>
