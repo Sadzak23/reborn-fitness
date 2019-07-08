@@ -113,7 +113,7 @@ export default class UserForm extends React.Component {
                 id="firstName"
                 type="text"
                 onChange={this.onFirstNameChange}
-                className="margin-right-input"
+                className="margin-right text-input"
                 placeholder="First Name"
                 value={this.state.firstName}
               />
@@ -133,7 +133,7 @@ export default class UserForm extends React.Component {
             onBdayChange={this.onBirthdateChange}
           />
           <div className="flex">
-            <label className="margin-right-input fit-content">
+            <label className="text-input fit-content margin-right">
               Weight: <input type="text" onChange={this.onWeightChange} className="inline-input" id="bodyWeight" value={this.state.weight} /> kg
             </label>
             <label className="text-input fit-content">

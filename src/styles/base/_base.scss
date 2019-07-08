@@ -18,15 +18,19 @@ body {
   line-height: 1.6;
 }
 button {
+  padding: 0px;
   cursor: pointer;
-}
-button:disabled {
+  &:disabled {
   cursor: default;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &:active {
+    padding-left: 2px;
+  }
 }
 
-button:focus {
-  outline:0;
-}
 
 // @media (max-width: $mobile-breakpoint) {
 //   html {

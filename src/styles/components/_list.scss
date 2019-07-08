@@ -22,17 +22,23 @@
 }  
 
 .list-item {
-  @extend .list-header;
-  background: none;
+  align-items: center;
+  border: 2px solid darken($color: $off-white, $amount: 9%);
   border-top: none;
-  border-radius: 0px;
-  color: $dark-gray;
-  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
   transition: background .3s ease;
   padding: 0 $l-size;
   &:hover {
     background: $off-white;
   }
+  p {
+    margin: 0;
+    font-size: 2rem;
+  }  
+  @media (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+  }  
 }
 
 .list-dashboard {
@@ -91,9 +97,3 @@
   align-self: center;
   padding-right: 5px;
 };
-
-// User
-.list-userName {
-  display: flex;
-  align-items: center;
-}

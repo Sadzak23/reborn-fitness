@@ -61,29 +61,29 @@
 }
 
 .btn-activate {
-  background: $off-white;
-  border-radius: 20px;
+  background: none;
+  border: none;
   display: flex;
   align-items: center;
-  margin: 7px;    
-  padding: 8px;
-  width: 14rem;
+  height: 50px;
+  width: 100%;
+  &:active {
+    padding: 0px;
+  }
+}
+.inactive-userName{
+  color: #999;
 }
 .icon-active {
   color: $ok-green;
-  font-size: 25px;
-  margin-right: 7px;
+  font-size: 40px;
+  margin-right: 10px;
 };
-.btn-green {
-  background: $light-green;
-}
-.btn-red {
-  background: $light-red;
-}
+
 .icon-inactive {
   color: $cancel-red;
-  font-size: 25px;
-  margin-right: 7px;
+  font-size: 40px;
+  margin-right: 10px;
 };
 
 //Timer

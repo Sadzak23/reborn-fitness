@@ -8,7 +8,10 @@ export default class Dashboard5x5 extends React.Component {
     return (
       <div className="content-container">
         <div className="list-header">
-          <p>Strong Lifts 5x5</p>
+          <div className="flex">
+            <FontAwesomeIcon icon={faDumbbell} size="2x" className="margin-right" />
+            <p>Strong Lifts 5x5</p>
+          </div>
         </div>
         <Link className="list-dashboard" to="/workout5x5">
           <FontAwesomeIcon icon={faDumbbell} /> Start Workout

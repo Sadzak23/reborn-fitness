@@ -35,14 +35,12 @@ export const SingleUser = ({ id, firstName, lastName, activeUser, birthdate, gen
   return (
     <div className={`list-item ${!activeUser ? "list-inactive-user" : ""}`}>
       <div className="list-int list-userName">
-      <button className={`btn-activate ${activeUser ? "btn-green" : "btn-red"}`} onClick={handleIsActive}>
+      <button className="btn-activate" onClick={handleIsActive}>
         <FontAwesomeIcon icon={!activeUser ? faToggleOff : faToggleOn} className={activeUser ? "icon-active" : "icon-inactive"} /> 
-        {!activeUser ? "Inactive" : "Activated"}
-      
+        <h3 className={activeUser ? "" : "inactive-userName"}>{firstName} {lastName}</h3>      
       </button>
-        <h3>{firstName} {lastName}</h3>
       </div>
-      <div>
+      <div className="single-user-btns">
         <Link to={`/edit-user/${id}`} className={!activeUser ? "no-click" : ""}>
           <button disabled={!activeUser} className="btn-edit-m">
             <FontAwesomeIcon icon={faUserEdit} />

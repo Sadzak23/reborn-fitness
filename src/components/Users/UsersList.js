@@ -1,17 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SingleUser from './SingleUser';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const UsersListPage = (props) => (
   <div>
     <div className="content-container list-body">
       <div className="list-header">
-        <p>Users List</p>
+        <div className="flex">
+          <FontAwesomeIcon icon={faUsers} size="2x" className="margin-right" />
+          <p> Users List</p>
+        </div>
         <Link to="/create-user">
-        <FontAwesomeIcon icon={faUserPlus} style={{ color: '#fff' }} size="2x" />
+          <FontAwesomeIcon icon={faUserPlus} style={{ color: '#fff' }} size="2x" />
         </Link>
       </div>
       <div className="list-body">

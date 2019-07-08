@@ -227,7 +227,7 @@ export default class TimerForm extends React.Component {
           <input
             name="intervalName"
             autoComplete="off"
-            className="margin-right-input form-interval-name"
+            className="margin-right text-input form-interval-name"
             id="interval-name"
             onChange={this.onIntervalNameChange}
             placeholder="Interval name"

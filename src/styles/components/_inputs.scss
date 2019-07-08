@@ -11,15 +11,15 @@
 }
 
 .interval-time-set {
-  @extend .margin-right-input;
+  @extend .text-input;
   min-width: 70px;
   max-width: 70px;
-  margin-right: 0px !important;
 }
 
 .interval-select {
-  @extend .margin-right-input;
+  @extend .text-input;
   min-width: 115px;
+  margin-right: $s-size;
 }
 
 .inline-input {
@@ -39,11 +39,6 @@
 .inline-input4 {
   @extend .inline-input;
   width: 40px;
-}
-
-.margin-right-input {
-  @extend .text-input;
-  margin-right: $s-size;
 }
 
 .margin-right {

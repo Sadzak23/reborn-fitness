@@ -1,19 +1,18 @@
 .header5x5 {
   display: flex;
   justify-content: space-between;
-  margin: $l-size 0 0 0;
+  margin: $l-size 0 $m-size 0;
 }
 
-.workout-exercise {
+.box {
   border: solid;
   border-radius: 20px;
-  margin-bottom: $m-size;
   padding: 20px;
   box-shadow: 6px 5px 5px 5px rgba(0, 0, 0, 0.5);
-};
+}
 
 .timer5x5 {
-  @extend .workout-exercise;
+  @extend .box;
   padding: 20px 60px;
   > h1 {
     margin: 0;
@@ -21,12 +20,17 @@
 };
 
 .workout-bodyweight {
-  @extend .workout-exercise;
+  @extend .box;
   display: flex;
   align-items: center;
   > h2 {
     margin: 0;
   }
+};
+
+.workout-exercise {
+  @extend .box;
+  margin-bottom: $m-size;
 };
 
 .exercise-title-5x5 {
