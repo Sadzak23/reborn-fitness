@@ -1,6 +1,8 @@
 import React from 'react';
+import { metRunning } from './Mets';
+import { formatMinutes } from '../Format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRunning } from '@fortawesome/free-solid-svg-icons';
+import { faRunning, faSwimmer, faHiking, faSkiing } from '@fortawesome/free-solid-svg-icons';
 
 export class RunningCal extends React.Component {
   constructor(props) {
@@ -15,29 +17,16 @@ export class RunningCal extends React.Component {
     }
   };
 
-  met = {
-    // pace: met
-    "7:30": 8.3,
-    "7:00": 9.1,
-    "6:30": 9.5,
-    "6:00": 10,
-    "5:30": 10.6,
-    "5:00": 11.7,
-    "4:30": 12.1,
-    "4:00": 12.9,
-    "3:30": 15.8,
-  };
-
   onCalculateDuration = () => {
     this.setState({
-      resultCal: Math.round(this.state.user.weight * this.met[this.state.metRunning] * this.state.duration / 60)
-    })
+      resultCal: Math.round(this.state.user.weight * metRunning[this.state.metRunning] * this.state.duration / 60)
+    });
   };
 
   onCalculateCal = () => {
     this.setState({
-      resultDuration: Math.round(this.state.calNo / this.state.user.weight / this.met[this.state.metRunning] * 60)
-    })
+      resultDuration: Math.round(this.state.calNo / this.state.user.weight / metRunning[this.state.metRunning] * 60)
+    });
   };
 
   onCaloriesChange = (e) => {
@@ -46,7 +35,7 @@ export class RunningCal extends React.Component {
       this.setState({ calNo }, () => {
         this.onCalculateCal();
       });
-    }
+    };
   };
 
   onDurationChange = (e) => {
@@ -57,13 +46,14 @@ export class RunningCal extends React.Component {
       });
     };
   };
+  
   onMetChange = (e) => {
     const metRunning = e.target.value;
     this.setState({ metRunning }, () => {
       this.onCalculateDuration();
       this.onCalculateCal();
     });
-  }
+  };
 
   render() {
     return (
@@ -117,13 +107,13 @@ export class RunningCal extends React.Component {
           </div>
           {this.props.checkDuration ?
             <div>
-              <h2 className="cal-result">If you ran for {this.state.duration} min,</h2>
+              <h2 className="cal-result">If you ran for {formatMinutes(this.state.duration)} min,</h2>
               <h1 className="cal-result">You have burned: {this.state.resultCal} kCal</h1>
             </div>
             :
             <div>
               <h2 className="cal-result">To burn {this.state.calNo} kCal</h2>
-              <h1 className="cal-result">You have to run for: {this.state.resultDuration} min</h1>
+              <h1 className="cal-result">You have to run for {formatMinutes(this.state.resultDuration)} min</h1>
             </div>
           }
         </div>

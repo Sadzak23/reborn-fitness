@@ -1,6 +1,8 @@
 import React from 'react';
+import { metCycling } from './Mets';
+import { formatMinutes } from '../Format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBiking, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { faBiking } from '@fortawesome/free-solid-svg-icons';
 
 export class CyclingCal extends React.Component {
   constructor(props) {
@@ -15,25 +17,15 @@ export class CyclingCal extends React.Component {
     }
   };
 
-  met = {
-    // speed: met
-    "slow": 5,
-    "light": 7.8,
-    "moderate": 9.5,
-    "fast": 11,
-    "race": 12,
-    "sprint-race": 13.2
-  };
-
   onCalculateDuration = () => {
     this.setState({
-      resultCal: Math.round(this.state.user.weight * this.met[this.state.metCycling] * this.state.duration / 60)
+      resultCal: Math.round(this.state.user.weight * metCycling[this.state.metCycling] * this.state.duration / 60)
     })
   };
 
   onCalculateCal = () => {
     this.setState({
-      resultDuration: Math.round(this.state.calNo / this.state.user.weight / this.met[this.state.metCycling] * 60)
+      resultDuration: Math.round(this.state.calNo / this.state.user.weight / metCycling[this.state.metCycling] * 60)
     })
   };
 
@@ -111,13 +103,13 @@ export class CyclingCal extends React.Component {
           </div>
           {this.props.checkDuration ?
             <div>
-              <h2 className="cal-result">If you cycled for {this.state.duration} min,</h2>
+              <h2 className="cal-result">If you cycled for {formatMinutes(this.state.duration)} min,</h2>
               <h1 className="cal-result">You have burned: {this.state.resultCal} kCal</h1>
             </div>
             :
             <div>
               <h2 className="cal-result">To burn {this.state.calNo} kCal</h2>
-              <h1 className="cal-result">You have to cycle for: {this.state.resultDuration} min</h1>
+              <h1 className="cal-result">You have to cycle for {formatMinutes(this.state.resultDuration)} min</h1>
             </div>
           }
         </div>

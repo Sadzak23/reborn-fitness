@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { formatSeconds } from '../Format';
 import { faForward, faBackward, faPause, faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -106,23 +107,6 @@ class Timer extends React.Component {
     };
   };
   
-  formatTime = (seconds) => {
-    const add0 = (num) => ("0" + num).slice(-2);
-    
-    if (seconds < 3600) {
-      const minutes = Math.floor(seconds / 60);
-      seconds = seconds % 60;
-      return `${add0(minutes)}:${add0(seconds)}`;
-    }
-    else {
-      let minutes = Math.floor(seconds / 60);
-      seconds = seconds % 60;
-      const hours = Math.floor(minutes / 60)
-      minutes = minutes % 60;
-      return `${add0(hours)}:${add0(minutes)}:${add0(seconds)}`;
-    }
-  };
-  
   componentWillUnmount() {
     clearInterval(this.state.interval);
   };
@@ -169,7 +153,7 @@ class Timer extends React.Component {
             <FontAwesomeIcon icon={faTimes} className="timer-x" />
           </button>
         <div className="content-container timer-container">
-          <h1 className="timer-clock">{this.formatTime(Math.ceil(this.state.miliseconds / 1000))}</h1>
+          <h1 className="timer-clock">{formatSeconds(Math.ceil(this.state.miliseconds / 1000))}</h1>
           <h3 className="timer-interval-name">- {this.state.phase} -</h3>
           <div className="timer-intervals">
             <div>
@@ -177,8 +161,8 @@ class Timer extends React.Component {
               <h2>Exercise: {exerciseNo} / {totalExercisesNo}</h2>
             </div>
             <div>
-              <h2>Elapsed Time: {elapsedTime < 0 ? "00:00" : this.formatTime(elapsedTime)}</h2>
-              <h2>Time Remaining: {this.formatTime(remainingTime)}</h2>
+              <h2>Elapsed Time: {elapsedTime < 0 ? "00:00" : formatSeconds(elapsedTime)}</h2>
+              <h2>Time Remaining: {formatSeconds(remainingTime)}</h2>
             </div>
           </div>
           <p>Type: {this.state.type}</p>

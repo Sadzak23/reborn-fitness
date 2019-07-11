@@ -1,8 +1,10 @@
 import React from 'react';
+import { metWalking } from './Mets';
+import { formatMinutes } from '../Format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWalking, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { faWalking } from '@fortawesome/free-solid-svg-icons';
 
-export class WalkincCal extends React.Component {
+export class WalkingCal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,22 +17,15 @@ export class WalkincCal extends React.Component {
     }
   };
 
-  met = {
-    // speed: met
-    "slow": 3.2,
-    "moderate": 5,
-    "fast": 8,
-  };
-
   onCalculateDuration = () => {
     this.setState({
-      resultCal: Math.round(this.state.user.weight * this.met[this.state.metWalking] * this.state.duration / 60)
+      resultCal: Math.round(this.state.user.weight * metWalking[this.state.metWalking] * this.state.duration / 60)
     })
   };
 
   onCalculateCal = () => {
     this.setState({
-      resultDuration: Math.round(this.state.calNo / this.state.user.weight / this.met[this.state.metWalking] * 60)
+      resultDuration: Math.round(this.state.calNo / this.state.user.weight / metWalking[this.state.metWalking] * 60)
     })
   };
 
@@ -105,13 +100,13 @@ export class WalkincCal extends React.Component {
           </div>
           {this.props.checkDuration ?
             <div>
-              <h2 className="cal-result">If you walked for {this.state.duration} min,</h2>
+              <h2 className="cal-result">If you walked for {formatMinutes(this.state.duration)} min,</h2>
               <h1 className="cal-result">You have burned: {this.state.resultCal} kCal</h1>
             </div>
             :
             <div>
               <h2 className="cal-result">To burn {this.state.calNo} kCal</h2>
-              <h1 className="cal-result">You have to walk for: {this.state.resultDuration} min</h1>
+              <h1 className="cal-result">You have to walk for {formatMinutes(this.state.resultDuration)} min</h1>
             </div>
           }
         </div>
