@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStopwatch, faDumbbell, faHeartbeat, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHotjar } from '@fortawesome/free-brands-svg-icons';
 
 const DashboardPage = () => (
   <div className="content-container">
@@ -10,6 +11,9 @@ const DashboardPage = () => (
     </div>
     <Link className="list-dashboard" to="/users">
       <FontAwesomeIcon icon={faUsers} /> Users
+    </Link>
+    <Link className="list-dashboard" to="/tool-cal">
+      <FontAwesomeIcon icon={faHotjar} /> Cal Calculator
     </Link>
     <Link className="list-dashboard" to="/timers">
       <FontAwesomeIcon icon={faStopwatch} /> Timer Workout

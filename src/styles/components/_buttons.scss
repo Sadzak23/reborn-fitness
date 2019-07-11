@@ -6,6 +6,9 @@
   font-size: $m-size;
   padding: $s-size;
   text-decoration: none;
+  &:active {
+    padding: $s-size;
+  }
 };
 
 .btn-logout {
@@ -182,3 +185,20 @@
   height: 6rem;
   width: 6rem;
 }
+
+// Calories Calculator
+
+.btn-duration-cal {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: solid 1px;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: auto;
+  padding: 10px;
+  &:active {
+    padding: 10px;
+  }
+};

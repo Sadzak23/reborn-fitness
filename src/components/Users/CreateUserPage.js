@@ -23,14 +23,8 @@ export class CreateUserPage extends React.Component {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth
-  }
-}
-
 const mapDispatchToProps = (dispatch) => ({
   startCreateUser: (user) => dispatch(startCreateUser(user))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUserPage);
+export default connect(undefined, mapDispatchToProps)(CreateUserPage);

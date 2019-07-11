@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import { startRemoveUser, editUser } from '../../actions/users';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserEdit, faUserTimes, faUserCheck, faUserSlash, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
+import { faUserEdit, faUserTimes, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
 
 export const SingleUser = ({ id, firstName, lastName, activeUser, birthdate, gender, height, weight, editUser, startRemoveUser }) => {
 
@@ -49,20 +49,20 @@ export const SingleUser = ({ id, firstName, lastName, activeUser, birthdate, gen
         <button disabled={!activeUser} className="btn-remove-m" onClick={onRemoveUser}>
           <FontAwesomeIcon icon={faUserTimes} />
         </button>
+        
+        <Link to={`/tool-cal/${id}`}>
+          <button className="btn-edit-m">
+            <FontAwesomeIcon icon={faUserEdit} style={{ color: 'yellow' }} />
+          </button>
+        </Link>
       </div>
     </div>
   )
 };
-
-const mapStateToProps = (state, props) => ({
-  user: state.users.find((user) => {
-    user.id === props.id
-  })
-});
 
 const mapDispatchToProps = (dispatch) => ({
   editUser: (id, updates) => dispatch(editUser(id, updates)),
   startRemoveUser: (id) => dispatch(startRemoveUser(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleUser);
+export default connect(undefined, mapDispatchToProps)(SingleUser);

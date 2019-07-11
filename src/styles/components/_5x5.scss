@@ -14,18 +14,12 @@
 .timer5x5 {
   @extend .box;
   padding: 20px 60px;
-  > h1 {
-    margin: 0;
-  }
 };
 
 .workout-bodyweight {
   @extend .box;
   display: flex;
   align-items: center;
-  > h2 {
-    margin: 0;
-  }
 };
 
 .workout-exercise {
@@ -37,9 +31,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  > h2, h3 {
-    margin: 0;
-  }
 };
 
 .counter5x5 {

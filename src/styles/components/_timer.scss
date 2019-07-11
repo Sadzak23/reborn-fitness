@@ -38,6 +38,9 @@
 .timer-intervals {
   display: flex;
   justify-content: space-around;
+  h2 {
+    margin: $m-size 0 0 0;
+  }
 };
 
 .timer-controls {

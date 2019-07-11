@@ -40,15 +40,7 @@
   @extend .inline-input;
   width: 40px;
 }
-
-.margin-right {
-  margin-right: $s-size;
-}
-
-.fit-content {
-  width: max-content;
-}
-
-.no-click {
-  pointer-events: none;
+.inline-input5 {
+  @extend .inline-input;
+  width: 50px;
 }

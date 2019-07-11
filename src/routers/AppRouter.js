@@ -17,6 +17,7 @@ import Workout5x5 from '../components/5x5/Workout5x5';
 import UserEdit from '../components/Users/CreateUserPage';
 import UsersList from '../components/Users/UsersList';
 import EditUserPage from '../components/Users/EditUserPage';
+import CalCalculator from '../components/CalCalculator/CalCalculator';
 
 export const history = createBrowserHistory();
 
@@ -36,6 +37,7 @@ const AppRouter = () => (
         <PrivateRoute path="/dashboard5x5" component={Dashboard5x5} />
         <FullScreenRoute path="/workout5x5" component={Workout5x5} />
         <PrivateRoute path="/history5x5" component={History5x5} />
+        <PrivateRoute path="/tool-cal/:id" component={CalCalculator} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
