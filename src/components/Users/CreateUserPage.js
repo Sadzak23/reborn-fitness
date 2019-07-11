@@ -7,7 +7,7 @@ export class CreateUserPage extends React.Component {
 
   onCreateUser = (user) => {
     this.props.startCreateUser(user);
-    this.props.history.push('/users');
+    this.props.history.goBack();
   };
 
   render() {
@@ -16,6 +16,7 @@ export class CreateUserPage extends React.Component {
       <div className="content-container">
         <UserForm
           onAddUser={this.onCreateUser}
+          history={this.props.history}
         />
       </div>
     </div>

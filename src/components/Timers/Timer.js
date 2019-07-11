@@ -143,7 +143,7 @@ class Timer extends React.Component {
       },
     })
       .then((value) =>
-        value === "exit" && this.props.history.push('/timers')          
+        value === "exit" && this.props.history.goBack()
       );
 
     //Exercise number calculator

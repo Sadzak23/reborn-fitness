@@ -7,7 +7,6 @@ export class CyclingCal extends React.Component {
     super(props);
     this.state = {
       user: props.user,
-      checkDuration: true,
       metCycling: "moderate",
       duration: 0,
       calNo: 0,
@@ -24,10 +23,6 @@ export class CyclingCal extends React.Component {
     "fast": 11,
     "race": 12,
     "sprint-race": 13.2
-  };
-
-  onResultType = () => {
-    this.setState({ checkDuration: !this.state.checkDuration })
   };
 
   onCalculateDuration = () => {
@@ -69,16 +64,10 @@ export class CyclingCal extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.onResultType} className="btn-duration-cal">
-          Duration
-        <FontAwesomeIcon icon={faToggleOn} size="2x" className={this.state.checkDuration ? "fa-rotate-180 margin-xs" : "margin-xs"} />
-          Calories
-       </button>
         <div className="cal-activity">
           <FontAwesomeIcon icon={faBiking} size="4x" className="activity-icon" />
           <div className="cal-activity-options">
-            {this.state.checkDuration ?
+            {this.props.checkDuration ?
               <label className="text-input fit-content margin-right">
                 Duration: <input
                   type="text"
@@ -120,7 +109,7 @@ export class CyclingCal extends React.Component {
               </label>
             </div>
           </div>
-          {this.state.checkDuration ?
+          {this.props.checkDuration ?
             <div>
               <h2 className="cal-result">If you cycled for {this.state.duration} min,</h2>
               <h1 className="cal-result">You have burned: {this.state.resultCal} kCal</h1>
@@ -132,7 +121,6 @@ export class CyclingCal extends React.Component {
             </div>
           }
         </div>
-      </div>
     )
   }
 };

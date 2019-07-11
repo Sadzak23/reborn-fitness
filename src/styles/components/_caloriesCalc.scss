@@ -1,7 +1,7 @@
 .cal-activity {
   border: 1px solid;
   border-radius: 20px;
-  box-shadow: 4px 4px 6px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
   padding: 20px;
 }
 
@@ -17,12 +17,32 @@
   justify-content: center;
 }
 
-.cal-result-value {
-  font-size: 30px;
-  margin-left: 7px;
-}
-
 .activity-icon {
   display: flex;
   margin: 0 auto -50px auto;
+}
+
+.activity-controls {
+  display: flex;
+  justify-content: space-around;
+}
+
+.activity-result-type {
+  display: flex;
+  align-items: center;
+  background: none;
+  justify-content: center;
+  border: solid 1px;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px;
+  height: 50px;
+  width: 200px;
+  &:active {
+    padding: 10px;
+  };
+  &:focus {
+    outline: none;
+  };
 }

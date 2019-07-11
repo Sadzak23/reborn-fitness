@@ -1,13 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRunning, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { faRunning } from '@fortawesome/free-solid-svg-icons';
 
 export class RunningCal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: props.user,
-      checkDuration: true,
       metRunning: "6:00",
       duration: 0,
       calNo: 0,
@@ -27,10 +26,6 @@ export class RunningCal extends React.Component {
     "4:30": 12.1,
     "4:00": 12.9,
     "3:30": 15.8,
-  };
-
-  onResultType = () => {
-    this.setState({ checkDuration: !this.state.checkDuration })
   };
 
   onCalculateDuration = () => {
@@ -72,16 +67,10 @@ export class RunningCal extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.onResultType} className="btn-duration-cal">
-          Duration
-        <FontAwesomeIcon icon={faToggleOn} size="2x" className={this.state.checkDuration ? "fa-rotate-180 margin-xs" : "margin-xs"} />
-          Calories
-      </button>
         <div className="cal-activity">
           <FontAwesomeIcon icon={faRunning} size="4x" className="activity-icon" />
           <div className="cal-activity-options">
-            {this.state.checkDuration ?
+            {this.props.checkDuration ?
               <label className="text-input fit-content margin-right">
                 Duration: <input
                   type="text"
@@ -126,7 +115,7 @@ export class RunningCal extends React.Component {
               </label>
             </div>
           </div>
-          {this.state.checkDuration ?
+          {this.props.checkDuration ?
             <div>
               <h2 className="cal-result">If you ran for {this.state.duration} min,</h2>
               <h1 className="cal-result">You have burned: {this.state.resultCal} kCal</h1>
@@ -138,7 +127,6 @@ export class RunningCal extends React.Component {
             </div>
           }
         </div>
-      </div>
     )
   }
 };

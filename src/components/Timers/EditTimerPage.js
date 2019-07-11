@@ -6,7 +6,7 @@ import { startEditTimer } from '../../actions/timers'
 export class EditTimerPage extends React.Component {
   onEdit = (id, updates) => {
     this.props.startEditTimer(id, updates);
-    this.props.history.push('/timers');
+    this.props.history.goBack();
   };
   render() {
     return (
@@ -15,6 +15,7 @@ export class EditTimerPage extends React.Component {
           <TimerForm
             timer={this.props.timer}
             onEditTimer={this.onEdit}
+            history={this.props.history}
           />
         </div>
       </div>

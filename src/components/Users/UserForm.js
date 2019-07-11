@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { colorMapGender } from '../ColorMap';
 import { userFormAlerts } from '../Alerts';
 import { Birthdate } from './Birthdate'
@@ -100,6 +99,10 @@ export default class UserForm extends React.Component {
     }
   };
 
+  onCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const genderColor = this.state.gender === "male" ? `${Object.keys(colorMapGender)[0]}` : `${Object.keys(colorMapGender)[1]}`;
     const genderPrefix = this.state.gender === "male" ? "Sir " : "Lady ";
@@ -158,11 +161,9 @@ export default class UserForm extends React.Component {
               <button className="btn-save" onClick={this.onEditUser}>
                 <FontAwesomeIcon icon={faSave} /> Save Changes
               </button>}
-            <Link className="form-cancel" to="/users">
-              <button className="btn-cancel">
+              <button className="btn-cancel form-cancel" onClick={this.onCancel}>
                 <FontAwesomeIcon icon={faBan} /> Cancel
               </button>
-            </Link>
           </div>
         </div>
       </div>

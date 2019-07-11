@@ -12,7 +12,7 @@ const DashboardPage = () => (
     <Link className="list-dashboard" to="/users">
       <FontAwesomeIcon icon={faUsers} /> Users
     </Link>
-    <Link className="list-dashboard" to="/tool-cal">
+    <Link className="list-dashboard" to="/user-select-cal">
       <FontAwesomeIcon icon={faHotjar} /> Cal Calculator
     </Link>
     <Link className="list-dashboard" to="/timers">

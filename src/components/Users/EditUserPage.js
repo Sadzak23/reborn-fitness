@@ -6,7 +6,7 @@ import { startEditUser } from '../../actions/users'
 export class EditUserPage extends React.Component {
   onEdit = (id, updates) => {
     this.props.startEditUser(id, updates);
-    this.props.history.push('/users');
+    this.props.history.goBack();
   };
   render() {
     return (
@@ -15,6 +15,7 @@ export class EditUserPage extends React.Component {
           <UserForm
             user={this.props.user}
             onEditUser={this.onEdit}
+            history={this.props.history}
           />
         </div>
       </div>

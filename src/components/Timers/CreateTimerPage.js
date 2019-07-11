@@ -6,7 +6,7 @@ import { startCreateTimer } from '../../actions/timers'
 export class CreateTimerPage extends React.Component {
   onCreateTimer = (timer) => {
     this.props.startCreateTimer(timer);
-    this.props.history.push('/timers');
+    this.props.history.goBack();
   };
   render() {
     return (
@@ -14,6 +14,7 @@ export class CreateTimerPage extends React.Component {
         <div className="content-container">
           <TimerForm
             onAddTimer={this.onCreateTimer}
+            history={this.props.history}
           />
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import uuid from 'uuid';
-import { Link } from 'react-router-dom';
 import SingleInterval from "./SingleInterval";
 import { colorMap } from '../ColorMap';
 import { timerFormAlerts } from '../Alerts';
@@ -177,6 +176,10 @@ export default class TimerForm extends React.Component {
     }
   };
 
+  onCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     return (
       <div className="form">
@@ -293,11 +296,9 @@ export default class TimerForm extends React.Component {
             <button className="btn-save" onClick={this.onEditTimer}>
               <FontAwesomeIcon icon={faSave} /> Save Changes
           </button>}
-          <Link className="form-cancel" to="/timers">
-            <button className="btn-cancel">
-              <FontAwesomeIcon icon={faBan} /> Cancel
+          <button className="btn-cancel form-cancel" onClick={this.onCancel}>
+            <FontAwesomeIcon icon={faBan} /> Cancel
           </button>
-          </Link>
         </div>
       </div>
     )

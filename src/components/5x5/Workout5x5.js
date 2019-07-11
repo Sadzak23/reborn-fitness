@@ -131,7 +131,7 @@ export default class Workout5x5 extends React.Component {
       },
     })
       .then((value) =>
-        value === "exit" && this.props.history.push('/dashboard5x5')
+        value === "exit" && this.props.history.goBack()
       );
     const exercise2Name = this.state.workout.type === 'a' ? "Bench Press" : "Overhead Press";
     const exercise2Weight = this.state.workout.type === 'a' ? this.state.userData.benchPress : this.state.userData.overheadPress;
