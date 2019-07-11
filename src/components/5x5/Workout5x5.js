@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-export default class Workout5x5 extends React.Component {
+export class Workout5x5 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +13,7 @@ export default class Workout5x5 extends React.Component {
         barbellRow: 80,
         overheadPress: 60,
         deadLift: 110,
-        bodyWeight: 75
+        bodyWeight: this.props.user ? this.props.user.weight : 0
       },
       workout: {
         type: 'a',
@@ -199,3 +200,11 @@ export default class Workout5x5 extends React.Component {
     )
   }
 };
+
+const mapStateToProps = (state, props) => {
+  return {
+    user: state.users.find((user) => user.id === props.match.params.id)
+  };
+};
+
+export default connect(mapStateToProps)(Workout5x5);

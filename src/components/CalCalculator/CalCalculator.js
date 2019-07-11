@@ -27,14 +27,6 @@ export class CalCalculator extends React.Component {
     this.setState({ checkDuration: !this.state.checkDuration })
   };
 
-  Click = () => {
-    this.setState({
-      user: this.props.user,
-      age: moment().diff(this.props.user.birthdate, 'years'),
-      weight: this.props.user.weight
-    })
-  };
-
   onGoBack = () => {
     this.props.history.goBack();
   }
@@ -52,16 +44,16 @@ export class CalCalculator extends React.Component {
         </button>
 
         {this.state.user ? (
-          <div>
+          <div className="cal-user-info">
             <h1>Hi {this.state.user.firstName}</h1>
             <h3>Age: {this.state.age} - Weight: {this.state.user.weight}kg</h3>
           </div>
-        ) : (<h3>Please Select user</h3>)
+        ) : (<h2 className="cal-user-info">Please Select user!</h2>)
         }
 
-        <button onClick={this.Click}>Click me</button>
         <div className="activity-controls">
           <select
+            autoFocus
             className="activity-result-type"
             id="activity-select"
             onChange={this.onActivitySelect}

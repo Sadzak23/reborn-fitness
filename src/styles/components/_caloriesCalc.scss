@@ -1,5 +1,11 @@
+.cal-user-info {
+  display: grid;
+  justify-items: center;
+  margin-bottom: $l-size;
+}
+
 .cal-activity {
-  border: 1px solid;
+  border: 2px solid;
   border-radius: 20px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
   padding: 20px;
@@ -32,7 +38,7 @@
   align-items: center;
   background: none;
   justify-content: center;
-  border: solid 1px;
+  border: 2px solid;
   border-bottom: none;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;

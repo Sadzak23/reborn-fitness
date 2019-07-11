@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SingleUser from '../Users/SingleUser-Cal';
+import SingleUser from '../Users/SingleUser';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +24,7 @@ const UsersListSelect = (props) => (
           ) : (
               props.users.map(user =>
                 (<SingleUser
+                  path={props.location.pathname}
                   key={user.id}
                   {...user}
                 />))

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SingleUser from './SingleUser';
+import SingleUser from './SingleUser-multiSelect';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
