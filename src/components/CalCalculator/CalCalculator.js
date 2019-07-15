@@ -27,8 +27,8 @@ export class CalCalculator extends React.Component {
     this.setState({ checkDuration: !this.state.checkDuration })
   };
 
-  onGoBack = () => {
-    this.props.history.goBack();
+  onExit = () => {
+    this.props.history.push("/");
   }
 
   render() {
@@ -39,7 +39,7 @@ export class CalCalculator extends React.Component {
     }
     return (
       <div className="content-container">
-        <button className="btn-x-header" onClick={this.onGoBack}>
+        <button className="btn-x-header" onClick={this.onExit}>
           <FontAwesomeIcon icon={faTimes} className="timer-x" />
         </button>
           <div className="cal-user-info">
