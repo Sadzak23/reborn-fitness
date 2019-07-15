@@ -1,6 +1,7 @@
 import React from "react";
 import uuid from 'uuid';
 import SingleInterval from "./SingleInterval";
+import { history } from "../../routers/AppRouter";
 import { colorMap } from '../ColorMap';
 import { timerFormAlerts } from '../Alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,8 +18,8 @@ export default class TimerForm extends React.Component {
       error: "",
       currentIntervalId: null,
       currentIntervalName: "",
-      currentIntervalMin: 0,
-      currentIntervalSec: 0,
+      currentIntervalMin: "",
+      currentIntervalSec: "",
       currentIntervalType: "exercise",
       currentIntervalColor: "#63d313",
       editInterval: false
@@ -43,12 +44,16 @@ export default class TimerForm extends React.Component {
     this.setState({ currentIntervalName });
   };
   onIntervalMinChange = (e) => {
-    const currentIntervalMin = parseInt(e.target.value);
-    this.setState({ currentIntervalMin });
+    const currentIntervalMin = e.target.value;
+    if (!currentIntervalMin || currentIntervalMin.match(/^\d{1,3}$/)) {
+      this.setState({ currentIntervalMin });
+    };
   };
   onIntervalSecChange = (e) => {
-    const currentIntervalSec = parseInt(e.target.value);
-    this.setState({ currentIntervalSec });
+    const currentIntervalSec = e.target.value;
+    if (!currentIntervalSec || currentIntervalSec.match(/^\d{1,3}$/)) {
+      this.setState({ currentIntervalSec });
+    };
   };
   onIntervalTypeChange = (e) => {
     const currentIntervalType = e.target.value;
@@ -63,23 +68,23 @@ export default class TimerForm extends React.Component {
   onAddInterval = () => {
     if (!this.state.currentIntervalName) {
       swal(timerFormAlerts.intTitle, timerFormAlerts.intNoName, "error", { dangerMode: true, })
-    } else if (this.state.currentIntervalMin === 0 & this.state.currentIntervalSec === 0) {
+    } else if (this.state.currentIntervalMin === 0 & this.state.currentIntervalSec === 0 || this.state.currentIntervalMin === "" & this.state.currentIntervalSec === "") {
       swal(timerFormAlerts.intTitle, timerFormAlerts.intDuration, "error", { dangerMode: true, })
     } else {
       this.setState({
         intervals: [...this.state.intervals, {
           id: uuid(),
           intervalName: this.state.currentIntervalName,
-          intervalMin: this.state.currentIntervalMin,
-          intervalSec: this.state.currentIntervalSec,
+          intervalMin: this.state.currentIntervalMin ? parseInt(this.state.currentIntervalMin) : 0,
+          intervalSec: this.state.currentIntervalSec ? parseInt(this.state.currentIntervalSec) : 0,
           intervalType: this.state.currentIntervalType,
           intervalColor: this.state.currentIntervalColor
         }]
       });
       this.setState({
         currentIntervalName: "",
-        currentIntervalMin: 0,
-        currentIntervalSec: 0,
+        currentIntervalMin: "",
+        currentIntervalSec: "",
         currentIntervalType: "exercise",
         currentIntervalColor: "#63d313",
         currentIntervalId: null,
@@ -127,8 +132,8 @@ export default class TimerForm extends React.Component {
         return {
           id: this.state.currentIntervalId,
           intervalName: this.state.currentIntervalName,
-          intervalMin: this.state.currentIntervalMin,
-          intervalSec: this.state.currentIntervalSec,
+          intervalMin: this.state.currentIntervalMin ? parseInt(this.state.currentIntervalMin) : 0,
+          intervalSec: this.state.currentIntervalSec ? parseInt(this.state.currentIntervalSec) : 0,
           intervalType: this.state.currentIntervalType,
           intervalColor: this.state.currentIntervalColor
         }
@@ -136,8 +141,8 @@ export default class TimerForm extends React.Component {
       this.setState({
         intervals: newIntervals,
         currentIntervalName: "",
-        currentIntervalMin: 0,
-        currentIntervalSec: 0,
+        currentIntervalMin: "",
+        currentIntervalSec: "",
         currentIntervalType: "exercise",
         currentIntervalColor: "#63d313",
         currentIntervalId: null,
@@ -177,7 +182,7 @@ export default class TimerForm extends React.Component {
   };
 
   onCancel = () => {
-    this.props.history.goBack();
+    history.goBack();
   };
 
   render() {
@@ -185,25 +190,24 @@ export default class TimerForm extends React.Component {
       <div className="form">
         <div className="form-header">
           <input
+            name="workout-name"
             autoFocus
             autoComplete="off"
             className="text-input form-timer-name"
-            name="workout-name"
             onChange={this.onNameChange}
             placeholder="Workout Name"
             type="text"
             value={this.state.name}
           />
-          <div>
-            <label htmlFor="warmup" className="form-label">Warmup Time</label>
-            <input
-              autoComplete="off"
-              className="text-input"
-              name="warmup"
-              onChange={this.onWarmupChange}
-              type="number"
-              value={this.state.warmupTime}
-            />
+          <div className="flex">
+            <label className="text-input fit-content">
+              Warmup Time: <input
+                type="text"
+                onChange={this.onWarmupChange}
+                autoComplete="off"
+                className="inline-input2"
+                value={this.state.warmupTime} /> sec
+            </label>
           </div>
         </div>
         <div name="interval-list">
@@ -228,36 +232,36 @@ export default class TimerForm extends React.Component {
 
         <div className="flex">
           <input
-            name="intervalName"
+            id="interval-name"
             autoComplete="off"
             className="margin-right text-input form-interval-name"
-            id="interval-name"
             onChange={this.onIntervalNameChange}
             placeholder="Interval name"
             type="text"
             value={this.state.currentIntervalName}
           />
-          <input
-            autoComplete="off"
-            className="interval-time-set form-min"
-            id="interval-minutes"
-            min="0"
-            onChange={this.onIntervalMinChange}
-            type="number"
-            value={this.state.currentIntervalMin}
-          />
-          <label htmlFor="interval-minutes" className="form-label"> min</label>
-          <input
-            autoComplete="off"
-            className="interval-time-set"
-            id="interval-seconds"
-            min="0"
-            max="59"
-            onChange={this.onIntervalSecChange}
-            type="number"
-            value={this.state.currentIntervalSec}
-          />
-          <label htmlFor="interval-seconds" className="form-label"> sec</label>
+          <div className="flex">
+            <label className="margin-right text-input fit-content">
+              <input
+                type="text"
+                onChange={this.onIntervalMinChange}
+                autoComplete="off"
+                className="inline-input"
+                id="interval-minutes"
+                placeholder="0"
+                value={this.state.currentIntervalMin} /> min
+            </label>
+            <label className="margin-right text-input fit-content">
+              <input
+                type="text"
+                onChange={this.onIntervalSecChange}
+                autoComplete="off"
+                className="inline-input"
+                id="interval-seconds"
+                placeholder="0"
+                value={this.state.currentIntervalSec} /> sec
+            </label>
+          </div>
           <select
             className="interval-select"
             id="interval-type"

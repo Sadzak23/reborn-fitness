@@ -4,12 +4,12 @@ import * as moment from 'moment';
 export class Birthdate extends React.Component {
   constructor(props) {
     super(props);
-    const birthdate = moment(props.birthdate).format('D M YYYY').split(' ')
+    const birthdate = props.birthdate ? moment(props.birthdate).format('D M YYYY').split(' ') : "";
     this.state = {
       date: '',
-      day: birthdate[0],
-      month: birthdate[1],
-      year: birthdate[2],
+      day: birthdate ? birthdate[0] : "",
+      month: birthdate ? birthdate[1] : "",
+      year: birthdate ? birthdate[2] : "",
     }
   };
 
@@ -49,13 +49,28 @@ export class Birthdate extends React.Component {
     return (
       <div className="text-input fit-content">
         Birthdate: <label className="margin-right fit-content">
-          day: <input type="text" onChange={this.onDayChange} className="inline-input2" value={this.state.day} />
+          day: <input
+          type="text"
+          onChange={this.onDayChange}
+          className="inline-input2"
+          placeholder="1"
+          value={this.state.day} />
         </label>
         <label className="margin-right fit-content">
-          month: <input type="text" onChange={this.onMonthChange} className="inline-input2" value={this.state.month} />
+          month: <input
+          type="text"
+          onChange={this.onMonthChange}
+          className="inline-input2"
+          placeholder="1"
+          value={this.state.month} />
         </label>
         <label className="margin-right fit-content">
-          year: <input type="text" onChange={this.onYearChange} className="inline-input4" value={this.state.year} />
+          year: <input
+          type="text"
+          onChange={this.onYearChange}
+          className="inline-input4"
+          placeholder="1990"
+          value={this.state.year} />
         </label>
       </div>
     )

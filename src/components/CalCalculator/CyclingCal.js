@@ -10,8 +10,8 @@ export class CyclingCal extends React.Component {
     this.state = {
       user: props.user,
       metCycling: "moderate",
-      duration: 0,
-      calNo: 0,
+      duration: "",
+      calNo: "",
       resultCal: 0,
       resultDuration: 0,
     }
@@ -66,6 +66,7 @@ export class CyclingCal extends React.Component {
                   onChange={this.onDurationChange}
                   autoComplete="off"
                   className="inline-input"
+                  placeholder="0"
                   value={this.state.duration}
                 /> min
             </label>
@@ -77,6 +78,7 @@ export class CyclingCal extends React.Component {
                   onChange={this.onCaloriesChange}
                   autoComplete="off"
                   className="inline-input5"
+                  placeholder="0"
                   value={this.state.calNo}
                 /> kCal
               </label>
@@ -103,12 +105,12 @@ export class CyclingCal extends React.Component {
           </div>
           {this.props.checkDuration ?
             <div>
-              <h2 className="cal-result">If you cycled for {formatMinutes(this.state.duration)} min,</h2>
+              <h2 className="cal-result">If you cycled for {formatMinutes(this.state.duration ? this.state.duration : 0)} min,</h2>
               <h1 className="cal-result">You have burned: {this.state.resultCal} kCal</h1>
             </div>
             :
             <div>
-              <h2 className="cal-result">To burn {this.state.calNo} kCal</h2>
+              <h2 className="cal-result">To burn {this.state.calNo ? this.state.calNo : 0} kCal</h2>
               <h1 className="cal-result">You have to cycle for {formatMinutes(this.state.resultDuration)} min</h1>
             </div>
           }

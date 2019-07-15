@@ -4,6 +4,7 @@ import { userFormAlerts } from '../Alerts';
 import { Birthdate } from './Birthdate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFemale, faMale, faSave, faUserPlus, faBan } from '@fortawesome/free-solid-svg-icons';
+import { history } from '../../routers/AppRouter';
 
 export default class UserForm extends React.Component {
   constructor(props) {
@@ -12,10 +13,11 @@ export default class UserForm extends React.Component {
     this.state = {
       firstName: props.user ? props.user.firstName : '',
       lastName: props.user ? props.user.lastName : '',
-      weight: props.user ? props.user.weight : 0,
-      height: props.user ? props.user.height : 0,
+      weight: props.user ? props.user.weight : "",
+      height: props.user ? props.user.height : "",
       gender: props.user ? props.user.gender : 'male',
-      birthdate: props.user ? props.user.birthdate : 631148400000
+      birthdate: props.user ? props.user.birthdate : "",
+      activeUser: props.user ? props.user.activeUser : false
     };
   };
 
@@ -94,13 +96,13 @@ export default class UserForm extends React.Component {
           height: this.state.height,
           weight: this.state.weight,
           gender: this.state.gender,
-          activeUser: false
+          activeUser: this.state.activeUser
         });
     }
   };
 
   onCancel = () => {
-    this.props.history.goBack();
+    history.goBack();
   };
 
   render() {
@@ -116,6 +118,7 @@ export default class UserForm extends React.Component {
                 id="firstName"
                 type="text"
                 onChange={this.onFirstNameChange}
+                autoComplete="off"
                 className="margin-right text-input"
                 placeholder="First Name"
                 value={this.state.firstName}
@@ -124,6 +127,7 @@ export default class UserForm extends React.Component {
                 id="lastName"
                 type="text"
                 onChange={this.onLastNameChange}
+                autoComplete="off"
                 className="text-input"
                 placeholder="Last Name"
                 value={this.state.lastName}
@@ -137,10 +141,22 @@ export default class UserForm extends React.Component {
           />
           <div className="flex">
             <label className="text-input fit-content margin-right">
-              Weight: <input type="text" onChange={this.onWeightChange} className="inline-input" id="bodyWeight" value={this.state.weight} /> kg
+              Weight: <input
+              type="text"
+              onChange={this.onWeightChange}
+              autoComplete="off"
+              className="inline-input"
+              placeholder="0"
+              value={this.state.weight} /> kg
             </label>
             <label className="text-input fit-content">
-              Height: <input type="text" onChange={this.onHeightChange} className="inline-input" id="bodyHeight" value={this.state.height} /> cm
+              Height: <input
+              type="text"
+              onChange={this.onHeightChange}
+              autoComplete="off"
+              className="inline-input"
+              placeholder="0"
+              value={this.state.height} /> cm
             </label>
           </div>
 
