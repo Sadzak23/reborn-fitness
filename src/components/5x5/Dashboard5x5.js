@@ -13,13 +13,15 @@ export default class Dashboard5x5 extends React.Component {
             <p>Strong Lifts 5x5</p>
           </div>
         </div>
-        <Link className="list-dashboard" to="/workout5x5">
+        <Link className="list-dashboard" to="/user-select-5x5" onMouseDown={(e) => {e.preventDefault()}}>
           <FontAwesomeIcon icon={faDumbbell} /> Start Workout
         </Link>
-        <Link className="list-dashboard" to="/user-select-5x5">
+        {/*
+        <Link className="list-dashboard" to="/user-select-5x5" onMouseDown={(e) => {e.preventDefault()}}>
           <FontAwesomeIcon icon={faUserCheck} /> Select User
         </Link>
-        <Link className="list-dashboard" to="/history5x5">
+      */}
+        <Link className="list-dashboard" to="/history5x5" onMouseDown={(e) => {e.preventDefault()}}>
           <FontAwesomeIcon icon={faAddressBook} /> View History
         </Link>
       </div>

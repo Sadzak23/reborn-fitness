@@ -35,12 +35,12 @@ export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer 
         <p>{intervals.length} intervals - Warmup time: {warmupTime}</p>
       </div>
       <div>
-        <Link to={`/timer/${id}`}>
+        <Link to={`/timer/${id}`} onMouseDown={(e) => {e.preventDefault()}}>
           <button className="btn-play">
             <FontAwesomeIcon icon={faPlay} />
           </button>
         </Link>
-        <Link to={`/edit-timer/${id}`}>
+        <Link to={`/edit-timer/${id}`} onMouseDown={(e) => {e.preventDefault()}}>
           <button className="btn-edit-m">
             <FontAwesomeIcon icon={faPen} style={{ color: '#fff' }} />
           </button>

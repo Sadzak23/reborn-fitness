@@ -41,7 +41,7 @@ export const SingleUser = ({ id, firstName, lastName, activeUser, editUser, star
       </button>
       </div>
       <div className="single-user-btns">
-        <Link to={`/edit-user/${id}`} className={!activeUser ? "no-click" : ""}>
+        <Link to={`/edit-user/${id}`} className={!activeUser ? "no-click" : ""} onMouseDown={(e) => {e.preventDefault()}}>
           <button disabled={!activeUser} className="btn-edit-m">
             <FontAwesomeIcon icon={faUserEdit} />
           </button>

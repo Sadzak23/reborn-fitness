@@ -13,7 +13,7 @@ const UsersListSelect = (props) => (
           <FontAwesomeIcon icon={faUsers} size="2x" className="margin-right" />
           <p> Please select user</p>
         </div>
-        <Link to="/create-user">
+        <Link to="/create-user" onMouseDown={(e) => {e.preventDefault()}}>
           <FontAwesomeIcon icon={faUserPlus} style={{ color: '#fff' }} size="2x" />
         </Link>
       </div>

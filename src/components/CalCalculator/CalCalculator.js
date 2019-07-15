@@ -42,15 +42,10 @@ export class CalCalculator extends React.Component {
         <button className="btn-x-header" onClick={this.onGoBack}>
           <FontAwesomeIcon icon={faTimes} className="timer-x" />
         </button>
-
-        {this.state.user ? (
           <div className="cal-user-info">
             <h1>Hi {this.state.user.firstName}</h1>
             <h3>Age: {this.state.age} - Weight: {this.state.user.weight}kg</h3>
           </div>
-        ) : (<h2 className="cal-user-info">Please Select user!</h2>)
-        }
-
         <div className="activity-controls">
           <select
             autoFocus
