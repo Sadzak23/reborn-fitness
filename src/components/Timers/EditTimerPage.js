@@ -15,7 +15,6 @@ export class EditTimerPage extends React.Component {
           <TimerForm
             timer={this.props.timer}
             onEditTimer={this.onEdit}
-            history={this.props.history}
           />
         </div>
       </div>

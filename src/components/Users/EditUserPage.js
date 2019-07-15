@@ -15,7 +15,6 @@ export class EditUserPage extends React.Component {
           <UserForm
             user={this.props.user}
             onEditUser={this.onEdit}
-            history={this.props.history}
           />
         </div>
       </div>
