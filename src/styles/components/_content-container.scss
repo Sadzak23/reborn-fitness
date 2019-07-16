@@ -4,18 +4,11 @@
   padding: 0 $m-size;
 }
 
-// User
-.single-user-btns {
-  width: 110px;
-};
-
-.list-userName {
-  display: flex;
-  align-items: center;
-  width: 100%;
+// Base
+.margin-top {
+  margin-top: $xl-size;
 }
 
-// Base
 .margin-right {
   margin-right: $s-size;
 }
@@ -30,4 +23,22 @@
 
 .no-click {
   pointer-events: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+};
+
+.flex-center {
+  @extend .flex;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
 }

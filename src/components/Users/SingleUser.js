@@ -39,13 +39,12 @@ export const SingleUser = ({ id, firstName, lastName, path, startRemoveUser }) =
   return (
     <div className="list-item">
       <div className="list-int list-userName">
-
         <Link to={linkTo()} className="btn-activate" onMouseDown={(e) => {e.preventDefault()}}>
           <h3>{firstName} {lastName}</h3>
         </Link>
-
       </div>
-      <div className="single-user-btns">
+      
+      <div className="list-item-btns">
         <Link to={`/edit-user/${id}`} onMouseDown={(e) => {e.preventDefault()}}>
           <button className="btn-edit-m">
             <FontAwesomeIcon icon={faUserEdit} />

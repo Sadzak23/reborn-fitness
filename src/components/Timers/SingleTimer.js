@@ -8,7 +8,7 @@ import { faPlay, faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer }) => {
 
-// Delete timer confirmation
+  // Delete timer confirmation
   const onConfirm = () => swal({
     title: "Are you sure?!",
     text: "You can't bring it back!",
@@ -27,20 +27,18 @@ export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer 
         swal("Deleted!", "Your timer has been deleted!", "success") &&
         startRemoveTimer(id) : swal("Your timer is safe!", "", "success")
     );
-//
+  //
   return (
     <div className="list-item">
-      <div className="list-int">
-        <h3>{name}</h3>
-        <p>{intervals.length} intervals - Warmup time: {warmupTime}</p>
-      </div>
-      <div>
-        <Link to={`/timer/${id}`} onMouseDown={(e) => {e.preventDefault()}}>
-          <button className="btn-play">
-            <FontAwesomeIcon icon={faPlay} />
-          </button>
+      <div className="list-int list-userName">
+        <Link to={`/timer/${id}`} className="btn-activate grid" onMouseDown={(e) => { e.preventDefault() }}>
+          <h3>{name}</h3>
+          <p>{intervals.length} intervals - Warmup time: {warmupTime}</p>
         </Link>
-        <Link to={`/edit-timer/${id}`} onMouseDown={(e) => {e.preventDefault()}}>
+      </div>
+
+      <div className="list-item-btns">
+        <Link to={`/edit-timer/${id}`} onMouseDown={(e) => { e.preventDefault() }}>
           <button className="btn-edit-m">
             <FontAwesomeIcon icon={faPen} style={{ color: '#fff' }} />
           </button>
