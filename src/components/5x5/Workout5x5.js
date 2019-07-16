@@ -2,18 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { history } from '../../routers/AppRouter';
 
 export class Workout5x5 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userData: {
-        squat: 120,
-        benchPress: 95,
-        barbellRow: 80,
-        overheadPress: 60,
-        deadLift: 110,
-        bodyWeight: this.props.user ? this.props.user.weight : 0
+        squat: this.props.user.workouts.strongLifts.squat,
+        benchPress: this.props.user.workouts.strongLifts.benchPress,
+        barbellRow: this.props.user.workouts.strongLifts.barbellRow,
+        overheadPress: this.props.user.workouts.strongLifts.overheadPress,
+        deadLift: this.props.user.workouts.strongLifts.deadLift,
+        bodyWeight: this.props.user.weight
       },
       workout: {
         type: 'a',
@@ -132,7 +133,7 @@ export class Workout5x5 extends React.Component {
       },
     })
       .then((value) =>
-        value === "exit" && this.props.history.goBack()
+        value === "exit" && history.push("/")
       );
     const exercise2Name = this.state.workout.type === 'a' ? "Bench Press" : "Overhead Press";
     const exercise2Weight = this.state.workout.type === 'a' ? this.state.userData.benchPress : this.state.userData.overheadPress;
@@ -201,10 +202,5 @@ export class Workout5x5 extends React.Component {
   }
 };
 
-const mapStateToProps = (state, props) => {
-  return {
-    user: state.users.find((user) => user.id === props.match.params.id)
-  };
-};
 
-export default connect(mapStateToProps)(Workout5x5);
+export default connect(undefined)(Workout5x5);

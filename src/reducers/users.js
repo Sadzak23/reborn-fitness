@@ -18,6 +18,24 @@ export default (state = [], action) => {
       });
     case 'SET_USERS':
       return action.users
+    case 'SET/EDIT_WEIGHTS_5X5':
+      return state.map((user) => {
+        if (user.id === action.id) {
+          return {
+            ...user,
+            workouts: {
+              ...user.workouts,
+              strongLifts: {
+                ...user.workouts.strongLifts,
+                ...action.data
+              }
+            }
+          }
+        }
+        else {
+          return user
+        }
+      });
     default:
       return state;
   };

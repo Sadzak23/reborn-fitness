@@ -72,7 +72,10 @@ export default class UserForm extends React.Component {
         height: this.state.height,
         weight: this.state.weight,
         gender: this.state.gender,
-        activeUser: false
+        activeUser: false,
+        workouts: {
+          history: ""
+        }
       })
     }
   };

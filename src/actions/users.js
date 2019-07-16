@@ -76,3 +76,29 @@ export const startSetUsers = () => {
       })
   };
 };
+
+//////////////////////////////// Strong Lifts ///////////////////////////////////
+
+// SET/EDIT_WEIGHTS_5X5
+export const setEditData5x5 = (id, data) => ({
+  type: 'SET/EDIT_WEIGHTS_5X5',
+  id,
+  data
+});
+
+export const startSetEditData5x5 = (userId, data) => {
+  return (dispatch, setState) => {
+    const uid = setState().auth.uid;
+    return database.ref(`admins/${uid}/users/${userId}/workouts/strongLifts`).update({
+      trainingType: data.trainingType,
+      squat: data.squat,
+      benchPress: data.benchPress,
+      barbellRow: data.barbellRow,
+      overheadPress: data.overheadPress,
+      deadLift: data.deadLift
+    })
+      .then(() => {
+        dispatch(setEditData5x5(userId, data));
+      })
+  };
+};
