@@ -1,14 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Workout5x5 from './Workout5x5';
 import WeightsForm5x5 from './WeightsForm5x5';
 
-export const WorkoutPage = ({ user }) => (
+export const EditUserData5x5 = ({ user }) => (
   <div>
-  {user.workouts.strongLifts ?
-      <Workout5x5 user={user} />
-      :
-      <WeightsForm5x5 user={user} />}
+      <WeightsForm5x5 user={user} />
   </div>
 );
 
@@ -18,4 +14,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps)(WorkoutPage);
+export default connect(mapStateToProps)(EditUserData5x5);

@@ -16,6 +16,7 @@ import EditTimerPage from '../components/timers/EditTimerPage';
 // 5x5
 import Dashboard5x5 from '../components/5x5/Dashboard5x5';
 import History5x5 from '../components/5x5/History5x5';
+import EditUserData5x5 from '../components/5x5/EditUserData5x5';
 import WorkoutPage from '../components/5x5/WorkoutPage';
 // User
 import CreateUserPage from '../components/Users/CreateUserPage';
@@ -42,6 +43,7 @@ const AppRouter = () => (
         <PrivateRoute path="/edit-timer/:id" component={EditTimerPage} />
         <PrivateRoute path="/dashboard5x5" component={Dashboard5x5} />
         <FullScreenRoute path="/workout5x5/:id" component={WorkoutPage} />
+        <PrivateRoute path="/edit-data5x5/:id" component={EditUserData5x5} />
         <PrivateRoute path="/history5x5" component={History5x5} />
         <PrivateRoute path="/user-select-5x5" component={UserSelect} />
         <PrivateRoute path="/tool-cal/:id" component={CalCalculator} />

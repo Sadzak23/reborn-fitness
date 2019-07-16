@@ -90,15 +90,12 @@ export const startSetEditData5x5 = (userId, data) => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
     return database.ref(`admins/${uid}/users/${userId}/workouts/strongLifts`).update({
-      trainingType: data.trainingType,
-      squat: data.squat,
-      benchPress: data.benchPress,
-      barbellRow: data.barbellRow,
-      overheadPress: data.overheadPress,
-      deadLift: data.deadLift
+      ...data
     })
       .then(() => {
         dispatch(setEditData5x5(userId, data));
+      }).then(() => {
+        return "done"
       })
   };
 };

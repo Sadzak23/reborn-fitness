@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../../routers/AppRouter';
@@ -17,7 +18,7 @@ export class Workout5x5 extends React.Component {
         bodyWeight: this.props.user.weight
       },
       workout: {
-        type: 'a',
+        type: this.props.user.workouts.strongLifts.trainingType,
         exercise1: {
           set1: 0,
           set2: 0,
@@ -135,16 +136,22 @@ export class Workout5x5 extends React.Component {
       .then((value) =>
         value === "exit" && history.push("/")
       );
+
     const exercise2Name = this.state.workout.type === 'a' ? "Bench Press" : "Overhead Press";
     const exercise2Weight = this.state.workout.type === 'a' ? this.state.userData.benchPress : this.state.userData.overheadPress;
     const exercise3Name = this.state.workout.type === 'a' ? "Barbell Row" : "Dead Lift";
     const exercise3Weight = this.state.workout.type === 'a' ? this.state.userData.barbellRow : this.state.userData.deadLift;
+
     return (
       <div className="content-container">
         <button className="btn-x" onClick={onExit}>
           <FontAwesomeIcon icon={faTimes} className="timer-x" />
         </button>
+
         <div className="header5x5">
+          <Link to={`/edit-data5x5/${this.props.user.id}`} className="workout-bodyweight">
+            <h2>Change Weights</h2>
+          </Link>
           <div className="timer5x5">
             <h1>Rest: 01:00</h1>
           </div>
