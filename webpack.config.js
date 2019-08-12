@@ -12,7 +12,6 @@ if (process.env.NODE_ENV === 'test') {
 
 module.exports = (env) => {
   const isProduction = env === 'production';
-  const CSSExtract = new MiniCssExtractPlugin('styles.css');
 
   return {
     entry: ['babel-polyfill', './src/app.js'],
@@ -45,7 +44,9 @@ module.exports = (env) => {
       }]
     },
     plugins: [
-      CSSExtract,
+      new MiniCssExtractPlugin({
+        filename: 'styles.css',
+      }),
       new webpack.DefinePlugin({
         'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
         'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
@@ -55,6 +56,27 @@ module.exports = (env) => {
         'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
       })
     ],
+    // optimization: {
+    //   runtimeChunk: 'single',
+    //   splitChunks: {
+    //     chunks: 'all',
+    //     maxInitialRequests: Infinity,
+    //     minSize: 0,
+    //     cacheGroups: {
+    //       vendor: {
+    //         test: /[\\/]node_modules[\\/]/,
+    //         name(module) {
+    //           // get the name. E.g. node_modules/packageName/not/this/part.js
+    //           // or node_modules/packageName
+    //           const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+  
+    //           // npm package names are URL-safe, but some servers don't like @ symbols
+    //           return `npm.${packageName.replace('@', '')}`;
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.resolve(__dirname, 'public'),

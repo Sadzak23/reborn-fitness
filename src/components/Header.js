@@ -17,7 +17,7 @@ export const Header = ({ startLogout, userName, userPhoto }) => (
     <div className="content-container">
       <div className="header__content">
         <Link className="header__title" to="/dashboard" onMouseDown={(e) => {e.preventDefault()}}>
-          <img className="header__img" src="/images/logo-header.png" alt="Reborn Fitness" />
+          <img className="header__img" src="images/logo-header.png" alt="Reborn Fitness" />
         </Link>
         <a className="avatar" onClick={toggle}>
           <div id="logout">
