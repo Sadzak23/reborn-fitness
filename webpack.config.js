@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'test') {
 
 module.exports = (env) => {
   const isProduction = env === 'production';
-  const CSSExtract = new ExtractTextPlugin('styles.css');
+  const CSSExtract = new MiniCssExtractPlugin('styles.css');
 
   return {
     entry: ['babel-polyfill', './src/app.js'],
@@ -27,8 +27,8 @@ module.exports = (env) => {
         exclude: /node_modules/
       }, {
         test: /\.s?css$/,
-        use: CSSExtract.extract({
-          use: [
+        use: [
+          MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -42,7 +42,6 @@ module.exports = (env) => {
               }
             }
           ]
-        })
       }]
     },
     plugins: [
