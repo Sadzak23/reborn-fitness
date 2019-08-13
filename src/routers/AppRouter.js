@@ -19,12 +19,12 @@ import History5x5 from '../components/5x5/History5x5';
 import EditUserData5x5 from '../components/5x5/EditUserData5x5';
 import WorkoutPage from '../components/5x5/WorkoutPage';
 // User
-import CreateUserPage from '../components/Users/CreateUserPage';
-import UsersList from '../components/Users/UsersList';
-import EditUserPage from '../components/Users/EditUserPage';
-import UserSelect from '../components/Users/UserSelect';
+import CreateUserPage from '../components/users/CreateUserPage';
+import UsersList from '../components/users/UsersList';
+import EditUserPage from '../components/users/EditUserPage';
+import UserSelect from '../components/users/UserSelect';
 // Calculator
-import CalCalculator from '../components/CalCalculator/CalCalculator';
+import CalCalculator from '../components/calCalculator/CalCalculator';
 
 export const history = createBrowserHistory();
 

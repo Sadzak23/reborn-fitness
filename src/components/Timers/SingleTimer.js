@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import { startRemoveTimer } from '../../actions/timers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer }) => {
 
