@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SingleUser from './SingleUser-multiSelect';
+import SingleUser from './SingleUser';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 
-const UsersListPage = (props) => (
+const UsersListSelect = (props) => (
   <div>
     <div className="content-container list-body">
       <div className="list-header">
         <div className="flex">
           <FontAwesomeIcon icon={faUsers} size="2x" className="margin-right" />
-          <p> Users List</p>
+          <p> Please select user</p>
         </div>
         <Link to="/create-user" onMouseDown={(e) => {e.preventDefault()}}>
           <FontAwesomeIcon icon={faUserPlus} style={{ color: '#fff' }} size="2x" />
@@ -24,6 +24,7 @@ const UsersListPage = (props) => (
           ) : (
               props.users.map(user =>
                 (<SingleUser
+                  path={props.location.pathname}
                   key={user.id}
                   {...user}
                 />))
@@ -38,4 +39,4 @@ const mapStateToProps = (state) => ({
   users: state.users
 });
 
-export default connect(mapStateToProps)(UsersListPage);
+export default connect(mapStateToProps)(UsersListSelect);
