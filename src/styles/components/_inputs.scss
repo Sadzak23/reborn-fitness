@@ -1,25 +1,12 @@
 .text-input {
   border: 1px solid #cacccd;
   border-radius: 10px;
-  height: 47.5px;
   font-size: $m-size;
-  font-weight: 300;
   padding: $s-size;
+  margin-bottom: $m-size;
   &:focus {
     outline: none;
   }
-}
-
-.interval-time-set {
-  @extend .text-input;
-  min-width: 70px;
-  max-width: 70px;
-}
-
-.interval-select {
-  @extend .text-input;
-  min-width: 115px;
-  margin-right: $s-size;
 }
 
 .inline-input {
@@ -44,4 +31,50 @@
 .inline-input5 {
   @extend .inline-input;
   width: 50px;
+}
+// Timer interval //
+
+.form-interval-name {
+  min-width: 130px;
+  max-width: 205px;
+  @media (max-width: 800px) {
+    width: 100% !important;
+    margin-right: 0 !important;
+  };
+}
+
+.int-form-input {
+  @extend .text-input;
+  background: white;
+  margin: 0 $s-size 0 0;
+  height: 50px;
+  width: max-content;
+  @media (max-width: 1000px) {
+    margin: 0 $s-size $s-size 0;
+  };
+}
+
+.interval-select {
+  @extend .int-form-input;
+  min-width: 115px;
+  margin-right: $s-size;
+}
+
+.int-form-full-width {
+  @media (max-width: 800px) {
+    width: 100%;
+  };
+}
+
+// User //
+
+.birthdate {
+  @extend .text-input;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 }

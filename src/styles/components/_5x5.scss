@@ -2,6 +2,16 @@
   display: flex;
   justify-content: space-between;
   margin: $l-size 0 $m-size 0;
+  @media (max-width: $mobile-breakpoint) {
+    margin: $xxl-size 0 $l-size 0;
+  }
+}
+
+.mobile-header5x5 {
+  background: #dadada;
+  padding: 10px;
+  border-radius: 30px;
+  margin: 10px 0;
 }
 
 .box {
@@ -14,27 +24,50 @@
 .timer5x5 {
   @extend .box;
   padding: 20px 60px;
-};
+  @media (max-width: $mobile-breakpoint) {
+    font-size: 2rem;
+    margin-bottom: $l-size;
+    text-align: center;
+    width: 100%;
+  }
+}
 
 .workout-bodyweight {
   @extend .box;
   display: flex;
   align-items: center;
-};
+  @media (max-width: $mobile-breakpoint) {
+    text-align: center;
+    padding: 20px;
+  }
+}
 
 .workout-exercise {
   @extend .box;
   margin-bottom: $m-size;
-};
+  @media (max-width: $mobile-breakpoint) {
+    margin: $l-size $m-size;
+  }
+}
 
 .exercise-title-5x5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-};
+}
 
 .counter5x5 {
   display: flex;
   justify-content: space-around;
   align-items: center;
-};
+}
+
+.input5x5 {
+  margin: 0 1.2rem 0 0;
+  width: max-content;
+  @media (max-width: $mobile-breakpoint) {
+    margin: 0 0 1.2rem 0;
+    text-align: center;
+    width: 250px;
+  }
+}

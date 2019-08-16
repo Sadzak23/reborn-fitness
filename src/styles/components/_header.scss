@@ -17,5 +17,7 @@
 
 .header__img {
   height: 5rem;
-  
+  @media (max-width: $mobile-breakpoint) {
+    margin: $s-size;
+  }  
 }

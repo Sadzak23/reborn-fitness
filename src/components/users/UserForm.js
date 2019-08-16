@@ -92,15 +92,15 @@ export default class UserForm extends React.Component {
       swal(userFormAlerts.title, userFormAlerts.lowHeight, "error", { dangerMode: true, })
     }
     else {
-        this.props.onEditUser(this.props.user.id, {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          birthdate: this.state.birthdate,
-          height: this.state.height,
-          weight: this.state.weight,
-          gender: this.state.gender,
-          activeUser: this.state.activeUser
-        });
+      this.props.onEditUser(this.props.user.id, {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        birthdate: this.state.birthdate,
+        height: this.state.height,
+        weight: this.state.weight,
+        gender: this.state.gender,
+        activeUser: this.state.activeUser
+      });
     }
   };
 
@@ -110,41 +110,39 @@ export default class UserForm extends React.Component {
 
   render() {
     const genderColor = this.state.gender === "male" ? `${Object.keys(colorMapGender)[0]}` : `${Object.keys(colorMapGender)[1]}`;
-    const genderPrefix = this.state.gender === "male" ? "Sir " : "Lady ";
+    const background = this.state.gender === "male" ? "#bae0ff" : "#f5ccd3";
     return (
       <div>
-        <div className="content-container form">
-          <h2>Hello {genderPrefix} {this.state.firstName}</h2>
-          <div className="form-header">
-            <div>
-              <input
-                id="firstName"
-                type="text"
-                onChange={this.onFirstNameChange}
-                autoComplete="off"
-                className="margin-right text-input"
-                placeholder="First Name"
-                value={this.state.firstName}
-              />
-              <input
-                id="lastName"
-                type="text"
-                onChange={this.onLastNameChange}
-                autoComplete="off"
-                className="text-input"
-                placeholder="Last Name"
-                value={this.state.lastName}
-              />
-            </div>
-          </div>
-          <Birthdate
-            birthdate={this.state.birthdate}
-            ref="child"
-            onBdayChange={this.onBirthdateChange}
+      <div className="user-form" style={{background}}>
+      {this.state.firstName ? <h2>Welcome {this.state.firstName}</h2> : <h2>Please enter user data</h2>}
+        <div className="flex">
+          <input
+            id="firstName"
+            type="text"
+            onChange={this.onFirstNameChange}
+            autoComplete="off"
+            className="margin-right text-input full-width"
+            placeholder="First Name"
+            value={this.state.firstName}
           />
-          <div className="flex">
-            <label className="text-input fit-content margin-right">
-              Weight: <input
+          <input
+            id="lastName"
+            type="text"
+            onChange={this.onLastNameChange}
+            autoComplete="off"
+            className="text-input full-width"
+            placeholder="Last Name"
+            value={this.state.lastName}
+          />
+        </div>
+        <Birthdate
+          birthdate={this.state.birthdate}
+          ref="child"
+          onBdayChange={this.onBirthdateChange}
+        />
+        <div className="flex">
+          <label className="text-input full-width margin-right">
+            Weight: <input
               type="text"
               onChange={this.onWeightChange}
               autoComplete="off"
@@ -152,8 +150,8 @@ export default class UserForm extends React.Component {
               placeholder="0"
               value={this.state.weight} /> kg
             </label>
-            <label className="text-input fit-content">
-              Height: <input
+          <label className="text-input full-width">
+            Height: <input
               type="text"
               onChange={this.onHeightChange}
               autoComplete="off"
@@ -161,29 +159,28 @@ export default class UserForm extends React.Component {
               placeholder="0"
               value={this.state.height} /> cm
             </label>
-          </div>
-
-          <div className="gender-label">
-            Gender:
+        </div>
+        <div className="gender-label">
+          Gender:
         <button
-              className="btn-gender"
-              onClick={this.onGenderChange}
-              style={{ background: genderColor }}
-            >
-              {this.state.gender === "male" ? <FontAwesomeIcon icon={faMale} size='3x' /> : <FontAwesomeIcon icon={faFemale} size='3x' />}
-            </button>
-          </div>
-          <div style={{ display: "flex" }}>
-            {!this.props.user ?
-              <button className="btn-save" onClick={this.onCreateUser}>
-                <FontAwesomeIcon icon={faUserPlus} /> Create New User</button> :
-              <button className="btn-save" onClick={this.onEditUser}>
-                <FontAwesomeIcon icon={faSave} /> Save Changes
+            className="btn-gender"
+            onClick={this.onGenderChange}
+            style={{ background: genderColor }}
+          >
+            {this.state.gender === "male" ? <FontAwesomeIcon icon={faMale} size='3x' /> : <FontAwesomeIcon icon={faFemale} size='3x' />}
+          </button>
+        </div>
+        </div>
+        <div className="form-submit">
+          {!this.props.user ?
+            <button className="btn-save" onClick={this.onCreateUser}>
+              <FontAwesomeIcon icon={faUserPlus} /> Create New User</button> :
+            <button className="btn-save" onClick={this.onEditUser}>
+              <FontAwesomeIcon icon={faSave} /> Save Changes
               </button>}
-              <button className="btn-cancel form-cancel" onClick={this.onCancel}>
-                <FontAwesomeIcon icon={faBan} /> Cancel
+          <button className="btn-cancel form-cancel" onClick={this.onCancel}>
+            <FontAwesomeIcon icon={faBan} /> Cancel
               </button>
-          </div>
         </div>
       </div>
     );

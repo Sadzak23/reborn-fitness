@@ -101,7 +101,7 @@ export class ActivityCal extends React.Component {
           <FontAwesomeIcon icon={icons[this.state.activity]} size="4x" className="activity-icon" />
           <div className="cal-activity-options">
             {this.state.checkDuration ?
-              <label className="text-input fit-content margin-right">
+              <label className="text-input cal-input">
                 Duration: <input
                   type="text"
                   onChange={this.onDurationChange}
@@ -112,7 +112,7 @@ export class ActivityCal extends React.Component {
                 /> min
               </label>
               :
-              <label className="text-input fit-content margin-right">
+              <label className="text-input cal-input">
                 Calories:
                 <input
                   type="text"

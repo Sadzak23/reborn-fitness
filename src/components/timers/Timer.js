@@ -106,7 +106,7 @@ class Timer extends React.Component {
       });
     };
   };
-  
+
   componentWillUnmount() {
     clearInterval(this.state.interval);
   };
@@ -149,23 +149,26 @@ class Timer extends React.Component {
 
     return (
       <div style={{ backgroundColor: this.state.color }}>
-          <button className="btn-x" onClick={onExit}>
-            <FontAwesomeIcon icon={faTimes} className="timer-x" />
-          </button>
+        <button className="btn-x" onClick={onExit}>
+          <FontAwesomeIcon icon={faTimes} className="timer-x" />
+        </button>
         <div className="content-container timer-container">
           <h1 className="timer-clock">{formatSeconds(Math.ceil(this.state.miliseconds / 1000))}</h1>
           <h3 className="timer-interval-name">- {this.state.phase} -</h3>
           <div className="timer-intervals">
             <div>
-              <h2>Interval: {this.state.intervalNo + 1}</h2>
-              <h2>Exercise: {exerciseNo} / {totalExercisesNo}</h2>
+              <p>Elapsed Time</p>
+              <h2>{elapsedTime < 0 ? "00:00" : formatSeconds(elapsedTime)}</h2>
             </div>
             <div>
-              <h2>Elapsed Time: {elapsedTime < 0 ? "00:00" : formatSeconds(elapsedTime)}</h2>
-              <h2>Time Remaining: {formatSeconds(remainingTime)}</h2>
+              <p>Exercise</p>
+              <h2>{exerciseNo} / {totalExercisesNo}</h2>
+            </div>
+            <div>
+              <p>Time Remaining</p>
+              <h2>{formatSeconds(remainingTime)}</h2>
             </div>
           </div>
-          <p>Type: {this.state.type}</p>
           <div className="timer-controls">
             <button onClick={this.handlePrevious} className="btn-next-prev">
               <FontAwesomeIcon icon={faBackward} />
