@@ -11,10 +11,15 @@
   padding: 20px;
 }
 
-.cal-activity-options{
+.cal-activity-options {
   display: flex;
   justify-content: space-between;
   margin-bottom: $s-size;
+  @media (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+    align-items: center;
+    margin: 16px 0;
+  }
 }
 
 .cal-result {
@@ -26,11 +31,21 @@
 .activity-icon {
   display: flex;
   margin: 0 auto -50px auto;
+  @media (max-width: $mobile-breakpoint) {
+    margin: 0 auto;
+  }
 }
 
 .activity-controls {
   display: flex;
   justify-content: space-around;
+}
+
+.cal-input {
+  width: max-content;
+  @media (max-width: $mobile-breakpoint) {
+    margin-bottom: $s-size;
+  }
 }
 
 .activity-result-type {
@@ -47,8 +62,11 @@
   width: 200px;
   &:active {
     padding: 10px;
-  };
+  }
   &:focus {
     outline: none;
-  };
+  }
+  @media (max-width: $mobile-breakpoint) {
+    width: 170px;
+  }
 }

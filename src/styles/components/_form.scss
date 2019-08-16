@@ -1,35 +1,78 @@
-.form > * {
-    margin-bottom: $m-size;
-  }
-
 .form__error {
-margin: 0 0 $m-size 0;
-font-style: italic;
+  margin: 0 0 $m-size 0;
+  font-style: italic;
 }
 
 .form-header {
   display: flex;
   justify-content: space-between;
+  margin-top: 1.6rem;
+}
+
+.timer-form-header {
+  @extend .form-header;
+  @media screen and (orientation: portrait) {
+    flex-direction: column;
+    > * {
+      justify-content: center;
+      margin-right: 0 !important;
+      width: 100% !important;
+    }
+  }
 }
 
 .form-timer-name {
+  margin-right: $s-size;
   width: 45rem;
 }
 
 .form-edit-interval {
-  background: #bae0ff !important;
+  background: $light-blue !important;
 }
 
-.form-interval-name {
-  width: 100%;
+.form-interval-inputs {
+  display: flex;
+  align-items: center;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    margin: auto;
+  }
+}
+
+.form-submit {
+  display: flex;
+  align-items: center;
+  margin: $m-size 0;
+  @media (max-width: $mobile-breakpoint) {
+    display: grid;
+  }
 }
 
 .form-cancel {
   margin-left: 15px;
   width: 40%;
+  @media (max-width: $mobile-breakpoint) {
+    margin: 0 0 $m-size 0;
+    width: 100%;
+  }
+}
+
+.user-form {
+  padding: 1.6rem;
+  border-radius: 30px;
+  margin: auto;
+  max-width: 700px;
+  .text-input {
+    background: white;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: $m-size;
+  }
 }
 
 .gender-label {
-  display: flex;
-  align-items: center;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
 }

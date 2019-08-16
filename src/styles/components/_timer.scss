@@ -2,7 +2,7 @@
   padding-top: $l-size;
   text-align: center;
   height: 100vh;
-};
+}
 
 .timer-x {
   color: white;
@@ -15,10 +15,9 @@
   border-radius: 30px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
   color: #fff;
-  font-size: 6rem;
-  margin: auto;
-  width: 30v;
-};
+  font-size: 9rem;
+  margin: $xl-size auto 0 auto;
+}
 
 .timer-interval-name {
   background: #00000033;
@@ -33,21 +32,31 @@
   margin: auto;
   padding: 0 15px;
   width: fit-content;
-};
+}
 
 .timer-intervals {
-  display: flex;
-  justify-content: space-around;
-  h2 {
-    margin: $m-size 0 0 0;
+  display: table;
+  table-layout: fixed;
+  margin: $l-size 0 $s-size 0;
+  width: 100%;
+  div {
+    display: table-cell;
   }
-};
+  p {
+    margin: 0;
+  }
+  h2 {
+    @media screen and (orientation: landscape) {
+      font-size: 3rem;
+    }
+  }
+}
 
 .timer-controls {
   background: #00000033;
   border: 3px solid;
   border-radius: 30px;
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.5);
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
   margin: auto;
   max-width: 400px;
   padding: 20px;

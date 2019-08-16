@@ -200,8 +200,8 @@ export class Workout5x5 extends React.Component {
       },
     },
   }).then((value) =>
-      value === "exit" && history.push("/")
-    );
+    value === "exit" && history.push("/")
+  );
 
   render() {
     const exercise2Name = this.state.workout.type === 'a' ? "Bench Press" : "Overhead Press";
@@ -215,7 +215,7 @@ export class Workout5x5 extends React.Component {
           <FontAwesomeIcon icon={faTimes} className="timer-x" />
         </button>
 
-        <div className="header5x5">
+        <div className="header5x5 show-desktop">
           <Link to={`/edit-data5x5/${this.props.user.id}`} className="workout-bodyweight">
             <h2>Change Weights</h2>
           </Link>
@@ -227,48 +227,63 @@ export class Workout5x5 extends React.Component {
           </div>
         </div>
 
-        {/* Exercise 1 */}
-        <div className="workout-exercise">
-          <div className="exercise-title-5x5">
-            <h2>Squat</h2>
-            <h2>5x5 {this.state.userData.squat}kg</h2>
-          </div>
-          <div className="counter5x5">
-            <button onClick={this.onRepCountE1R1} className="btn-exercise-count">{this.state.workout.exercise1.set1}</button>
-            <button onClick={this.onRepCountE1R2} className="btn-exercise-count">{this.state.workout.exercise1.set2}</button>
-            <button onClick={this.onRepCountE1R3} className="btn-exercise-count">{this.state.workout.exercise1.set3}</button>
-            <button onClick={this.onRepCountE1R4} className="btn-exercise-count">{this.state.workout.exercise1.set4}</button>
-            <button onClick={this.onRepCountE1R5} className="btn-exercise-count">{this.state.workout.exercise1.set5}</button>
+
+        <div className="header5x5 show-mobile">
+          <Link to={`/edit-data5x5/${this.props.user.id}`} className="workout-bodyweight">
+            <h2>Change Weights</h2>
+          </Link>
+          <div className="workout-bodyweight">
+            <h2>Body Weight: {this.state.userData.bodyWeight}Kg</h2>
           </div>
         </div>
-
-        {/* Exercise 2 */}
-        <div className="workout-exercise">
-          <div className="exercise-title-5x5">
-            <h2>{exercise2Name}</h2>
-            <h2>5x5 {exercise2Weight}kg</h2>
-          </div>
-          <div className="counter5x5">
-            <button onClick={this.onRepCountE2R1} className="btn-exercise-count">{this.state.workout.exercise2.set1}</button>
-            <button onClick={this.onRepCountE2R2} className="btn-exercise-count">{this.state.workout.exercise2.set2}</button>
-            <button onClick={this.onRepCountE2R3} className="btn-exercise-count">{this.state.workout.exercise2.set3}</button>
-            <button onClick={this.onRepCountE2R4} className="btn-exercise-count">{this.state.workout.exercise2.set4}</button>
-            <button onClick={this.onRepCountE2R5} className="btn-exercise-count">{this.state.workout.exercise2.set5}</button>
-          </div>
+        <div className="timer5x5 show-mobile">
+          <h1>Rest: {formatSeconds(Math.ceil(this.state.miliseconds / 1000))}</h1>
         </div>
 
-        {/* Exercise 3 */}
-        <div className="workout-exercise">
-          <div className="exercise-title-5x5">
-            <h2>{exercise3Name}</h2>
-            <h2>5x5 {exercise3Weight}kg</h2>
+        <div className="mobile-header5x5">
+          {/* Exercise 1 */}
+          <div className="workout-exercise">
+            <div className="exercise-title-5x5">
+              <h2>Squat</h2>
+              <h2>5x5 {this.state.userData.squat}kg</h2>
+            </div>
+            <div className="counter5x5">
+              <button onClick={this.onRepCountE1R1} className="btn-exercise-count">{this.state.workout.exercise1.set1}</button>
+              <button onClick={this.onRepCountE1R2} className="btn-exercise-count">{this.state.workout.exercise1.set2}</button>
+              <button onClick={this.onRepCountE1R3} className="btn-exercise-count">{this.state.workout.exercise1.set3}</button>
+              <button onClick={this.onRepCountE1R4} className="btn-exercise-count">{this.state.workout.exercise1.set4}</button>
+              <button onClick={this.onRepCountE1R5} className="btn-exercise-count">{this.state.workout.exercise1.set5}</button>
+            </div>
           </div>
-          <div className="counter5x5">
-            <button onClick={this.onRepCountE3R1} className="btn-exercise-count">{this.state.workout.exercise3.set1}</button>
-            <button onClick={this.onRepCountE3R2} className="btn-exercise-count">{this.state.workout.exercise3.set2}</button>
-            <button onClick={this.onRepCountE3R3} className="btn-exercise-count">{this.state.workout.exercise3.set3}</button>
-            <button onClick={this.onRepCountE3R4} className="btn-exercise-count">{this.state.workout.exercise3.set4}</button>
-            <button onClick={this.onRepCountE3R5} className="btn-exercise-count">{this.state.workout.exercise3.set5}</button>
+
+          {/* Exercise 2 */}
+          <div className="workout-exercise">
+            <div className="exercise-title-5x5">
+              <h2>{exercise2Name}</h2>
+              <h2>5x5 {exercise2Weight}kg</h2>
+            </div>
+            <div className="counter5x5">
+              <button onClick={this.onRepCountE2R1} className="btn-exercise-count">{this.state.workout.exercise2.set1}</button>
+              <button onClick={this.onRepCountE2R2} className="btn-exercise-count">{this.state.workout.exercise2.set2}</button>
+              <button onClick={this.onRepCountE2R3} className="btn-exercise-count">{this.state.workout.exercise2.set3}</button>
+              <button onClick={this.onRepCountE2R4} className="btn-exercise-count">{this.state.workout.exercise2.set4}</button>
+              <button onClick={this.onRepCountE2R5} className="btn-exercise-count">{this.state.workout.exercise2.set5}</button>
+            </div>
+          </div>
+
+          {/* Exercise 3 */}
+          <div className="workout-exercise">
+            <div className="exercise-title-5x5">
+              <h2>{exercise3Name}</h2>
+              <h2>5x5 {exercise3Weight}kg</h2>
+            </div>
+            <div className="counter5x5">
+              <button onClick={this.onRepCountE3R1} className="btn-exercise-count">{this.state.workout.exercise3.set1}</button>
+              <button onClick={this.onRepCountE3R2} className="btn-exercise-count">{this.state.workout.exercise3.set2}</button>
+              <button onClick={this.onRepCountE3R3} className="btn-exercise-count">{this.state.workout.exercise3.set3}</button>
+              <button onClick={this.onRepCountE3R4} className="btn-exercise-count">{this.state.workout.exercise3.set4}</button>
+              <button onClick={this.onRepCountE3R5} className="btn-exercise-count">{this.state.workout.exercise3.set5}</button>
+            </div>
           </div>
         </div>
       </div>

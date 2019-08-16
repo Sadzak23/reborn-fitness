@@ -13,12 +13,31 @@
   margin-right: $s-size;
 }
 
+.margin-side {
+  margin: 0 $s-size;
+}
+
+.mobile-margin-bottom {
+  @media (max-width: $mobile-breakpoint) {
+    margin-bottom: $s-size;
+  }
+}
+
+.mobile-margin0 {
+  margin: 0 !important;
+}
+
 .margin-xs {
   margin: 0 7px;
 }
 
 .fit-content {
   width: max-content;
+}
+
+.full-width {
+  text-align: center;
+  width: 100%;
 }
 
 .no-click {
@@ -32,7 +51,7 @@
 .flex {
   display: flex;
   align-items: center;
-};
+}
 
 .flex-center {
   @extend .flex;
@@ -41,4 +60,16 @@
 
 .grid {
   display: grid;
+}
+
+.column-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $m-size;
+  @media (max-width: $mobile-breakpoint) {
+    display: grid !important;
+    justify-items: center;
+    margin-bottom: 0px;
+  }
 }

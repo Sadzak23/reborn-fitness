@@ -88,15 +88,15 @@ export class Workout5x5 extends React.Component {
 
   render() {
     return (
-      <div className="content-container form">
+      <div className="content-container">
 
         {/* Header */}
         <h1 className="text-center margin-top">Hello {this.props.user.firstName}</h1>
         {this.userData ?
           <div>
-          <h2 className="text-center">Enter new weights</h2>
-          <p className="text-center">If it's too ease, you can increse weight, but not too much</p>
-          <p className="text-center">After long break, you should reduce weight</p>
+            <h2 className="text-center">Enter new weights</h2>
+            <p className="text-center">If it's too ease, you can increse weight, but not too much</p>
+            <p className="text-center">After long break, you should reduce weight</p>
           </div>
           :
           <div>
@@ -106,56 +106,57 @@ export class Workout5x5 extends React.Component {
         }
 
         {/* Input fields */}
-        <div className="flex-center">
-          <label className="text-input fit-content margin-right">
-            Squat: 5x <input
-              type="text"
-              onChange={this.onSquatChange}
-              className="inline-input"
-              placeholder="0"
-              value={this.state.squat}
-            /> kg
+        <div>
+          <div className="column-row">
+            <label className="text-input input5x5">
+              Squat: 5x <input
+                type="text"
+                onChange={this.onSquatChange}
+                className="inline-input"
+                placeholder="0"
+                value={this.state.squat}
+              /> kg
           </label>
-          <label className="text-input fit-content margin-right">
-            Bench Press: 5x <input
-              type="text"
-              onChange={this.onBenchPressChange}
-              className="inline-input"
-              placeholder="0"
-              value={this.state.benchPress}
-            /> kg
+            <label className="text-input input5x5">
+              Bench Press: 5x <input
+                type="text"
+                onChange={this.onBenchPressChange}
+                className="inline-input"
+                placeholder="0"
+                value={this.state.benchPress}
+              /> kg
           </label>
-          <label className="text-input fit-content margin-right">
-            Barbell Row: 5x <input
-              type="text"
-              onChange={this.onBarbellRowChange}
-              className="inline-input"
-              placeholder="0"
-              value={this.state.barbellRow}
-            /> kg
+            <label className="text-input input5x5">
+              Barbell Row: 5x <input
+                type="text"
+                onChange={this.onBarbellRowChange}
+                className="inline-input"
+                placeholder="0"
+                value={this.state.barbellRow}
+              /> kg
           </label>
+          </div>
+          <div className="column-row">
+            <label className="text-input input5x5">
+              Overhead Press: 5x <input
+                type="text"
+                onChange={this.onOverheadPressChange}
+                className="inline-input"
+                placeholder="0"
+                value={this.state.overheadPress}
+              /> kg
+          </label>
+            <label className="text-input input5x5">
+              Deadlift: 5x <input
+                type="text"
+                onChange={this.onDeadliftChange}
+                className="inline-input"
+                placeholder="0"
+                value={this.state.deadLift}
+              /> kg
+          </label>
+          </div>
         </div>
-        <div className="flex-center">
-          <label className="text-input fit-content margin-right">
-            Overhead Press: 5x <input
-              type="text"
-              onChange={this.onOverheadPressChange}
-              className="inline-input"
-              placeholder="0"
-              value={this.state.overheadPress}
-            /> kg
-          </label>
-          <label className="text-input fit-content margin-right">
-            Deadlift: 5x <input
-              type="text"
-              onChange={this.onDeadliftChange}
-              className="inline-input"
-              placeholder="0"
-              value={this.state.deadLift}
-            /> kg
-          </label>
-        </div>
-
         {/* Recommended weights */}
         {!this.userData &&
           <div>
@@ -183,7 +184,7 @@ export class Workout5x5 extends React.Component {
         }
 
         {/* Action Buttons */}
-        <div className="flex">
+        <div className="form-submit">
           {this.userData ?
             <button className="btn-save" onClick={this.onEdit}>
               <FontAwesomeIcon icon={faSave} /> Update data

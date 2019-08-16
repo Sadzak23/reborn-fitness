@@ -47,31 +47,32 @@ export class Birthdate extends React.Component {
 
   render() {
     return (
-      <div className="text-input fit-content">
-        Birthdate: <label className="margin-right fit-content">
-          day: <input
-          type="text"
-          onChange={this.onDayChange}
-          className="inline-input2"
-          placeholder="1"
-          value={this.state.day} />
-        </label>
-        <label className="margin-right fit-content">
-          month: <input
-          type="text"
-          onChange={this.onMonthChange}
-          className="inline-input2"
-          placeholder="1"
-          value={this.state.month} />
-        </label>
-        <label className="margin-right fit-content">
-          year: <input
-          type="text"
-          onChange={this.onYearChange}
-          className="inline-input4"
-          placeholder="1990"
-          value={this.state.year} />
-        </label>
+      <div className="birthdate">
+        Birthdate:<div>
+          <label className="margin-side"> Day: <input
+              type="text"
+              onChange={this.onDayChange}
+              className="inline-input2"
+              placeholder="1"
+              value={this.state.day} />
+          </label>
+          <label className="margin-right">
+            Month: <input
+              type="text"
+              onChange={this.onMonthChange}
+              className="inline-input2"
+              placeholder="1"
+              value={this.state.month} />
+          </label>
+          <label className="margin-right">
+            Year: <input
+              type="text"
+              onChange={this.onYearChange}
+              className="inline-input4"
+              placeholder="1990"
+              value={this.state.year} />
+          </label>
+        </div>
       </div>
     )
   };
