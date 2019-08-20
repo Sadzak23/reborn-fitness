@@ -49,6 +49,8 @@ export class Workout5x5 extends React.Component {
 
     }
   };
+  beep = new Audio('../assets/beep.mp3');
+  longBeep = new Audio('../assets/beep0.mp3');
 
   ///////////////// Timer //////////////////////////////////////////
 
@@ -59,18 +61,18 @@ export class Workout5x5 extends React.Component {
       clearInterval(this.state.interval);
 
       // Play sound on 0
-      new Audio('../assets/beep0.mp3').play();
+      this.longBeep.play();
       this.setState({
         paused: true
       });
     };
     // Play sound on 3,2,1
     if (this.state.miliseconds === 3000 || this.state.miliseconds === 2000 || this.state.miliseconds === 1000) {
-      new Audio('../assets/beep.mp3').play();
+      this.beep.play();
     };
     // Play sound on 10
     if (this.state.miliseconds === 10000) {
-      new Audio('../assets/beep.mp3').play();
+      this.beep.play();
     };
   };
 
