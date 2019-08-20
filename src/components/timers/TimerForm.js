@@ -21,7 +21,7 @@ export default class TimerForm extends React.Component {
       currentIntervalMin: "",
       currentIntervalSec: "",
       currentIntervalType: "exercise",
-      currentIntervalColor: Object.keys(colorMap)[2],
+      currentIntervalColor: Object.keys(colorMap)[0],
       editInterval: false
     };
   };
@@ -86,7 +86,7 @@ export default class TimerForm extends React.Component {
         currentIntervalMin: "",
         currentIntervalSec: "",
         currentIntervalType: "exercise",
-        currentIntervalColor: Object.keys(colorMap)[2],
+        currentIntervalColor: Object.keys(colorMap)[0],
         currentIntervalId: null,
         editInterval: false
       });
@@ -100,7 +100,7 @@ export default class TimerForm extends React.Component {
       currentIntervalMin: 0,
       currentIntervalSec: 0,
       currentIntervalType: "exercise",
-      currentIntervalColor: Object.keys(colorMap)[2],
+      currentIntervalColor: Object.keys(colorMap)[0],
       currentIntervalId: null,
       editInterval: false
     });
@@ -144,7 +144,7 @@ export default class TimerForm extends React.Component {
         currentIntervalMin: "",
         currentIntervalSec: "",
         currentIntervalType: "exercise",
-        currentIntervalColor: Object.keys(colorMap)[2],
+        currentIntervalColor: Object.keys(colorMap)[0],
         currentIntervalId: null,
         editInterval: false
       });
@@ -230,7 +230,7 @@ export default class TimerForm extends React.Component {
           </div>
         </div>
 
-        <div className="list-int-form" style={{background: this.state.currentIntervalColor}}>
+        <div className="list-int-form">
         <div className="form-interval-inputs">
             <input
               id="interval-name"
@@ -286,6 +286,8 @@ export default class TimerForm extends React.Component {
               <option value={Object.keys(colorMap)[2]}>{colorMap[Object.keys(colorMap)[2]]}</option>
               <option value={Object.keys(colorMap)[3]}>{colorMap[Object.keys(colorMap)[3]]}</option>
               <option value={Object.keys(colorMap)[4]}>{colorMap[Object.keys(colorMap)[4]]}</option>
+              <option value={Object.keys(colorMap)[5]}>{colorMap[Object.keys(colorMap)[5]]}</option>
+              <option value={Object.keys(colorMap)[6]}>{colorMap[Object.keys(colorMap)[6]]}</option>
             </select>
             </div>
             </div>
