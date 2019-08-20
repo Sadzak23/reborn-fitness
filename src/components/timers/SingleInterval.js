@@ -14,8 +14,11 @@ const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, inter
   return (
     <div className={`list-item ${editingClass}`}>
       <div className="list-int">
-        <h3>{intervalMin}:{intervalSec < 10 ? "0" + intervalSec : intervalSec} - {intervalName}</h3>
-        <p>{intervalType} - {colorMap[intervalColor]}</p>
+      <div className="list-int-color" style={{background: intervalColor}}></div>
+        <div>
+          <h3>{intervalMin}:{intervalSec < 10 ? "0" + intervalSec : intervalSec} - {intervalName}</h3>
+          <p>{intervalType} - {colorMap[intervalColor]}</p>
+        </div>
       </div>
       <div>
         <button className="btn-edit-s" onClick={onEditInterval}>
