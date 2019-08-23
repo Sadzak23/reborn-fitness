@@ -14,6 +14,7 @@ class Timer extends React.Component {
         paused: true,
         phase: "Warmup",
         miliseconds: props.timer.warmupTime * 1000,
+        seconds: props.timer.warmupTime,
         type: "warmup",
         interval: null
       }
@@ -24,6 +25,7 @@ class Timer extends React.Component {
         paused: true,
         phase: props.timer.intervals[0].intervalName,
         miliseconds: props.timer.intervals[0].intervalSec * 1000 + props.timer.intervals[0].intervalMin * 60000,
+        seconds: props.timer.intervals[0].intervalSec + props.timer.intervals[0].intervalMin * 60,
         type: props.timer.intervals[0].intervalType,
         interval: null
       }
@@ -41,6 +43,7 @@ class Timer extends React.Component {
           color: this.props.timer.intervals[this.state.intervalNo + 1].intervalColor,
           phase: this.props.timer.intervals[this.state.intervalNo + 1].intervalName,
           miliseconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec * 1000 + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60000,
+          seconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60,
           type: this.props.timer.intervals[this.state.intervalNo + 1].intervalType,
           intervalNo: this.state.intervalNo + 1
         });
@@ -69,7 +72,7 @@ class Timer extends React.Component {
     };
 
     // Play sound on 10
-    if (this.state.miliseconds === 10000) {
+    if (this.state.miliseconds === 10000 && this.state.seconds >= 15) {
       this.beep.play();
     };
   };
@@ -91,6 +94,7 @@ class Timer extends React.Component {
         color: this.props.timer.intervals[this.state.intervalNo + 1].intervalColor,
         phase: this.props.timer.intervals[this.state.intervalNo + 1].intervalName,
         miliseconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec * 1000 + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60000,
+        seconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60,
         type: this.props.timer.intervals[this.state.intervalNo + 1].intervalType,
         intervalNo: this.state.intervalNo + 1
       });
@@ -103,6 +107,7 @@ class Timer extends React.Component {
         color: this.props.timer.intervals[this.state.intervalNo - 1].intervalColor,
         phase: this.props.timer.intervals[this.state.intervalNo - 1].intervalName,
         miliseconds: this.props.timer.intervals[this.state.intervalNo - 1].intervalSec * 1000 + this.props.timer.intervals[this.state.intervalNo - 1].intervalMin * 60000,
+        seconds: this.props.timer.intervals[this.state.intervalNo - 1].intervalSec + this.props.timer.intervals[this.state.intervalNo - 1].intervalMin * 60,
         type: this.props.timer.intervals[this.state.intervalNo - 1].intervalType,
         intervalNo: this.state.intervalNo - 1
       });
