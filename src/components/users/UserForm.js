@@ -48,9 +48,16 @@ export default class UserForm extends React.Component {
     this.setState({ birthdate })
   }
 
-  onGenderChange = () => {
-    const gender = this.state.gender === "male" ? "female" : "male";
-    this.setState({ gender });
+  onGenderMale = () => {
+    this.setState({gender: "male"});
+    document.getElementById("btn-female").classList.remove("female-active")
+    document.getElementById("btn-male").classList.add("male-active")
+  };
+
+  onGenderFemale = () => {
+    this.setState({gender: "female"});
+    document.getElementById("btn-male").classList.remove("male-active")
+    document.getElementById("btn-female").classList.add("female-active")
   };
 
   onCreateUser = () => {
@@ -109,67 +116,74 @@ export default class UserForm extends React.Component {
   };
 
   render() {
-    const genderColor = this.state.gender === "male" ? `${Object.keys(colorMapGender)[0]}` : `${Object.keys(colorMapGender)[1]}`;
     const background = this.state.gender === "male" ? "#bae0ff" : "#f5ccd3";
     return (
       <div>
-      <div className="user-form" style={{background}}>
-      {this.state.firstName ? <h2>Welcome {this.state.firstName}</h2> : <h2>Please enter user data</h2>}
-        <div className="flex">
-          <input
-            id="firstName"
-            type="text"
-            onChange={this.onFirstNameChange}
-            autoComplete="off"
-            className="margin-right text-input full-width"
-            placeholder="First Name"
-            value={this.state.firstName}
-          />
-          <input
-            id="lastName"
-            type="text"
-            onChange={this.onLastNameChange}
-            autoComplete="off"
-            className="text-input full-width"
-            placeholder="Last Name"
-            value={this.state.lastName}
-          />
-        </div>
-        <Birthdate
-          birthdate={this.state.birthdate}
-          ref="child"
-          onBdayChange={this.onBirthdateChange}
-        />
-        <div className="flex">
-          <label className="text-input full-width margin-right">
-            Weight: <input
+        <div className="user-form" style={{ background }}>
+          {this.state.firstName ? <h2>Welcome {this.state.firstName}</h2> : <h2>Please enter user data</h2>}
+          <div className="flex">
+            <input
+              id="firstName"
               type="text"
-              onChange={this.onWeightChange}
+              onChange={this.onFirstNameChange}
               autoComplete="off"
-              className="inline-input"
-              placeholder="0"
-              value={this.state.weight} /> kg
-            </label>
-          <label className="text-input full-width">
-            Height: <input
+              className="margin-right text-input full-width"
+              placeholder="First Name"
+              value={this.state.firstName}
+            />
+            <input
+              id="lastName"
               type="text"
-              onChange={this.onHeightChange}
+              onChange={this.onLastNameChange}
               autoComplete="off"
-              className="inline-input"
-              placeholder="0"
-              value={this.state.height} /> cm
+              className="text-input full-width"
+              placeholder="Last Name"
+              value={this.state.lastName}
+            />
+          </div>
+          <Birthdate
+            birthdate={this.state.birthdate}
+            ref="child"
+            onBdayChange={this.onBirthdateChange}
+          />
+          <div className="flex">
+            <label className="text-input full-width margin-right">
+              Weight: <input
+                type="text"
+                onChange={this.onWeightChange}
+                autoComplete="off"
+                className="inline-input"
+                placeholder="0"
+                value={this.state.weight} /> kg
             </label>
-        </div>
-        <div className="gender-label">
-          Gender:
-        <button
-            className="btn-gender"
-            onClick={this.onGenderChange}
-            style={{ background: genderColor }}
-          >
-            {this.state.gender === "male" ? <FontAwesomeIcon icon={faMale} size='3x' /> : <FontAwesomeIcon icon={faFemale} size='3x' />}
-          </button>
-        </div>
+            <label className="text-input full-width">
+              Height: <input
+                type="text"
+                onChange={this.onHeightChange}
+                autoComplete="off"
+                className="inline-input"
+                placeholder="0"
+                value={this.state.height} /> cm
+            </label>
+          </div>
+          <div className="gender-label">Choose Gender:
+            <div>
+              <button
+                className="btn-gender male-active"
+                onClick={this.onGenderMale}
+                id="btn-male"
+              >
+                <FontAwesomeIcon icon={faMale} size='3x' />
+              </button>
+              <button
+                className="btn-gender"
+                onClick={this.onGenderFemale}
+                id="btn-female"
+              >
+                <FontAwesomeIcon icon={faFemale} size='3x' />
+              </button>
+            </div>
+          </div>
         </div>
         <div className="form-submit">
           {!this.props.user ?
