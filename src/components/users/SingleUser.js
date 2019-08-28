@@ -32,9 +32,15 @@ export const SingleUser = ({ id, firstName, lastName, path, startRemoveUser }) =
       if (path === "/user-select-cal") {
         return `/tool-cal/${id}`
       } else if (path === "/user-select-5x5") {
-        return `/workout5x5/${id}`
+        return {
+          pathname: `/dashboard5x5`,
+          state: {
+            firstName,
+            id
+          }
+        }
       }
-    }
+    };
 
   return (
     <div className="list-item">

@@ -4,13 +4,17 @@
   padding: 0 $m-size;
 }
 
+.chart-container {
+  position: relative;
+  width: 90%;
+}
 // Base
 .margin-top {
   margin-top: $xl-size;
 }
 
 .margin-right {
-  margin-right: $s-size;
+  margin-right: $s-size !important;
 }
 
 .margin-side {
@@ -51,6 +55,12 @@
 .flex {
   display: flex;
   align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .flex-center {

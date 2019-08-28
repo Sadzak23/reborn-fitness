@@ -18,7 +18,7 @@ const DashboardPage = () => (
     <Link className="list-dashboard" to="/timers" onMouseDown={(e) => {e.preventDefault()}}>
       <FontAwesomeIcon icon={faStopwatch} /> Timer Workout
     </Link>
-    <Link className="list-dashboard" to="/dashboard5x5" onMouseDown={(e) => {e.preventDefault()}}>
+    <Link className="list-dashboard" to="/user-select-5x5" onMouseDown={(e) => {e.preventDefault()}}>
       <FontAwesomeIcon icon={faDumbbell} /> 5x5 Strong Lifts
     </Link>
     <Link className="list-dashboard" to="/dashboard" onMouseDown={(e) => {e.preventDefault()}}>

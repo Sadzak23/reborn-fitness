@@ -170,7 +170,7 @@ export class Workout5x5 extends React.Component {
                 : 30}kg</h3>
               <h3 className="margin-right">Barbell Row: {this.state.barbellRow ?
                 Math.round(this.state.barbellRow * 0.3) * 2.5
-                : 20}kg</h3>
+                : 30}kg</h3>
             </div>
             <div className="flex-center">
               <h3 className="margin-right">Overhead Press: {this.state.overheadPress ?
