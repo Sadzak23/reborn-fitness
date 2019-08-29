@@ -13,7 +13,7 @@ export class Workout5x5 extends React.Component {
       benchPress: this.userData ? this.userData.benchPress : '',
       barbellRow: this.userData ? this.userData.barbellRow : '',
       overheadPress: this.userData ? this.userData.overheadPress : '',
-      deadLift: this.userData ? this.userData.deadLift : '',
+      deadlift: this.userData ? this.userData.deadlift : '',
     }
   };
 
@@ -45,9 +45,9 @@ export class Workout5x5 extends React.Component {
   };
 
   onDeadliftChange = (e) => {
-    const deadLift = e.target.value;
-    if (!deadLift || deadLift.match(/^\d{1,3}([.]\d{0,1})?$/)) {
-      this.setState({ deadLift });
+    const deadlift = e.target.value;
+    if (!deadlift || deadlift.match(/^\d{1,3}([.]\d{0,1})?$/)) {
+      this.setState({ deadlift });
     }
   };
 
@@ -58,7 +58,7 @@ export class Workout5x5 extends React.Component {
       benchPress: this.state.benchPress ? Math.round(parseFloat(this.state.benchPress * 0.3)) * 2.5 : 20,
       barbellRow: this.state.barbellRow ? Math.round(parseFloat(this.state.barbellRow * 0.3)) * 2.5 : 30,
       overheadPress: this.state.overheadPress ? Math.round(parseFloat(this.state.overheadPress * 0.3)) * 2.5 : 20,
-      deadLift: this.state.deadLift ? Math.round(parseFloat(this.state.deadLift * 0.3)) * 2.5 : 40
+      deadlift: this.state.deadlift ? Math.round(parseFloat(this.state.deadlift * 0.3)) * 2.5 : 40
     };
     const userId = this.props.user.id
     this.props.startSetEditData5x5(userId, data)
@@ -70,7 +70,7 @@ export class Workout5x5 extends React.Component {
       benchPress: Math.floor(this.state.benchPress / 2.5) * 2.5,
       barbellRow: Math.floor(this.state.barbellRow / 2.5) * 2.5,
       overheadPress: Math.floor(this.state.overheadPress / 2.5) * 2.5,
-      deadLift: Math.floor(this.state.deadLift / 2.5) * 2.5
+      deadlift: Math.floor(this.state.deadlift / 2.5) * 2.5
     };
     const userId = this.props.user.id;
     new Promise((resolve) => {
@@ -152,7 +152,7 @@ export class Workout5x5 extends React.Component {
                 onChange={this.onDeadliftChange}
                 className="inline-input"
                 placeholder="0"
-                value={this.state.deadLift}
+                value={this.state.deadlift}
               /> kg
           </label>
           </div>
@@ -176,8 +176,8 @@ export class Workout5x5 extends React.Component {
               <h3 className="margin-right">Overhead Press: {this.state.overheadPress ?
                 Math.round(this.state.overheadPress * 0.3) * 2.5
                 : 20}kg</h3>
-              <h3 className="margin-right">Deadlift: {this.state.deadLift ?
-                Math.round(this.state.deadLift * 0.3) * 2.5
+              <h3 className="margin-right">Deadlift: {this.state.deadlift ?
+                Math.round(this.state.deadlift * 0.3) * 2.5
                 : 40}kg</h3>
             </div>
           </div>
