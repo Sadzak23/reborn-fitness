@@ -169,14 +169,14 @@ export default class UserForm extends React.Component {
           <div className="gender-label">Choose Gender:
             <div>
               <button
-                className="btn-gender male-active"
+                className={`btn-gender ${this.state.gender === "male" ? "male-active" : ""}`}
                 onClick={this.onGenderMale}
                 id="btn-male"
               >
                 <FontAwesomeIcon icon={faMale} size='3x' />
               </button>
               <button
-                className="btn-gender"
+                className={`btn-gender ${this.state.gender === "female" ? "female-active" : ""}`}
                 onClick={this.onGenderFemale}
                 id="btn-female"
               >
