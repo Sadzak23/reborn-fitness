@@ -27,7 +27,7 @@ export class Workout5x5 extends React.Component {
           set3: 0,
           set4: 0,
           set5: 0,
-          done: false
+          done: ""
         },
         exercise2: {
           set1: 0,
@@ -35,7 +35,7 @@ export class Workout5x5 extends React.Component {
           set3: 0,
           set4: 0,
           set5: 0,
-          done: false
+          done: ""
         },
         exercise3: {
           set1: 0,
@@ -43,13 +43,12 @@ export class Workout5x5 extends React.Component {
           set3: 0,
           set4: 0,
           set5: 0,
-          done: false
+          done: ""
         },
       },
       // Timer state
       interval: null,
       miliseconds: 0,
-      paused: false,
 
     }
   };
@@ -66,9 +65,6 @@ export class Workout5x5 extends React.Component {
 
       // Play sound on 0
       this.longBeep.play();
-      this.setState({
-        paused: true
-      });
     };
     // Play sound on 3,2,1
     if (this.state.miliseconds === 3000 || this.state.miliseconds === 2000 || this.state.miliseconds === 1000) {
@@ -78,15 +74,6 @@ export class Workout5x5 extends React.Component {
     if (this.state.miliseconds === 10000) {
       this.beep.play();
     };
-  };
-
-  togglePause = () => {
-    this.setState({ paused: !this.state.paused });
-    if (!this.state.paused) {
-      clearInterval(this.state.interval);
-    } else {
-      this.setState({ interval: setInterval(this.tick, 100) });
-    }
   };
 
   componentWillUnmount() {
@@ -106,6 +93,7 @@ export class Workout5x5 extends React.Component {
         }
       }, () => {
         this.runTimer(exerciseNo, setNo);
+        this.exerciseDone(exerciseNo);
       });
     } else {
       this.setState({
@@ -118,6 +106,7 @@ export class Workout5x5 extends React.Component {
         }
       }, () => {
         this.runTimer(exerciseNo, setNo);
+        this.exerciseDone(exerciseNo);
       });
     };
   };
@@ -132,7 +121,6 @@ export class Workout5x5 extends React.Component {
           interval: setInterval(this.tick, 100)
         });
       });
-      this.exerciseDone(exerciseNo)
     } else if (this.state.workout[exerciseNo][setNo] === 0) {
       clearInterval(this.state.interval);
       this.setState({
@@ -147,7 +135,6 @@ export class Workout5x5 extends React.Component {
           interval: setInterval(this.tick, 100)
         });
       });
-      this.exerciseDone(exerciseNo)
     }
   };
 
@@ -157,14 +144,40 @@ export class Workout5x5 extends React.Component {
       this.state.workout[exerciseNo].set3 === 5 &&
       this.state.workout[exerciseNo].set4 === 5 &&
       this.state.workout[exerciseNo].set5 === 5) {
-      // console.log("Great work! Next time lift " + (this.state.userData.squat + 2.5) + "kg");
+      this.setState({
+        workout: {
+          ...this.state.workout,
+          [exerciseNo]: {
+            ...this.state.workout[exerciseNo],
+            done: "5x5"
+          }
+        }
+      });
     } else if (this.state.workout[exerciseNo].set1 > 0 &&
       this.state.workout[exerciseNo].set2 > 0 &&
       this.state.workout[exerciseNo].set3 > 0 &&
       this.state.workout[exerciseNo].set4 > 0 &&
       this.state.workout[exerciseNo].set5 > 0) {
-      // console.log(exerciseNo + " done! Next time try again " + this.state.userData.squat + "kg");
-    } 
+      this.setState({
+        workout: {
+          ...this.state.workout,
+          [exerciseNo]: {
+            ...this.state.workout[exerciseNo],
+            done: "almost"
+          }
+        }
+      });
+    } else {
+      this.setState({
+        workout: {
+          ...this.state.workout,
+          [exerciseNo]: {
+            ...this.state.workout[exerciseNo],
+            done: ""
+          }
+        }
+      });
+    }
   };
 
   onExit = () => swal({
