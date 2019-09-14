@@ -1,11 +1,6 @@
 import React from 'react';
 
 export const Exercise5x5 = ({ exerciseName, exerciseWeight, exerciseNo, exerciseSets, onRepCount }) => {
-
-  const onRepCountS = (set) => {
-    onRepCount(exerciseNo, `set${set}`);
-  };
-
   const done = () => {
     if (exerciseSets.done === "5x5") {
       return (
