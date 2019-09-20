@@ -11,7 +11,7 @@ export default class Dashboard5x5 extends React.Component {
           <div className="flex-between">
             <div className="flex">
               <FontAwesomeIcon icon={faDumbbell} size="2x" className="margin-right" />
-              <p>Strong Lifts 5x5</p>
+              <h2>Strong Lifts</h2>
             </div>
             <div className="flex">
               <p className="margin-right">{this.props.location.state.firstName}</p>

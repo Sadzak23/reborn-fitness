@@ -7,20 +7,7 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
-html {
-  font-size: 62.5%;
-}
 
-h1, h2, h3 {
-  margin: 0;
-}
-
-body {
-  color: $dark-gray;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: $m-size;
-  line-height: 1.6;
-}
 button {
   padding: 0px;
   cursor: pointer;
@@ -40,9 +27,4 @@ a {
   text-decoration: none;
 }
 
-@media (max-width: $mobile-breakpoint) {
-  body {
-    font-size: $s-size;
-    line-height: 1.6;
-  }
-}
+

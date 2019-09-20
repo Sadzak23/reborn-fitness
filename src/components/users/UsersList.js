@@ -11,7 +11,7 @@ const UsersListPage = (props) => (
       <div className="list-header">
         <div className="flex">
           <FontAwesomeIcon icon={faUsers} size="2x" className="margin-right" />
-          <p> Users List</p>
+          <h2> Users List</h2>
         </div>
         <Link to="/create-user" onMouseDown={(e) => {e.preventDefault()}}>
           <FontAwesomeIcon icon={faUserPlus} style={{ color: '#fff' }} size="2x" />

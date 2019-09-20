@@ -8,7 +8,7 @@
   justify-content: space-between;
   padding: $s-size $l-size;
   p {
-    font-size: 2rem;
+    font-size: $m-size-em;
     margin: 0px;
   }
 }
@@ -45,15 +45,8 @@
   border: 2px solid #e0e0e0;
   border-radius: 0 0 15px 15px;
   display: flex;
-  @media screen and (orientation: portrait) {
-    * {
-      font-size: 15px;
-    }
-  }
-  @media (max-width: 1000px) {    
-    align-items: center;
-    flex-direction: column;
-  }
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .list-int-duration-form {
@@ -71,7 +64,7 @@
   border-top: none;
   color: $dark-gray;
   display: block;
-  font-size: $l-size;
+  font-size: $l-size-em;
   text-align: center;
   text-decoration: none;
   transition: background 0.3s ease;
@@ -86,7 +79,7 @@
   p {
     margin: 0;
     color: $gray;
-    font-size: $s-size;
+    font-size: $s-size-em;
   }
 }
 

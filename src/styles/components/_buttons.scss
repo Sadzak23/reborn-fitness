@@ -29,15 +29,15 @@
   background: #b92828;
   border-radius: 100%;
   color: #fff;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 2.2em;
+  width: 2.2em;
   margin: 7px 0 7px 7px;
 }
 
 .btn-remove-m {
   @extend .btn-remove-s;
-  height: 4rem;
-  width: 4rem;
+  height: 2.8em;
+  width: 2.8em;
   &:disabled {
     background: #ccc;
     border: 0px;
@@ -50,37 +50,34 @@
 }
 
 .btn-edit-m {
-  @extend .btn-edit-s;
-  height: 4rem;
-  width: 4rem;
-  &:disabled {
-    background: #ccc;
-    border: 0px;
-    box-shadow: none;
-  }
+  @extend .btn-remove-m;
+  background: $blue;
 }
 
 //User
 
 .btn-gender {
   background: #b7b7b7;
-  border-radius: 100%;
+  border-radius: 50px;
   border-style: outset;
   box-shadow: 4px 4px 6px 1px rgba(0, 0, 0, 0.5);
   color: #fff;
-  height: 8rem;
-  width: 8rem;
-  margin: 0 8px;
+  height: 5em;
+  width: 5em;
+  margin: 5px 8px 0;
   &:active {
     border-style: inset;
     box-shadow: none;
+  }
+  @media (max-width: $mobile-breakpoint) {
+    flex-grow: 1;
   }
 }
 .male-active {
   background: #1e83d6;
   border-style: inset;
   box-shadow: none;
-};
+}
 .female-active {
   background: #f57289;
   border-style: inset;
@@ -103,14 +100,14 @@
 }
 .icon-active {
   color: $ok-green;
-  font-size: 40px;
-  margin-right: 10px;
+  font-size: 2.4em;
+  margin-right: 0.2em;
 }
 
 .icon-inactive {
   color: $cancel-red;
-  font-size: 40px;
-  margin-right: 10px;
+  font-size: 2.4em;
+  margin-right: 0.2em;
 }
 
 //Timer
@@ -144,13 +141,13 @@
   width: 4rem;
   @media (max-width: $mobile-breakpoint) {
     right: 10px;
-    top: 7px;
+    top: 5px;
   }
 }
 
 .btn-x-header {
   @extend .btn-x;
-  top: 100px;
+  top: 5.5em;
 }
 
 // Timer Form
@@ -166,9 +163,6 @@
   color: #fff;
   height: 5rem;
   min-width: 10rem;
-  @media screen and (orientation: portrait) {
-    min-width: 9rem;
-  }
 }
 
 .btn-replace-int {
@@ -217,12 +211,12 @@
   background: $blue;
   border-radius: 100%;
   color: #fff;
-  font-size: $l-size;
-  height: 6rem;
-  width: 6rem;
+  font-size: 2.5em;
+  height: 2em;
+  width: 2em;
   @media (max-width: $mobile-breakpoint) {
-    font-size: 3rem;
-    height: 5.5rem;
-    width: 5.5rem;
+    font-size: 6vw;
+    height: 12vw;
+    width: 12vw;
   }
 }

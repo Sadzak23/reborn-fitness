@@ -166,8 +166,8 @@ export default class UserForm extends React.Component {
                 value={this.state.height} /> cm
             </label>
           </div>
-          <div className="gender-label">Choose Gender:
-            <div>
+          <div className="text-center">Choose Gender:
+            <div className="flex-center">
               <button
                 className={`btn-gender ${this.state.gender === "male" ? "male-active" : ""}`}
                 onClick={this.onGenderMale}

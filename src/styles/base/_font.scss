@@ -1,0 +1,24 @@
+html {
+  font-size: 62.5%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+body {
+  color: $dark-gray;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  body { 
+    font-size: 13px;    
+    line-height: 1.3;
+  }
+  .mob-font-size { font-size: 70%; };
+}

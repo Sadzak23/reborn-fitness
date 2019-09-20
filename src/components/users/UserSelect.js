@@ -11,7 +11,7 @@ const UsersListSelect = (props) => (
       <div className="list-header">
         <div className="flex">
           <FontAwesomeIcon icon={faUsers} size="2x" className="margin-right" />
-          <p> Please select user</p>
+          <h2> Please select user</h2>
         </div>
         <Link to="/create-user" onMouseDown={(e) => {e.preventDefault()}}>
           <FontAwesomeIcon icon={faUserPlus} style={{ color: '#fff' }} size="2x" />

@@ -231,18 +231,18 @@ export default class TimerForm extends React.Component {
         </div>
 
         <div className="list-int-form">
-        <div className="form-interval-inputs">
+        <div className="flex-wrap">
             <input
               id="interval-name"
               autoComplete="off"
-              className="int-form-input form-interval-name"
+              className="int-form-input int-full-width"
               onChange={this.onIntervalNameChange}
               placeholder="Interval name"
               type="text"
               value={this.state.currentIntervalName}
             />
-            <div className="flex int-form-full-width">
-              <label className="int-form-input int-form-full-width">
+            <div className="flex-grow">
+              <label className="int-form-input int-full-width">
                 <input
                   type="text"
                   onChange={this.onIntervalMinChange}
@@ -252,7 +252,7 @@ export default class TimerForm extends React.Component {
                   placeholder="0"
                   value={this.state.currentIntervalMin} /> min
               </label>
-              <label className="int-form-input int-form-full-width">
+              <label className="int-form-input int-full-width">
                 <input
                   type="text"
                   onChange={this.onIntervalSecChange}
@@ -263,7 +263,7 @@ export default class TimerForm extends React.Component {
                   value={this.state.currentIntervalSec} /> sec
               </label>
               </div>
-            <div className="flex int-form-full-width">
+            <div className="flex-grow">
               <select
               className="interval-select"
               id="interval-type"

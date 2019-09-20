@@ -11,7 +11,7 @@ const TimersListPage = (props) => (
       <div className="list-header">
       <div className="flex">
           <FontAwesomeIcon icon={faStopwatch} size="2x" className="margin-right" />
-          <p>Select Timer Workout</p>
+          <h2>Select Timer Workout</h2>
         </div>
         <Link to="/create-timer" onMouseDown={(e) => {e.preventDefault()}}>
         <FontAwesomeIcon icon={faPlusCircle} style={{ color: '#fff' }} size="2x" />

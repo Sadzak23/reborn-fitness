@@ -7,7 +7,7 @@ import { faHotjar } from '@fortawesome/free-brands-svg-icons';
 const DashboardPage = () => (
   <div className="content-container">
     <div className="list-header">
-      <p>Welcome to Reborn Fitness App</p>
+      <h2>Welcome to Reborn Fitness App</h2>
     </div>
     <Link className="list-dashboard" to="/users" onMouseDown={(e) => {e.preventDefault()}}>
       <FontAwesomeIcon icon={faUsers} /> Users

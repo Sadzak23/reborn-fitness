@@ -68,6 +68,15 @@
   justify-content: center;
 }
 
+.flex-grow {
+  display: flex;
+  flex-grow: 1;
+}
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .grid {
   display: grid;
 }

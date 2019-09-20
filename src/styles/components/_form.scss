@@ -30,15 +30,6 @@
   background: $light-blue !important;
 }
 
-.form-interval-inputs {
-  display: flex;
-  align-items: center;
-  @media (max-width: 800px) {
-    flex-direction: column;
-    margin: auto;
-  }
-}
-
 .form-submit {
   display: flex;
   align-items: center;
@@ -69,10 +60,4 @@
     text-align: center;
     margin-bottom: $m-size;
   }
-}
-
-.gender-label {
-  display: grid;
-  justify-content: center;
-  justify-items: center;
 }

@@ -1,7 +1,7 @@
 .text-input {
   border: 1px solid #cacccd;
   border-radius: 10px;
-  font-size: $m-size;
+  font-size: 1em;
   padding: $s-size;
   margin-bottom: $m-size;
   &:focus {
@@ -34,15 +34,6 @@
 }
 // Timer interval //
 
-.form-interval-name {
-  min-width: 130px;
-  max-width: 205px;
-  @media (max-width: 800px) {
-    width: 100% !important;
-    margin-right: 0 !important;
-  };
-}
-
 .int-form-input {
   @extend .text-input;
   background: white;
@@ -51,18 +42,27 @@
   @media (max-width: 1000px) {
     margin: 0 $s-size $s-size 0;
   };
+  @media (max-width: $mobile-breakpoint) {
+    height: 40px;
+  }
 }
-
+.interval-time {
+  display: flex;
+  flex: 1 0 205px;
+}
 .interval-select {
   @extend .int-form-input;
   min-width: 115px;
   margin-right: $s-size;
-}
-
-.int-form-full-width {
-  @media (max-width: 800px) {
-    width: 100%;
+  flex-grow: 1;
+  @media (max-width: 1000px) {
   };
+}
+.int-full-width {
+  flex-grow: 1;
+  @media (max-width: 800px) {
+    text-align: center;
+  }
 }
 
 // User //
@@ -73,7 +73,7 @@
   justify-content: center;
   text-align: center;
   width: 100%;
-  @media (max-width: 500px) {
+  @media (max-width: 391px) {
     flex-direction: column;
   }
 }
