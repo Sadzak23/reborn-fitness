@@ -144,7 +144,9 @@ export class Workout5x5 extends React.Component {
       this.state.workout[exerciseNo].set3 === 5 &&
       this.state.workout[exerciseNo].set4 === 5 &&
       this.state.workout[exerciseNo].set5 === 5) {
+      clearInterval(this.state.interval);
       this.setState({
+        miliseconds: 0,
         workout: {
           ...this.state.workout,
           [exerciseNo]: {
@@ -158,7 +160,9 @@ export class Workout5x5 extends React.Component {
       this.state.workout[exerciseNo].set3 > 0 &&
       this.state.workout[exerciseNo].set4 > 0 &&
       this.state.workout[exerciseNo].set5 > 0) {
+      clearInterval(this.state.interval);
       this.setState({
+        miliseconds: 0,
         workout: {
           ...this.state.workout,
           [exerciseNo]: {
@@ -173,7 +177,7 @@ export class Workout5x5 extends React.Component {
           ...this.state.workout,
           [exerciseNo]: {
             ...this.state.workout[exerciseNo],
-            done: ""
+            done: "x"
           }
         }
       });
