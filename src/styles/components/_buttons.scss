@@ -8,12 +8,10 @@
 
 .big-button {
   background: $blue;
-  border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   color: #fff;
   font-size: $m-size;
   padding: $s-size;
-  text-decoration: none;
   &:active {
     padding: $s-size;
   }

@@ -3,7 +3,6 @@
   justify-content: space-between;
   margin: $l-size 0 $m-size 0;
   @media (max-width: $mobile-breakpoint) {
-    //margin: $xxl-size 0 $l-size 0;
     margin: 2em 5em 2em 5em;
   }
 }
@@ -65,6 +64,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: $mobile-breakpoint) {
+    font-size: 80%;
+  }
 }
 
 .counter5x5 {

@@ -203,7 +203,7 @@ export class Workout5x5 extends React.Component {
     const exercise3Weight = this.state.workout.type === 'a' ? this.state.userData.barbellRow : this.state.userData.deadlift;
 
     return (
-      <div className="content-container mob-font-size">
+      <div className="content-container">
         <button className="btn-x" onClick={this.onExit}>
           <FontAwesomeIcon icon={faTimes} className="timer-x" />
         </button>
@@ -223,10 +223,10 @@ export class Workout5x5 extends React.Component {
 
         <div className="header5x5 show-mobile">
           <Link to={`/edit-data5x5/${this.props.user.id}`} className="workout-weights">
-            <h2>Change Weights</h2>
+            <h3>Change Weights</h3>
           </Link>
           <div className="workout-bodyweight">
-            <h2>Body Weight: {this.state.userData.bodyWeight}Kg</h2>
+            <h3>Body Weight: {this.state.userData.bodyWeight}Kg</h3>
           </div>
         </div>
         <div className="timer5x5 show-mobile">

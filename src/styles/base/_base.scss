@@ -8,11 +8,35 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
+html {
+  font-size: 62.5%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+body {
+  color: $dark-gray;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  @media (max-width: $mobile-breakpoint) {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  @media (max-width: 400px) {
+    font-size: 10px;
+  }
+}
+
 button {
   padding: 0px;
   cursor: pointer;
   &:disabled {
-  cursor: default;
+    cursor: default;
   }
   &:focus {
     outline: 0;
@@ -26,5 +50,3 @@ a {
   color: #333;
   text-decoration: none;
 }
-
-

@@ -1,13 +1,13 @@
 .timer-container {
   padding-top: $l-size;
   text-align: center;
-  height: 100vh;
   @media (orientation: portrait) {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-  }
-}
+    height: 90vh;
+  };
+};
 
 .timer-x {
   color: white;
