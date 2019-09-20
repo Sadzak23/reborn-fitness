@@ -33,7 +33,6 @@ class Timer extends React.Component {
   };
   beep = new Audio('../assets/beep.mp3');
   longBeep = new Audio('../assets/beep0.mp3');
-
   tick = () => {
     this.setState({ miliseconds: this.state.miliseconds -= 100 })
     //Next interval
@@ -114,8 +113,15 @@ class Timer extends React.Component {
     };
   };
 
+  componentDidMount() {
+    document.body.style.background = this.state.color;
+  };
+  componentDidUpdate() {
+    document.body.style.background = this.state.color;
+  };
   componentWillUnmount() {
     clearInterval(this.state.interval);
+    document.body.style.background = null;
   };
 
   render() {
@@ -155,36 +161,40 @@ class Timer extends React.Component {
     const remainingTime = this.props.timer.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) - elapsedTime;
 
     return (
-      <div style={{ backgroundColor: this.state.color }}>
+      <div>
         <button className="btn-x" onClick={onExit}>
           <FontAwesomeIcon icon={faTimes} className="timer-x" />
         </button>
         <div className="content-container timer-container">
-          <h1 className="timer-clock">{formatSeconds(Math.ceil(this.state.miliseconds / 1000))}</h1>
-          <h3 className="timer-interval-name">- {this.state.phase} -</h3>
-          <div className="timer-intervals">
-            <div>
-              <p>Elapsed Time</p>
-              <h2>{elapsedTime < 0 ? "00:00" : formatSeconds(elapsedTime)}</h2>
-            </div>
-            <div>
-              <p>Exercise</p>
-              <h2>{exerciseNo} / {totalExercisesNo}</h2>
-            </div>
-            <div>
-              <p>Time Remaining</p>
-              <h2>{formatSeconds(remainingTime)}</h2>
-            </div>
+          <div>
+            <h1 className="timer-clock">{formatSeconds(Math.ceil(this.state.miliseconds / 1000))}</h1>
+            <h3 className="timer-interval-name">- {this.state.phase} -</h3>
           </div>
-          <div className="timer-controls">
-            <button onClick={this.handlePrevious} className="btn-next-prev">
-              <FontAwesomeIcon icon={faBackward} />
-            </button>
-            <button onClick={this.togglePause} className={this.state.paused ? "btn-play" : "btn-pause"}>
-              {this.state.paused ? <FontAwesomeIcon icon={faPlay} /> : <FontAwesomeIcon icon={faPause} />}</button>
-            <button onClick={this.handleNext} className="btn-next-prev">
-              <FontAwesomeIcon icon={faForward} />
-            </button>
+          <div>
+            <div className="timer-intervals">
+              <div>
+                <p>Elapsed Time</p>
+                <h2>{elapsedTime < 0 ? "00:00" : formatSeconds(elapsedTime)}</h2>
+              </div>
+              <div>
+                <p>Exercise</p>
+                <h2>{exerciseNo} / {totalExercisesNo}</h2>
+              </div>
+              <div>
+                <p>Time Remaining</p>
+                <h2>{formatSeconds(remainingTime)}</h2>
+              </div>
+            </div>
+            <div className="timer-controls">
+              <button onClick={this.handlePrevious} className="btn-next-prev">
+                <FontAwesomeIcon icon={faBackward} />
+              </button>
+              <button onClick={this.togglePause} className={this.state.paused ? "btn-play" : "btn-pause"}>
+                {this.state.paused ? <FontAwesomeIcon icon={faPlay} /> : <FontAwesomeIcon icon={faPause} />}</button>
+              <button onClick={this.handleNext} className="btn-next-prev">
+                <FontAwesomeIcon icon={faForward} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
