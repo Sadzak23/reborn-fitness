@@ -92,8 +92,7 @@ export class Workout5x5 extends React.Component {
           }
         }
       }, () => {
-        this.runTimer(exerciseNo, setNo);
-        this.exerciseDone(exerciseNo);
+        this.exerciseDone(exerciseNo, setNo);
       });
     } else {
       this.setState({
@@ -105,40 +104,12 @@ export class Workout5x5 extends React.Component {
           }
         }
       }, () => {
-        this.runTimer(exerciseNo, setNo);
-        this.exerciseDone(exerciseNo);
+        this.exerciseDone(exerciseNo, setNo);
       });
     };
   };
-
-  runTimer = (exerciseNo, setNo) => {
-    if (this.state.workout[exerciseNo][setNo] === 5) {
-      clearInterval(this.state.interval);
-      this.setState({
-        miliseconds: 90000
-      }, () => {
-        this.setState({
-          interval: setInterval(this.tick, 100)
-        });
-      });
-    } else if (this.state.workout[exerciseNo][setNo] === 0) {
-      clearInterval(this.state.interval);
-      this.setState({
-        miliseconds: 0
-      });
-    } else {
-      clearInterval(this.state.interval);
-      this.setState({
-        miliseconds: 300000
-      }, () => {
-        this.setState({
-          interval: setInterval(this.tick, 100)
-        });
-      });
-    }
-  };
-
-  exerciseDone = (exerciseNo) => {
+  
+  exerciseDone = (exerciseNo, setNo) => {
     if (this.state.workout[exerciseNo].set1 === 5 &&
       this.state.workout[exerciseNo].set2 === 5 &&
       this.state.workout[exerciseNo].set3 === 5 &&
@@ -177,9 +148,36 @@ export class Workout5x5 extends React.Component {
           ...this.state.workout,
           [exerciseNo]: {
             ...this.state.workout[exerciseNo],
-            done: "x"
+            done: ""
           }
         }
+      }, () => this.runTimer(exerciseNo, setNo));
+    }
+  };
+
+  runTimer = (exerciseNo, setNo) => {
+    if (this.state.workout[exerciseNo][setNo] === 5) {
+      clearInterval(this.state.interval);
+      this.setState({
+        miliseconds: 90000
+      }, () => {
+        this.setState({
+          interval: setInterval(this.tick, 100)
+        });
+      });
+    } else if (this.state.workout[exerciseNo][setNo] === 0) {
+      clearInterval(this.state.interval);
+      this.setState({
+        miliseconds: 0
+      });
+    } else {
+      clearInterval(this.state.interval);
+      this.setState({
+        miliseconds: 300000
+      }, () => {
+        this.setState({
+          interval: setInterval(this.tick, 100)
+        });
       });
     }
   };
