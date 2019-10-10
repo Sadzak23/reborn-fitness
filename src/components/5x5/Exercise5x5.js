@@ -18,12 +18,21 @@ export const Exercise5x5 = ({ exerciseName, exerciseWeight, exerciseNo, exercise
     }
   });
 
+  const bottomMessage = () => {
+    switch (exerciseSets.done) {
+      case "":
+        return "Click a button to enter rep number"
+      case "5x5":
+        return `Great job! Next time lift ${(exerciseWeight + 2.5)}kg`;
+      case "almost":
+        return "It's ok! You'll get it next time.";
+    }
+  };
+
   return (
     <div id={exerciseName} className="workout-exercise">
       <div className="exercise-title-5x5">
         <h2>{exerciseName}</h2>
-        {exerciseSets.done === "5x5" && <h3>Great job! Next time lift {(exerciseWeight + 2.5)}kg</h3>}
-        {exerciseSets.done === "almost" && <h3>It's ok! You'll get it next time.</h3>}
         <h2>5x5 {exerciseWeight}kg</h2>
       </div>
       <div className="counter5x5">
@@ -31,6 +40,7 @@ export const Exercise5x5 = ({ exerciseName, exerciseWeight, exerciseNo, exercise
           <button onClick={() => { onRepCount(exerciseNo, `set${set}`) }} className="btn-exercise-count" key={exerciseName + set}>{exerciseSets[`set${set}`]}</button>
         ))}
       </div>
+      <h3 className="exercise-message5x5">{bottomMessage()}</h3>
     </div>
   )
 };

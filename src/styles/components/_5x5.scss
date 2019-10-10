@@ -7,7 +7,7 @@
   }
 }
 
-.mobile-header5x5 {
+.exercises5x5 {
   background: #dadada;
   padding: 10px;
   border-radius: 30px;
@@ -67,6 +67,12 @@
   @media (max-width: $mobile-breakpoint) {
     font-size: 80%;
   }
+}
+
+.exercise-message5x5 {
+  text-align: center;
+  padding-top: 5px;
+  font-style: italic;
 }
 
 .counter5x5 {

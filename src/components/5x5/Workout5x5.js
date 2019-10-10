@@ -76,6 +76,33 @@ export class Workout5x5 extends React.Component {
     };
   };
 
+  runTimer = (exerciseNo, setNo) => {
+    if (this.state.workout[exerciseNo][setNo] === 5) {
+      clearInterval(this.state.interval);
+      this.setState({
+        miliseconds: 90000
+      }, () => {
+        this.setState({
+          interval: setInterval(this.tick, 100)
+        });
+      });
+    } else if (this.state.workout[exerciseNo][setNo] === 0) {
+      clearInterval(this.state.interval);
+      this.setState({
+        miliseconds: 0
+      });
+    } else {
+      clearInterval(this.state.interval);
+      this.setState({
+        miliseconds: 300000
+      }, () => {
+        this.setState({
+          interval: setInterval(this.tick, 100)
+        });
+      });
+    }
+  };
+
   componentWillUnmount() {
     clearInterval(this.state.interval);
   };
@@ -155,33 +182,6 @@ export class Workout5x5 extends React.Component {
     }
   };
 
-  runTimer = (exerciseNo, setNo) => {
-    if (this.state.workout[exerciseNo][setNo] === 5) {
-      clearInterval(this.state.interval);
-      this.setState({
-        miliseconds: 90000
-      }, () => {
-        this.setState({
-          interval: setInterval(this.tick, 100)
-        });
-      });
-    } else if (this.state.workout[exerciseNo][setNo] === 0) {
-      clearInterval(this.state.interval);
-      this.setState({
-        miliseconds: 0
-      });
-    } else {
-      clearInterval(this.state.interval);
-      this.setState({
-        miliseconds: 300000
-      }, () => {
-        this.setState({
-          interval: setInterval(this.tick, 100)
-        });
-      });
-    }
-  };
-
   onExit = () => swal({
     title: "You're not a quitter!",
     text: "Are you?!",
@@ -235,7 +235,7 @@ export class Workout5x5 extends React.Component {
           <h1>Rest: {formatSeconds(Math.ceil(this.state.miliseconds / 1000))}</h1>
         </div>
 
-        <div className="mobile-header5x5">
+        <div className="exercises5x5">
           {/* Exercise 1 */}
           <Exercise5x5
             exerciseName="Squat"
@@ -244,7 +244,6 @@ export class Workout5x5 extends React.Component {
             exerciseSets={this.state.workout.exercise1}
             onRepCount={this.onRepCount}
           />
-
           {/* Exercise 2 */}
           <Exercise5x5
             exerciseName={exercise2Name}
@@ -253,7 +252,6 @@ export class Workout5x5 extends React.Component {
             exerciseSets={this.state.workout.exercise2}
             onRepCount={this.onRepCount}
           />
-
           {/* Exercise 3 */}
           <Exercise5x5
             exerciseName={exercise3Name}
