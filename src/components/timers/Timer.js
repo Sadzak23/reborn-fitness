@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { formatSeconds } from '../Format';
 import { faForward, faBackward, faPause, faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { onExit } from '../Alerts'
 
 class Timer extends React.Component {
   constructor(props) {
@@ -125,24 +126,6 @@ class Timer extends React.Component {
   };
 
   render() {
-    //Exit timer confirmation
-    const onExit = () => swal({
-      title: "You're not a quitter!",
-      text: "Are you?!",
-      icon: "warning",
-      buttons: {
-        cancel: "Cancel",
-        exit: {
-          text: "Yes, I quit!",
-          value: "exit",
-          className: "btn-alert-exit"
-        },
-      },
-    })
-      .then((value) =>
-        value === "exit" && this.props.history.goBack()
-      );
-
     //Exercise number calculator
     const exerciseNo = this.props.timer.intervals.slice(0, this.state.intervalNo + 1).reduce((count, interval) =>
       interval.intervalType === "exercise" ? count + 1 : count, 0);

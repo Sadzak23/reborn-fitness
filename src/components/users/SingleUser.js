@@ -1,46 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import swal from 'sweetalert';
 import { startRemoveUser, editUser } from '../../actions/users';
+import { onRemoveAlert } from '../Alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 
 export const SingleUser = ({ id, firstName, lastName, path, startRemoveUser }) => {
 
-  // Delete timer confirmation
-  const onRemoveUser = () => swal({
-    title: "Are you sure?!",
-    text: "You can't bring it back!",
-    icon: "error",
-    buttons: {
-      cancel: "Cancel!",
-      delete: {
-        text: "Yes, delete it!",
-        value: "delete",
-        className: "btn-alert-delete"
-      },
-    },
-  })
-    .then((value) =>
-      value === "delete" ?
-        swal("Deleted!", `${firstName} has been deleted!`, "success") &&
-        startRemoveUser(id) : swal(`${firstName} is safe!`, "", "success")
-    );
+  // Delete user confirmation
+  const onRemoveUser = () => onRemoveAlert(startRemoveUser, id, firstName);
   
-    const linkTo = () => {
-      if (path === "/user-select-cal") {
-        return `/tool-cal/${id}`
-      } else if (path === "/user-select-5x5") {
-        return {
-          pathname: `/dashboard5x5`,
-          state: {
-            firstName,
-            id
-          }
+  const linkTo = () => {
+    if (path === "/user-select-cal") {
+      return `/tool-cal/${id}`
+    } else if (path === "/user-select-5x5") {
+      return {
+        pathname: `/dashboard5x5`,
+        state: {
+          firstName,
+          id
         }
       }
-    };
+    }
+  };
 
   return (
     <div className="list-item">

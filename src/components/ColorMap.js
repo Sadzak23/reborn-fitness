@@ -7,7 +7,3 @@ export const colorMap = {
   "#bc9c90" : "Brown",
   "#cccccc" : "Gray",
 }
-export const colorMapGender = {
-  "#1e83d6" : "Male-blue",
-  "#f57289" : "Female-pink"
-   }

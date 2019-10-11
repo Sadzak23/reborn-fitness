@@ -1,5 +1,6 @@
 import React from "react";
 import uuid from 'uuid';
+import Swal from "sweetalert2";
 import SingleInterval from "./SingleInterval";
 import { history } from "../../routers/AppRouter";
 import { colorMap } from '../ColorMap';
@@ -67,9 +68,9 @@ export default class TimerForm extends React.Component {
   // Buttons
   onAddInterval = () => {
     if (!this.state.currentIntervalName) {
-      swal(timerFormAlerts.intTitle, timerFormAlerts.intNoName, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.intTitle, timerFormAlerts.intNoName, "error")
     } else if (this.state.currentIntervalMin === 0 & this.state.currentIntervalSec === 0 || this.state.currentIntervalMin === "" & this.state.currentIntervalSec === "") {
-      swal(timerFormAlerts.intTitle, timerFormAlerts.intDuration, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.intTitle, timerFormAlerts.intDuration, "error")
     } else {
       this.setState({
         intervals: [...this.state.intervals, {
@@ -121,9 +122,9 @@ export default class TimerForm extends React.Component {
 
   onReplaceInterval = () => {
     if (!this.state.currentIntervalName) {
-      swal(timerFormAlerts.intTitle, timerFormAlerts.intNoName, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.intTitle, timerFormAlerts.intNoName, "error")
     } else if (this.state.currentIntervalMin === 0 & this.state.currentIntervalSec === 0) {
-      swal(timerFormAlerts.intTitle, timerFormAlerts.intDuration, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.intTitle, timerFormAlerts.intDuration, "error")
     } else {
       const newIntervals = this.state.intervals.map((interval) => {
         if (interval.id !== this.state.currentIntervalId) {
@@ -153,9 +154,9 @@ export default class TimerForm extends React.Component {
 
   onAddTimer = () => {
     if (!this.state.name) {
-      swal(timerFormAlerts.title, timerFormAlerts.noName, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.title, timerFormAlerts.noName, "error")
     } else if (this.state.intervals.length === 0) {
-      swal(timerFormAlerts.title, timerFormAlerts.noIntreval, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.title, timerFormAlerts.noIntreval, "error")
     }
     else {
       this.props.onAddTimer({
@@ -168,9 +169,9 @@ export default class TimerForm extends React.Component {
 
   onEditTimer = () => {
     if (!this.state.name) {
-      swal(timerFormAlerts.title, timerFormAlerts.noName, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.title, timerFormAlerts.noName, "error")
     } else if (this.state.intervals.length === 0) {
-      swal(timerFormAlerts.title, timerFormAlerts.noIntreval, "error", { dangerMode: true, })
+      Swal.fire(timerFormAlerts.title, timerFormAlerts.noIntreval, "error")
     }
     else {
       this.props.onEditTimer(this.props.timer.id, {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { colorMapGender } from '../ColorMap';
+import Swal from 'sweetalert2';
 import { userFormAlerts } from '../Alerts';
 import { Birthdate } from './Birthdate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,66 +49,59 @@ export default class UserForm extends React.Component {
   }
 
   onGenderMale = () => {
-    this.setState({gender: "male"});
+    this.setState({ gender: "male" });
     document.getElementById("btn-female").classList.remove("female-active")
     document.getElementById("btn-male").classList.add("male-active")
   };
 
   onGenderFemale = () => {
-    this.setState({gender: "female"});
+    this.setState({ gender: "female" });
     document.getElementById("btn-male").classList.remove("male-active")
     document.getElementById("btn-female").classList.add("female-active")
   };
 
   onCreateUser = () => {
-    const now = new Date();
-    if (!this.state.firstName || !this.state.lastName) {
-      swal(userFormAlerts.title, userFormAlerts.noName, "error", { dangerMode: true, })
-    } else if (!this.state.birthdate || this.state.birthdate > now) {
-      swal(userFormAlerts.bDateTitle, userFormAlerts.bDate, "error", { dangerMode: true, })
-    } else if (this.state.weight < 20) {
-      swal(userFormAlerts.title, userFormAlerts.lowWeight, "error", { dangerMode: true, })
-    } else if (this.state.height < 100 || this.state.height > 250) {
-      swal(userFormAlerts.title, userFormAlerts.lowHeight, "error", { dangerMode: true, })
-    }
-    else {
-      this.props.onAddUser({
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        birthdate: this.state.birthdate,
-        height: this.state.height,
-        weight: this.state.weight,
-        gender: this.state.gender,
-        activeUser: false,
-        workouts: {
-          history: ""
-        }
-      })
-    }
+    const onCreate = () => this.props.onAddUser({
+      firstName: this.state.firstName, 
+      lastName: this.state.lastName,
+      birthdate: this.state.birthdate,
+      height: this.state.height,
+      weight: this.state.weight,
+      gender: this.state.gender,
+      activeUser: false,
+      workouts: {
+        history: ""
+      }
+    })
+    userFormAlerts(
+      this.state.firstName, 
+      this.state.lastName,
+      this.state.birthdate,
+      this.state.height,
+      this.state.weight,
+      this.state.gender,
+      onCreate
+    )
   };
 
   onEditUser = () => {
-    const now = new Date();
-    if (!this.state.firstName || !this.state.lastName) {
-      swal(userFormAlerts.title, userFormAlerts.noName, "error", { dangerMode: true, })
-    } else if (!this.state.birthdate || this.state.birthdate > now) {
-      swal(userFormAlerts.bDateTitle, userFormAlerts.bDate, "error", { dangerMode: true, })
-    } else if (this.state.weight < 20) {
-      swal(userFormAlerts.title, userFormAlerts.lowWeight, "error", { dangerMode: true, })
-    } else if (this.state.height < 100 || this.state.height > 250) {
-      swal(userFormAlerts.title, userFormAlerts.lowHeight, "error", { dangerMode: true, })
-    }
-    else {
-      this.props.onEditUser(this.props.user.id, {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        birthdate: this.state.birthdate,
-        height: this.state.height,
-        weight: this.state.weight,
-        gender: this.state.gender,
-        activeUser: this.state.activeUser
-      });
-    }
+    const onEdit = () => this.props.onEditUser(this.props.user.id, {
+      firstName: this.state.firstName, 
+      lastName: this.state.lastName,
+      birthdate: this.state.birthdate,
+      height: this.state.height,
+      weight: this.state.weight,
+      gender: this.state.gender
+    })
+    userFormAlerts(
+      this.state.firstName, 
+      this.state.lastName,
+      this.state.birthdate,
+      this.state.height,
+      this.state.weight,
+      this.state.gender,
+      onEdit
+    )
   };
 
   onCancel = () => {

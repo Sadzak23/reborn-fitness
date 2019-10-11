@@ -80,10 +80,6 @@ export class Workout5x5 extends React.Component {
     })
   };
 
-  onCancel = () => {
-    history.goBack();
-  };
-
   userData = this.props.user.workouts.strongLifts
 
   render() {
@@ -194,7 +190,7 @@ export class Workout5x5 extends React.Component {
               <FontAwesomeIcon icon={faSave} /> Save initial data
           </button>
           }
-          <button className="btn-cancel form-cancel" onClick={this.onCancel}>
+          <button className="btn-cancel form-cancel" onClick={() => history.goBack()}>
             <FontAwesomeIcon icon={faBan} /> Cancel
           </button>
         </div>

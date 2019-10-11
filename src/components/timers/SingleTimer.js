@@ -1,33 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import swal from 'sweetalert';
+import { onRemoveAlert } from '../Alerts'
 import { startRemoveTimer } from '../../actions/timers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer }) => {
-
   // Delete timer confirmation
-  const onConfirm = () => swal({
-    title: "Are you sure?!",
-    text: "You can't bring it back!",
-    icon: "error",
-    buttons: {
-      cancel: "Cancel!",
-      delete: {
-        text: "Yes, delete it!",
-        value: "delete",
-        className: "btn-alert-delete"
-      },
-    },
-  })
-    .then((value) =>
-      value === "delete" ?
-        swal("Deleted!", "Your timer has been deleted!", "success") &&
-        startRemoveTimer(id) : swal("Your timer is safe!", "", "success")
-    );
-  //
+  const onRemoveTimer = () => onRemoveAlert(startRemoveTimer, id, name);
+  
   return (
     <div className="list-item">
       <div className="list-int list-userName">
@@ -43,7 +25,7 @@ export const SingleTimer = ({ id, name, warmupTime, intervals, startRemoveTimer 
             <FontAwesomeIcon icon={faPen} style={{ color: '#fff' }} />
           </button>
         </Link>
-        <button className="btn-remove-m" onClick={onConfirm}>
+        <button className="btn-remove-m" onClick={onRemoveTimer}>
           <FontAwesomeIcon icon={faTimes} style={{ color: '#fff' }} />
         </button>
       </div>
