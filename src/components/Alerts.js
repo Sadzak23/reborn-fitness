@@ -36,7 +36,14 @@ export const onRemoveAlert = (startRemove, id, name) => Swal.fire({
   showCancelButton: true
 })
   .then((result) => result.value &&
-    Swal.fire("Deleted!", `${name} has been deleted!`, "success") &&
+    Swal.fire({
+      type: 'success',
+      title: `${name} has been deleted!`,
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000
+    }) &&
     startRemove(id)
   );
 
