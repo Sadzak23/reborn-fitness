@@ -2,23 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { history } from '../../routers/AppRouter';
+import { faTimes, faSave, faBan } from '@fortawesome/free-solid-svg-icons';
+import { onExit, done5x5 } from '../Alerts'
 import { formatSeconds } from '../Format';
 import { Exercise5x5 } from './Exercise5x5';
+import { history } from '../../routers/AppRouter';
+import { startEditUser } from '../../actions/users';
 
 export class Workout5x5 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: {
-        squat: this.props.user.workouts.strongLifts.squat,
-        benchPress: this.props.user.workouts.strongLifts.benchPress,
-        barbellRow: this.props.user.workouts.strongLifts.barbellRow,
-        overheadPress: this.props.user.workouts.strongLifts.overheadPress,
-        deadlift: this.props.user.workouts.strongLifts.deadlift,
-        bodyWeight: this.props.user.weight
-      },
       workout: {
         type: this.props.user.workouts.strongLifts.trainingType,
         exercise1: {
@@ -135,7 +129,7 @@ export class Workout5x5 extends React.Component {
       });
     };
   };
-  
+
   exerciseDone = (exerciseNo, setNo) => {
     if (this.state.workout[exerciseNo].set1 === 5 &&
       this.state.workout[exerciseNo].set2 === 5 &&
@@ -182,34 +176,73 @@ export class Workout5x5 extends React.Component {
     }
   };
 
-  onExit = () => swal({
-    title: "You're not a quitter!",
-    text: "Are you?!",
-    icon: "warning",
-    buttons: {
-      cancel: "Cancel",
-      exit: {
-        text: "Yes, I quit!",
-        value: "exit",
-        className: "btn-alert-exit"
-      },
-    },
-  }).then((value) =>
-    value === "exit" && history.push("/")
-  );
+  onWorkoutSave = () => {
+    const now = new Date().valueOf()
+    const history = this.props.user.workouts.history ? this.props.user.workouts.history : {}
+    const dataA = {
+      exercise1: this.state.workout.exercise1.done,
+      exercise2: this.state.workout.exercise2.done,
+      exercise3: this.state.workout.exercise3.done,
+      squat: this.props.user.workouts.strongLifts.squat,
+      benchPress: this.props.user.workouts.strongLifts.benchPress,
+      barbellRow: this.props.user.workouts.strongLifts.barbellRow
+    };
+    const dataB = {
+      exercise1: this.state.workout.exercise1.done,
+      exercise2: this.state.workout.exercise2.done,
+      exercise3: this.state.workout.exercise3.done,
+      squat: this.props.user.workouts.strongLifts.squat,
+      overheadPress: this.props.user.workouts.strongLifts.overheadPress,
+      deadlift: this.props.user.workouts.strongLifts.deadlift
+    };
+
+    if (this.state.workout.type === 'a') {      
+      this.props.startEditUser(this.props.user.id, {
+        workouts: {
+          ...this.props.user.workouts,
+          history: {
+            ...this.props.user.workouts.history,
+            [now]: dataA
+          },
+          strongLifts: {            
+            ...this.props.user.workouts.strongLifts,
+            squat: dataA.exercise1 === "5x5" ? this.props.user.workouts.strongLifts.squat + 2.5 :this.props.user.workouts.strongLifts.squat,
+            benchPress: dataA.exercise2 === "5x5" ? this.props.user.workouts.strongLifts.benchPress + 2.5 :this.props.user.workouts.strongLifts.benchPress,
+            barbellRow: dataA.exercise3 === "5x5" ? this.props.user.workouts.strongLifts.barbellRow + 2.5 :this.props.user.workouts.strongLifts.barbellRow,
+            trainingType: "b"
+          }
+        }
+      });
+    } else {
+      this.props.startEditUser(this.props.user.id, {
+        workouts: {
+          ...this.props.user.workouts,
+          history: {            
+            ...this.props.user.workouts.history,
+            [now]: dataB
+          },
+          strongLifts: {            
+            ...this.props.user.workouts.strongLifts,
+            squat: dataB.exercise1 === "5x5" ? this.props.user.workouts.strongLifts.squat + 2.5 :this.props.user.workouts.strongLifts.squat,
+            overheadPress: dataB.exercise2 === "5x5" ? this.props.user.workouts.strongLifts.overheadPress + 2.5 :this.props.user.workouts.strongLifts.overheadPress,
+            deadlift: dataB.exercise3 === "5x5" ? this.props.user.workouts.strongLifts.deadlift + 5 :this.props.user.workouts.strongLifts.deadlift,
+            trainingType: "a"
+          }
+        }
+      });
+    };
+  };
+
+  onDone = () => done5x5(this.state.workout, this.onWorkoutSave)
 
   render() {
     const exercise2Name = this.state.workout.type === 'a' ? "Bench Press" : "Overhead Press";
-    const exercise2Weight = this.state.workout.type === 'a' ? this.state.userData.benchPress : this.state.userData.overheadPress;
+    const exercise2Weight = this.state.workout.type === 'a' ? this.props.user.workouts.strongLifts.benchPress : this.props.user.workouts.strongLifts.overheadPress;
     const exercise3Name = this.state.workout.type === 'a' ? "Barbell Row" : "Deadlift";
-    const exercise3Weight = this.state.workout.type === 'a' ? this.state.userData.barbellRow : this.state.userData.deadlift;
+    const exercise3Weight = this.state.workout.type === 'a' ? this.props.user.workouts.strongLifts.barbellRow : this.props.user.workouts.strongLifts.deadlift;
 
     return (
       <div className="content-container">
-        <button className="btn-x" onClick={this.onExit}>
-          <FontAwesomeIcon icon={faTimes} className="timer-x" />
-        </button>
-
         <div className="header5x5 show-desktop">
           <Link to={`/edit-data5x5/${this.props.user.id}`} className="workout-bodyweight">
             <h2>Change Weights</h2>
@@ -218,17 +251,16 @@ export class Workout5x5 extends React.Component {
             <h1>Rest: {formatSeconds(Math.ceil(this.state.miliseconds / 1000))}</h1>
           </div>
           <div className="workout-bodyweight">
-            <h2>Body Weight: {this.state.userData.bodyWeight}Kg</h2>
+            <h2>Body Weight: {this.props.user.weight}Kg</h2>
           </div>
         </div>
-
 
         <div className="header5x5 show-mobile">
           <Link to={`/edit-data5x5/${this.props.user.id}`} className="workout-weights">
             <h3>Change Weights</h3>
           </Link>
           <div className="workout-bodyweight">
-            <h3>Body Weight: {this.state.userData.bodyWeight}Kg</h3>
+            <h3>Body Weight: {this.props.user.weight}Kg</h3>
           </div>
         </div>
         <div className="timer5x5 show-mobile">
@@ -239,7 +271,7 @@ export class Workout5x5 extends React.Component {
           {/* Exercise 1 */}
           <Exercise5x5
             exerciseName="Squat"
-            exerciseWeight={this.state.userData.squat}
+            exerciseWeight={this.props.user.workouts.strongLifts.squat}
             exerciseNo="exercise1"
             exerciseSets={this.state.workout.exercise1}
             onRepCount={this.onRepCount}
@@ -261,10 +293,21 @@ export class Workout5x5 extends React.Component {
             onRepCount={this.onRepCount}
           />
         </div>
+        <div className="form-submit">
+          <button className="btn-save" onClick={this.onDone}>
+            <FontAwesomeIcon icon={faSave} /> Save workout
+          </button>
+          <button className="btn-cancel form-cancel" onClick={onExit}>
+            <FontAwesomeIcon icon={faBan} /> Cancel
+          </button>
+        </div>
       </div>
     )
   }
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  startEditUser: (id, updates) => dispatch(startEditUser(id, updates))
+});
 
-export default connect(undefined)(Workout5x5);
+export default connect(undefined, mapDispatchToProps)(Workout5x5);

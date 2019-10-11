@@ -42,10 +42,9 @@ export const onRemoveAlert = (startRemove, id, name) => Swal.fire({
 
 // 5x5 Workout done
 export const done5x5 = (workout, onSave) => {
-  // workout.exercise1.done !== "" &&
-  //   workout.exercise3.done !== "" &&
-  //   workout.exercise3.done !== "" 
-  true ?
+  workout.exercise1.done !== "" &&
+  workout.exercise3.done !== "" &&
+  workout.exercise3.done !== "" ?
     Swal.fire({
       title: "Well done!",
       text: "Would you like to save your workout?!",
@@ -60,18 +59,17 @@ export const done5x5 = (workout, onSave) => {
           type: 'success',
           title: 'Workout Saved!',
           toast: true,
-          position: 'top-end',
+          position: 'top',
           showConfirmButton: false,
-          timer: 1500
-        }).then(() => {
-//          history.goBack()
+          timer: 2000
         })
+          history.goBack()
       } else {
         history.goBack()
       }
     })
     :
-    Swal.fire("Your workout is not yet complete!");
+    Swal.fire("Not yet", "Your workout is not complete!", "info");
 };
 
 //Exit workout confirmation
