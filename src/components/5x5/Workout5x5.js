@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faSave, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faSave, faBan } from '@fortawesome/free-solid-svg-icons';
 import { onExit, done5x5 } from '../Alerts'
 import { formatSeconds } from '../Format';
 import { Exercise5x5 } from './Exercise5x5';
-import { history } from '../../routers/AppRouter';
 import { startEditUser } from '../../actions/users';
 
 export class Workout5x5 extends React.Component {
@@ -177,8 +176,6 @@ export class Workout5x5 extends React.Component {
   };
 
   onWorkoutSave = () => {
-    const now = new Date().valueOf()
-    const history = this.props.user.workouts.history ? this.props.user.workouts.history : {}
     const dataA = {
       exercise1: this.state.workout.exercise1.done,
       exercise2: this.state.workout.exercise2.done,
@@ -202,7 +199,7 @@ export class Workout5x5 extends React.Component {
           ...this.props.user.workouts,
           history: {
             ...this.props.user.workouts.history,
-            [now]: dataA
+            [Date.now()]: dataA
           },
           strongLifts: {            
             ...this.props.user.workouts.strongLifts,
@@ -219,7 +216,7 @@ export class Workout5x5 extends React.Component {
           ...this.props.user.workouts,
           history: {            
             ...this.props.user.workouts.history,
-            [now]: dataB
+            [Date.now()]: dataB
           },
           strongLifts: {            
             ...this.props.user.workouts.strongLifts,
@@ -298,7 +295,7 @@ export class Workout5x5 extends React.Component {
             <FontAwesomeIcon icon={faSave} /> Save workout
           </button>
           <button className="btn-cancel form-cancel" onClick={onExit}>
-            <FontAwesomeIcon icon={faBan} /> Cancel
+            <FontAwesomeIcon icon={faBan} /> Quit
           </button>
         </div>
       </div>
