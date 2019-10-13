@@ -25,7 +25,10 @@ export default class Dashboard5x5 extends React.Component {
         <Link className="list-dashboard" to="/user-select-5x5" onMouseDown={(e) => { e.preventDefault() }}>
           <FontAwesomeIcon icon={faUsers} /> Change User
         </Link>
-        <Link className="list-dashboard" to="/history5x5" onMouseDown={(e) => { e.preventDefault() }}>
+        <Link className="list-dashboard" to={{
+          pathname: '/history5x5',
+          state: { id: this.props.location.state.id }
+        }} onMouseDown={(e) => { e.preventDefault() }}>
           <FontAwesomeIcon icon={faAddressBook} /> View History
         </Link>
       </div>
