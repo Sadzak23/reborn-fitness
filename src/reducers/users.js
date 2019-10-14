@@ -18,7 +18,7 @@ export default (state = [], action) => {
       });
     case 'SET_USERS':
       return action.users
-    case 'SET/EDIT_WEIGHTS_5X5':
+    case 'SET/EDIT/SAVE_WORKOUT_5X5':
       return state.map((user) => {
         if (user.id === action.id) {
           return {
@@ -27,7 +27,11 @@ export default (state = [], action) => {
               ...user.workouts,
               strongLifts: {
                 ...user.workouts.strongLifts,
-                ...action.data
+                ...action.data.strongLifts
+              },
+              history: {
+                ...user.workouts.history,
+                ...action.data.history
               }
             }
           }

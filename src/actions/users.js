@@ -79,9 +79,9 @@ export const startSetUsers = () => {
 
 //////////////////////////////// Strong Lifts ///////////////////////////////////
 
-// SET/EDIT_WEIGHTS_5X5
+// SET/EDIT/SAVE_WORKOUT_5X5
 export const setEditData5x5 = (id, data) => ({
-  type: 'SET/EDIT_WEIGHTS_5X5',
+  type: 'SET/EDIT/SAVE_WORKOUT_5X5',
   id,
   data
 });
@@ -89,7 +89,7 @@ export const setEditData5x5 = (id, data) => ({
 export const startSetEditData5x5 = (userId, data) => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
-    return database.ref(`admins/${uid}/users/${userId}/workouts/strongLifts`).update({
+    return database.ref(`admins/${uid}/users/${userId}/workouts`).update({
       ...data
     })
       .then(() => {
