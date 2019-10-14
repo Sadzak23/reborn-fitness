@@ -20,12 +20,12 @@ export const ExerciseChart = ({ data, type }) => {
         height={300}
         data={data}
         margin={{
-          top: 20, right: 30, left: 0, bottom: 0,
+          top: 20, right: 10, left: 10, bottom: 10,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="id" padding={{ right: 50 }} />
-        <YAxis />
+        <XAxis dataKey="id" padding={{ right: 50 }} tickMargin={12} />
+        <YAxis domain={['dataMin -5', 'dataMax']} unit="kg" padding={{ top: 20 }} tickMargin={10} />
         <Tooltip />
         <Legend verticalAlign="top" height={36} />
         <Line connectNulls type="monotone" dataKey="Barbell Row" stroke="#ed1515" fill="#ed1515" />
@@ -42,12 +42,12 @@ export const ExerciseChart = ({ data, type }) => {
         height={300}
         data={data}
         margin={{
-          top: 20, right: 30, left: 0, bottom: 0,
+          top: 20, right: 10, left: 10, bottom: 10,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="id" padding={{ right: 50 }} />
-        <YAxis />
+        <XAxis dataKey="id" padding={{ right: 50 }} tickMargin={12} />
+        <YAxis domain={['dataMin -5', 'dataMax']} unit="kg" padding={{ top: 20 }} tickMargin={10} />
         <Tooltip />
         <Area connectNulls type="monotone" dataKey={singleData[type].key} stroke={singleData[type].color} fill={singleData[type].color} />
       </AreaChart>
@@ -55,20 +55,22 @@ export const ExerciseChart = ({ data, type }) => {
   };
 };
 
-export const RadarWeightsChart = ({ data, data2 }) => {
-  const currentWeights = [
-    { exercise: "Barbell Row", value: data.barbellRow - data2.barbellRow },
-    { exercise: "Bench Press", value: data.benchPress - data2.benchPress },
-    { exercise: "Deadlift", value: data.deadlift - data2.deadlift },
-    { exercise: "Overhead Press", value: data.overheadPress - data2.overheadPress },
-    { exercise: "Squat", value: data.squat - data2.squat },
+export const RadarWeightsChart = ({ data }) => {
+  const progress = [
+    { exercise: "Barbell Row", start: data.start["Barbell Row"], now: data.now["Barbell Row"] },
+    { exercise: "Bench Press", start: data.start["Bench Press"], now: data.now["Bench Press"] },
+    { exercise: "Deadlift", start: data.start.Deadlift, now: data.now.Deadlift },
+    { exercise: "Overhead Press", start: data.start["Overhead Press"], now: data.now["Overhead Press"] },
+    { exercise: "Squat", start: data.start.Squat, now: data.now.Squat },
   ];
   return (
-    <RadarChart cx={300} cy={250} outerRadius={150} width={500} height={500} data={currentWeights}>
+    <RadarChart className="radar5x5" outerRadius={150} width={500} height={500} data={progress}>
       <PolarGrid />
       <PolarAngleAxis dataKey="exercise" />
       <PolarRadiusAxis />
-      <Radar name="Mike" dataKey="value" stroke="#34f7aa" fill="#34f7aa" fillOpacity={0.6} />
+      <Legend iconType="star" verticalAlign="top" className="radar5x5" />
+      <Radar name="Start" dataKey="start" stroke="#ed1515" fill="#ed1515" fillOpacity={0.3} />
+      <Radar name="Now" dataKey="now" stroke="#34f7aa" fill="#34f7aa" fillOpacity={0.3} />
     </RadarChart>
   );
 };
