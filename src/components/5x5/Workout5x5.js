@@ -6,7 +6,7 @@ import { faSave, faBan } from '@fortawesome/free-solid-svg-icons';
 import { onExit, done5x5 } from '../Alerts'
 import { formatSeconds } from '../Format';
 import { Exercise5x5 } from './Exercise5x5';
-import { startEditUser } from '../../actions/users';
+import { startSetEditData5x5 } from '../../actions/users';
 
 export class Workout5x5 extends React.Component {
   constructor(props) {
@@ -45,10 +45,10 @@ export class Workout5x5 extends React.Component {
 
     }
   };
+  
+  ///////////////// Timer //////////////////////////////////////////
   beep = new Audio('../assets/beep.mp3');
   longBeep = new Audio('../assets/beep0.mp3');
-
-  ///////////////// Timer //////////////////////////////////////////
 
   tick = () => {
     this.setState({ miliseconds: this.state.miliseconds -= 100 })
@@ -180,51 +180,45 @@ export class Workout5x5 extends React.Component {
       exercise1: this.state.workout.exercise1.done,
       exercise2: this.state.workout.exercise2.done,
       exercise3: this.state.workout.exercise3.done,
-      squat: this.props.user.workouts.strongLifts.squat,
-      benchPress: this.props.user.workouts.strongLifts.benchPress,
-      barbellRow: this.props.user.workouts.strongLifts.barbellRow
+      Squat: this.props.user.workouts.strongLifts.Squat,
+      "Bench Press": this.props.user.workouts.strongLifts["Bench Press"],
+      "Barbell Row": this.props.user.workouts.strongLifts["Barbell Row"]
     };
     const dataB = {
       exercise1: this.state.workout.exercise1.done,
       exercise2: this.state.workout.exercise2.done,
       exercise3: this.state.workout.exercise3.done,
-      squat: this.props.user.workouts.strongLifts.squat,
-      overheadPress: this.props.user.workouts.strongLifts.overheadPress,
-      deadlift: this.props.user.workouts.strongLifts.deadlift
+      Squat: this.props.user.workouts.strongLifts.Squat,
+      "Overhead Press": this.props.user.workouts.strongLifts["Overhead Press"],
+      Deadlift: this.props.user.workouts.strongLifts.Deadlift
     };
 
-    if (this.state.workout.type === 'a') {      
-      this.props.startEditUser(this.props.user.id, {
-        workouts: {
-          ...this.props.user.workouts,
-          history: {
-            ...this.props.user.workouts.history,
-            [Date.now()]: dataA
-          },
-          strongLifts: {            
-            ...this.props.user.workouts.strongLifts,
-            squat: dataA.exercise1 === "5x5" ? this.props.user.workouts.strongLifts.squat + 2.5 :this.props.user.workouts.strongLifts.squat,
-            benchPress: dataA.exercise2 === "5x5" ? this.props.user.workouts.strongLifts.benchPress + 2.5 :this.props.user.workouts.strongLifts.benchPress,
-            barbellRow: dataA.exercise3 === "5x5" ? this.props.user.workouts.strongLifts.barbellRow + 2.5 :this.props.user.workouts.strongLifts.barbellRow,
-            trainingType: "b"
-          }
+    if (this.state.workout.type === 'a') {
+      this.props.startSetEditData5x5(this.props.user.id, {
+        history: {
+          ...this.props.user.workouts.history,
+          [Date.now()]: dataA
+        },
+        strongLifts: {
+          ...this.props.user.workouts.strongLifts,
+          Squat: dataA.exercise1 === "5x5" ? this.props.user.workouts.strongLifts.Squat + 2.5 : this.props.user.workouts.strongLifts.Squat,
+          "Bench Press": dataA.exercise2 === "5x5" ? this.props.user.workouts.strongLifts["Bench Press"] + 2.5 : this.props.user.workouts.strongLifts["Bench Press"],
+          "Barbell Row": dataA.exercise3 === "5x5" ? this.props.user.workouts.strongLifts["Barbell Row"] + 2.5 : this.props.user.workouts.strongLifts["Barbell Row"],
+          trainingType: "b"
         }
       });
     } else {
-      this.props.startEditUser(this.props.user.id, {
-        workouts: {
-          ...this.props.user.workouts,
-          history: {            
-            ...this.props.user.workouts.history,
-            [Date.now()]: dataB
-          },
-          strongLifts: {            
-            ...this.props.user.workouts.strongLifts,
-            squat: dataB.exercise1 === "5x5" ? this.props.user.workouts.strongLifts.squat + 2.5 :this.props.user.workouts.strongLifts.squat,
-            overheadPress: dataB.exercise2 === "5x5" ? this.props.user.workouts.strongLifts.overheadPress + 2.5 :this.props.user.workouts.strongLifts.overheadPress,
-            deadlift: dataB.exercise3 === "5x5" ? this.props.user.workouts.strongLifts.deadlift + 5 :this.props.user.workouts.strongLifts.deadlift,
-            trainingType: "a"
-          }
+      this.props.startSetEditData5x5(this.props.user.id, {
+        history: {
+          ...this.props.user.workouts.history,
+          [Date.now()]: dataB
+        },
+        strongLifts: {
+          ...this.props.user.workouts.strongLifts,
+          Squat: dataB.exercise1 === "5x5" ? this.props.user.workouts.strongLifts.Squat + 2.5 : this.props.user.workouts.strongLifts.Squat,
+          "Overhead Press": dataB.exercise2 === "5x5" ? this.props.user.workouts.strongLifts["Overhead Press"] + 2.5 : this.props.user.workouts.strongLifts["Overhead Press"],
+          Deadlift: dataB.exercise3 === "5x5" ? this.props.user.workouts.strongLifts.Deadlift + 5 : this.props.user.workouts.strongLifts.Deadlift,
+          trainingType: "a"
         }
       });
     };
@@ -234,9 +228,9 @@ export class Workout5x5 extends React.Component {
 
   render() {
     const exercise2Name = this.state.workout.type === 'a' ? "Bench Press" : "Overhead Press";
-    const exercise2Weight = this.state.workout.type === 'a' ? this.props.user.workouts.strongLifts.benchPress : this.props.user.workouts.strongLifts.overheadPress;
+    const exercise2Weight = this.state.workout.type === 'a' ? this.props.user.workouts.strongLifts["Bench Press"] : this.props.user.workouts.strongLifts["Overhead Press"];
     const exercise3Name = this.state.workout.type === 'a' ? "Barbell Row" : "Deadlift";
-    const exercise3Weight = this.state.workout.type === 'a' ? this.props.user.workouts.strongLifts.barbellRow : this.props.user.workouts.strongLifts.deadlift;
+    const exercise3Weight = this.state.workout.type === 'a' ? this.props.user.workouts.strongLifts["Barbell Row"] : this.props.user.workouts.strongLifts.Deadlift;
 
     return (
       <div className="content-container">
@@ -268,7 +262,7 @@ export class Workout5x5 extends React.Component {
           {/* Exercise 1 */}
           <Exercise5x5
             exerciseName="Squat"
-            exerciseWeight={this.props.user.workouts.strongLifts.squat}
+            exerciseWeight={this.props.user.workouts.strongLifts.Squat}
             exerciseNo="exercise1"
             exerciseSets={this.state.workout.exercise1}
             onRepCount={this.onRepCount}
@@ -304,7 +298,7 @@ export class Workout5x5 extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  startEditUser: (id, updates) => dispatch(startEditUser(id, updates))
+  startSetEditData5x5: (id, updates) => dispatch(startSetEditData5x5(id, updates))
 });
 
 export default connect(undefined, mapDispatchToProps)(Workout5x5);

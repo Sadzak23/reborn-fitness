@@ -9,11 +9,11 @@ export class Workout5x5 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squat: this.userData ? this.userData.squat : '',
-      benchPress: this.userData ? this.userData.benchPress : '',
-      barbellRow: this.userData ? this.userData.barbellRow : '',
-      overheadPress: this.userData ? this.userData.overheadPress : '',
-      deadlift: this.userData ? this.userData.deadlift : '',
+      squat: this.userData ? this.userData.Squat : '',
+      benchPress: this.userData ? this.userData["Bench Press"] : '',
+      barbellRow: this.userData ? this.userData["Barbell Row"] : '',
+      overheadPress: this.userData ? this.userData["Overhead Press"] : '',
+      deadlift: this.userData ? this.userData.Deadlift : '',
     }
   };
 
@@ -52,13 +52,22 @@ export class Workout5x5 extends React.Component {
   };
 
   onSave = () => {
+    const exercises = {
+      Squat: this.state.squat ? Math.round(parseFloat(this.state.squat * 0.75 / 2.5)) * 2.5 : 20,
+      "Bench Press": this.state.benchPress ? Math.round(parseFloat(this.state.benchPress * 0.3)) * 2.5 : 20,
+      "Barbell Row": this.state.barbellRow ? Math.round(parseFloat(this.state.barbellRow * 0.3)) * 2.5 : 30,
+      "Overhead Press": this.state.overheadPress ? Math.round(parseFloat(this.state.overheadPress * 0.3)) * 2.5 : 20,
+      Deadlift: this.state.deadlift ? Math.round(parseFloat(this.state.deadlift * 0.3)) * 2.5 : 40
+    }
     const data = {
-      trainingType: "a",
-      squat: this.state.squat ? Math.round(parseFloat(this.state.squat * 0.75 / 2.5)) * 2.5 : 20,
-      benchPress: this.state.benchPress ? Math.round(parseFloat(this.state.benchPress * 0.3)) * 2.5 : 20,
-      barbellRow: this.state.barbellRow ? Math.round(parseFloat(this.state.barbellRow * 0.3)) * 2.5 : 30,
-      overheadPress: this.state.overheadPress ? Math.round(parseFloat(this.state.overheadPress * 0.3)) * 2.5 : 20,
-      deadlift: this.state.deadlift ? Math.round(parseFloat(this.state.deadlift * 0.3)) * 2.5 : 40
+      strongLifts: {
+        trainingType: "a",
+        ...exercises
+      },
+      history: {
+        ...this.props.user.workouts.history,
+        [Date.now()]: exercises
+      }
     };
     const userId = this.props.user.id
     this.props.startSetEditData5x5(userId, data)
@@ -66,11 +75,13 @@ export class Workout5x5 extends React.Component {
 
   onEdit = () => {
     const data = {
-      squat: Math.floor(this.state.squat / 2.5) * 2.5,
-      benchPress: Math.floor(this.state.benchPress / 2.5) * 2.5,
-      barbellRow: Math.floor(this.state.barbellRow / 2.5) * 2.5,
-      overheadPress: Math.floor(this.state.overheadPress / 2.5) * 2.5,
-      deadlift: Math.floor(this.state.deadlift / 2.5) * 2.5
+      strongLifts: {
+        Squat: Math.floor(this.state.squat / 2.5) * 2.5,
+        "Bench Press": Math.floor(this.state.benchPress / 2.5) * 2.5,
+        "Barbell Row": Math.floor(this.state.barbellRow / 2.5) * 2.5,
+        "Overhead Press": Math.floor(this.state.overheadPress / 2.5) * 2.5,
+        Deadlift: Math.floor(this.state.deadlift / 2.5) * 2.5
+      }
     };
     const userId = this.props.user.id;
     new Promise((resolve) => {

@@ -57,6 +57,11 @@
   align-items: center;
 }
 
+.flex-self-center {
+  display: flex;
+  margin: auto;
+}
+
 .flex-between {
   display: flex;
   justify-content: space-between;
