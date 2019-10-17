@@ -24,6 +24,9 @@ export class History5x5 extends React.Component {
   };
 
   render() {
+    // Rerender component on screen resize
+    window.onresize = () => this.forceUpdate()
+    
     if (this.props.user.workouts.strongLifts) {
       const getWorkouts = () => {
         const history = this.props.user.workouts.history;
