@@ -9,7 +9,7 @@ export class History5x5 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartViewType: "View all"
+      chartViewType: "View All"
     };
   };
 
@@ -23,10 +23,19 @@ export class History5x5 extends React.Component {
     this.setState({ chartViewType: e.target.value })
   };
 
+  chartColors = [
+    { val: "View All", color: "#a0a0a0" },
+    { val: "Barbell Row", color: "#ed1515" },
+    { val: "Bench Press", color: "#3085d6" },
+    { val: "Deadlift", color: "#845931" },
+    { val: "Overhead Press", color: "#ff7f50" },
+    { val: "Squat", color: "#34f7aa" }
+  ]
+
   render() {
     // Rerender component on screen resize
-    window.onresize = () => this.forceUpdate()
-    
+    window.onresize = () => this.forceUpdate();
+
     if (this.props.user.workouts.strongLifts) {
       const getWorkouts = () => {
         const history = this.props.user.workouts.history;
@@ -50,24 +59,24 @@ export class History5x5 extends React.Component {
       return (
         <div className="content-container">
           <FontAwesomeIcon icon={faAddressBook} size="7x" className="flex-self-center" />
-          <h2 className="text-center">
+          <h2 className="history-header">
             {this.props.user.firstName}'s Strong Lift History
           </h2>
-          <div id="select-view">
-            <select
-              onChange={this.onChartViewTypeChange}
-              value={this.state.chartViewType}
-            >
-              <option value="View all">View all</option>
-              <option value="Barbell Row">Barbell Row</option>
-              <option value="Bench Press">Bench Press</option>
-              <option value="Squat">Squat</option>
-              <option value="Deadlift">Deadlift</option>
-              <option value="Overhead Press">Overhead Press</option>
-            </select>
+          {/* Legend */}
+          <div className="legend">
+            {this.chartColors.map(e =>
+              <button
+                style={{ background: e.color, }}
+                onClick={() => this.setState({ chartViewType: e.val })}
+                key={e.val}
+              >{e.val}
+              </button>
+            )}
           </div>
-          <ExerciseChart data={getWorkouts()} type={this.state.chartViewType} />
+          {/* Charts */}
+          <ExerciseChart data={getWorkouts()} type={this.state.chartViewType} lines={this.chartColors} />
           <RadarWeightsChart data={progress} />
+          {/* Back button */}
           <button className="btn-save" onClick={() => history.goBack()}>
             <FontAwesomeIcon icon={faHandPointLeft} /> Back
           </button>

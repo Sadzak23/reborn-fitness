@@ -1,3 +1,23 @@
+.history-header {
+  text-align: center;
+  margin-bottom: $s-size-em;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0.3em;
+  button {
+    color: #fff;
+    border-radius: 20px;
+    font-size: 0.8em;
+    padding: 0.5em;
+  }
+  @media (max-width: $mobile-breakpoint) {
+    grid: 1fr 1fr / 1fr 1fr 1fr;
+  }
+}
+
 .radar5x5 {
   display: flex;
   margin: auto;

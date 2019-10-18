@@ -4,17 +4,12 @@ import {
   AreaChart, Area, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
 } from "recharts";
 
-export const ExerciseChart = ({ data, type }) => {
-  const singleData = {
-    "Barbell Row": { key: "Barbell Row", color: "#ed1515" },
-    "Bench Press": { key: "Bench Press", color: "#275eff" },
-    Deadlift: { key: "Deadlift", color: "#000" },
-    "Overhead Press": { key: "Overhead Press", color: "#ff7f50" },
-    Squat: { key: "Squat", color: "#34f7aa" },
-  }
+export const ExerciseChart = ({ data, type, lines }) => {
+  
   const width = window.innerWidth > 950 ? 900 : window.innerWidth - 75
+  // const width = window.screen.orientation.type === "portrait-primary" || window.screen.orientation.type === "portrait-secondary" ? screen.width - 75 : window.innerWidth > 950 ? 900 : screen.width - 75
 
-  if (type === "View all") {
+  if (type === "View All") {
     return (
       <LineChart
         className="line-chart"
@@ -29,12 +24,10 @@ export const ExerciseChart = ({ data, type }) => {
         <XAxis dataKey="id" tickMargin={12} />
         <YAxis domain={['dataMin -5', 'dataMax']} unit="kg" padding={{ top: 20 }} tickMargin={10} />
         <Tooltip />
-        <Legend verticalAlign="top" />
-        <Line connectNulls type="monotone" dataKey="Barbell Row" stroke="#ed1515" fill="#ed1515" />
-        <Line connectNulls type="monotone" dataKey="Bench Press" stroke="#275eff" fill="#275eff" />
-        <Line connectNulls type="monotone" dataKey="Deadlift" stroke="#000" fill="#000" />
-        <Line connectNulls type="monotone" dataKey="Overhead Press" stroke="#ff7f50" fill="#ff7f50" />
-        <Line connectNulls type="monotone" dataKey="Squat" stroke="#34f7aa" fill="#34f7aa" />
+        {lines.map(e =>
+          e.val !== "View All" &&
+          <Line connectNulls type="monotone" dataKey={e.val} stroke={e.color} fill={e.color} key={`line-${e.color}`} />
+        )}
       </LineChart>
     )
   } else {
@@ -51,7 +44,10 @@ export const ExerciseChart = ({ data, type }) => {
         <XAxis dataKey="id" tickMargin={12} />
         <YAxis domain={['dataMin -5', 'dataMax']} unit="kg" padding={{ top: 20 }} tickMargin={10} />
         <Tooltip />
-        <Area connectNulls type="monotone" dataKey={singleData[type].key} stroke={singleData[type].color} fill={singleData[type].color} />
+        {lines.map(e =>
+          e.val === type &&          
+          <Area connectNulls type="monotone" dataKey={e.val} stroke={e.color} fill={e.color} key={`line-${e.color}`} />
+        )}
       </AreaChart>
     );
   };
@@ -65,11 +61,13 @@ export const RadarWeightsChart = ({ data }) => {
     { exercise: "Overhead Press", start: data.start["Overhead Press"], now: data.now["Overhead Press"] },
     { exercise: "Squat", start: data.start.Squat, now: data.now.Squat },
   ];
-  const height = window.innerWidth < 400 ? 230 : window.innerWidth > 700 ? 400 : 270
-  const width = window.innerWidth < 400 ? 300 : window.innerWidth > 700 ? 500 : 400
-  const outerRadius = window.innerWidth < 400 ? 80 : window.innerWidth > 700 ? 150 : 100
   return (
-    <RadarChart className="radar5x5" outerRadius={outerRadius} width={width} height={height} data={progress}>
+    <RadarChart 
+    className="radar5x5"
+    outerRadius={window.innerWidth < 400 ? 75 : window.innerWidth > 700 ? 150 : 100}
+    width={window.innerWidth < 400 ? 300 : window.innerWidth > 700 ? 500 : 400}
+    height={window.innerWidth < 400 ? 230 : window.innerWidth > 700 ? 400 : 270}
+    data={progress}>
       <PolarGrid />
       <PolarAngleAxis dataKey="exercise" />
       <PolarRadiusAxis />
