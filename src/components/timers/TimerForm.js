@@ -7,6 +7,7 @@ import { colorMap } from '../ColorMap';
 import { timerFormAlerts } from '../Alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt, faPlusCircle, faSave, faClipboardList, faBan } from "@fortawesome/free-solid-svg-icons";
+import { add0 } from "../Format";
 
 export default class TimerForm extends React.Component {
   constructor(props) {
@@ -28,15 +29,13 @@ export default class TimerForm extends React.Component {
   };
   onNameChange = (e) => {
     const name = e.target.value;
-    this.setState({
-      name
-    });
+    this.setState({ name });
   };
   onWarmupChange = (e) => {
-    const warmupTime = parseInt(e.target.value);
-    this.setState({
-      warmupTime
-    });
+    const warmupTime = e.target.value;
+    if (!warmupTime || warmupTime.match(/^\d{1,3}$/)) {
+      this.setState({ warmupTime });
+    }
   };
 
   // Current Interval settings
@@ -51,8 +50,8 @@ export default class TimerForm extends React.Component {
     };
   };
   onIntervalSecChange = (e) => {
-    const currentIntervalSec = e.target.value;
-    if (!currentIntervalSec || currentIntervalSec.match(/^\d{1,3}$/)) {
+    const currentIntervalSec = add0(e.target.value);
+    if (currentIntervalSec.match(/^[0-5]?[0-9]?$/)) {
       this.setState({ currentIntervalSec });
     };
   };
@@ -161,7 +160,7 @@ export default class TimerForm extends React.Component {
     else {
       this.props.onAddTimer({
         name: this.state.name,
-        warmupTime: this.state.warmupTime,
+        warmupTime: this.state.warmupTime ? parseInt(this.this.state.warmupTime) : 0,
         intervals: this.state.intervals
       });
     }
@@ -202,19 +201,23 @@ export default class TimerForm extends React.Component {
           />
           <div className="flex">
             <label className="text-input">
-              Warmup Time: <input
+              Warmup Time:
+              <input
                 type="text"
                 onChange={this.onWarmupChange}
                 autoComplete="off"
-                className="inline-input2"
+                className="time-input-right"
+                placeholder="0"
                 value={this.state.warmupTime} /> sec
             </label>
           </div>
         </div>
+        {/* Intervals header */}
         <div>
           <div className="list-header">
             <p><FontAwesomeIcon icon={faClipboardList} /> Intervals</p>
           </div>
+          {/* Intervals list */}
           <div>
             {this.state.intervals.length === 0 ? (
               <p className="list-no-int">No Intervals Added</p>
@@ -230,9 +233,9 @@ export default class TimerForm extends React.Component {
               )}
           </div>
         </div>
-
+        {/* Intervals settings */}
         <div className="list-int-form">
-        <div className="flex-wrap">
+          <div className="flex-wrap">
             <input
               id="interval-name"
               autoComplete="off"
@@ -242,56 +245,55 @@ export default class TimerForm extends React.Component {
               type="text"
               value={this.state.currentIntervalName}
             />
-            <div className="flex-grow">
-              <label className="int-form-input int-full-width">
+            <div className="flex-grow int-form-input">
+              <label>Duration:
                 <input
                   type="text"
                   onChange={this.onIntervalMinChange}
                   autoComplete="off"
-                  className="inline-input"
-                  id="interval-minutes"
-                  placeholder="0"
-                  value={this.state.currentIntervalMin} /> min
+                  className="time-input-right"
+                  placeholder="min"
+                  value={this.state.currentIntervalMin} />:
               </label>
-              <label className="int-form-input int-full-width">
+              <label>
                 <input
                   type="text"
                   onChange={this.onIntervalSecChange}
                   autoComplete="off"
-                  className="inline-input"
-                  id="interval-seconds"
-                  placeholder="0"
-                  value={this.state.currentIntervalSec} /> sec
+                  className="time-input-left"
+                  placeholder="sec"
+                  value={this.state.currentIntervalSec} />
               </label>
-              </div>
+
+            </div>
             <div className="flex-grow">
               <select
-              className="interval-select"
-              id="interval-type"
-              name="type"
-              onChange={this.onIntervalTypeChange}
-              value={this.state.currentIntervalType}
-            >
-              <option value="exercise">Exercise</option>
-              <option value="rest">Rest</option>
-            </select>
-            <select
-              className="interval-select"
-              name="color"
-              id="interval-color"
-              onChange={this.onIntervalColorChange}
-              value={this.state.currentIntervalColor}
-            >
-              <option value={Object.keys(colorMap)[0]}>{colorMap[Object.keys(colorMap)[0]]}</option>
-              <option value={Object.keys(colorMap)[1]}>{colorMap[Object.keys(colorMap)[1]]}</option>
-              <option value={Object.keys(colorMap)[2]}>{colorMap[Object.keys(colorMap)[2]]}</option>
-              <option value={Object.keys(colorMap)[3]}>{colorMap[Object.keys(colorMap)[3]]}</option>
-              <option value={Object.keys(colorMap)[4]}>{colorMap[Object.keys(colorMap)[4]]}</option>
-              <option value={Object.keys(colorMap)[5]}>{colorMap[Object.keys(colorMap)[5]]}</option>
-              <option value={Object.keys(colorMap)[6]}>{colorMap[Object.keys(colorMap)[6]]}</option>
-            </select>
+                className="interval-select"
+                id="interval-type"
+                name="type"
+                onChange={this.onIntervalTypeChange}
+                value={this.state.currentIntervalType}
+              >
+                <option value="exercise">Exercise</option>
+                <option value="rest">Rest</option>
+              </select>
+              <select
+                className="interval-select"
+                name="color"
+                id="interval-color"
+                onChange={this.onIntervalColorChange}
+                value={this.state.currentIntervalColor}
+              >
+                <option value={Object.keys(colorMap)[0]}>{colorMap[Object.keys(colorMap)[0]]}</option>
+                <option value={Object.keys(colorMap)[1]}>{colorMap[Object.keys(colorMap)[1]]}</option>
+                <option value={Object.keys(colorMap)[2]}>{colorMap[Object.keys(colorMap)[2]]}</option>
+                <option value={Object.keys(colorMap)[3]}>{colorMap[Object.keys(colorMap)[3]]}</option>
+                <option value={Object.keys(colorMap)[4]}>{colorMap[Object.keys(colorMap)[4]]}</option>
+                <option value={Object.keys(colorMap)[5]}>{colorMap[Object.keys(colorMap)[5]]}</option>
+                <option value={Object.keys(colorMap)[6]}>{colorMap[Object.keys(colorMap)[6]]}</option>
+              </select>
             </div>
-            </div>
+          </div>
           <div className="flex">
             <button disabled={!this.state.editInterval} className="btn-replace-int" onClick={this.onReplaceInterval}>
               <FontAwesomeIcon icon={faSyncAlt} /> Replace
@@ -301,10 +303,8 @@ export default class TimerForm extends React.Component {
             </button>
           </div>
         </div>
-
-
-
-
+        
+        {/* Submit/Cancel buttons */}
         <div className="form-submit">
           {!this.props.timer ?
             <button className="btn-save" onClick={this.onAddTimer}>

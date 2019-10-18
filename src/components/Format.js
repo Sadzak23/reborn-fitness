@@ -1,6 +1,6 @@
-export const formatSeconds = (seconds) => {
-  const add0 = (num) => ("0" + num).slice(-2);
-  
+export const add0 = (num) => ("0" + num).slice(-2);
+
+export const formatSeconds = (seconds) => {  
   if (seconds < 3600) {
     const minutes = Math.floor(seconds / 60);
     seconds = seconds % 60;
@@ -16,8 +16,6 @@ export const formatSeconds = (seconds) => {
 };
 
 export const formatMinutes = (min) => {
-  const add0 = (num) => ("0" + num).slice(-2);
-  
   if (min >= 60) {
     const hours = Math.floor(min / 60);
     min = min % 60;
