@@ -24,7 +24,10 @@ export default class TimerForm extends React.Component {
       currentIntervalSec: "",
       currentIntervalType: "exercise",
       currentIntervalColor: Object.keys(colorMap)[0],
-      editInterval: false
+      editInterval: false,
+      rounds: props.timer.rounds ? props.timer.rounds : "",
+      roundRestMin: props.timer.roundRestMin ? props.timer.roundRestMin : "",
+      roundRestSec: props.timer.roundRestSec ? add0(props.timer.roundRestSec) : "",
     };
   };
   onNameChange = (e) => {
@@ -35,6 +38,26 @@ export default class TimerForm extends React.Component {
     const warmupTime = e.target.value;
     if (!warmupTime || warmupTime.match(/^\d{1,3}$/)) {
       this.setState({ warmupTime });
+    }
+  };
+
+  onRoundNoChange = (e) => {
+    const rounds = e.target.value;
+    if (!rounds || rounds.match(/^[1-9]\d{0,1}$/)) {
+      this.setState({ rounds });
+    }
+  };
+
+  onRoundRestMinChange = (e) => {
+    const roundRestMin = e.target.value;
+    if (!roundRestMin || roundRestMin.match(/^\d{1,3}$/)) {
+      this.setState({ roundRestMin });
+    }
+  };
+  onRoundRestSecChange = (e) => {
+    const roundRestSec = add0(e.target.value);
+    if (roundRestSec.match(/^[0-5]?[0-9]?$/)) {
+      this.setState({ roundRestSec});
     }
   };
 
@@ -161,6 +184,9 @@ export default class TimerForm extends React.Component {
       this.props.onAddTimer({
         name: this.state.name,
         warmupTime: this.state.warmupTime ? parseInt(this.this.state.warmupTime) : 0,
+        rounds: this.state.rounds ? parseInt(this.state.rounds) : 1,
+        roundRestMin: this.state.roundRestMin ? parseInt(this.state.roundRestMin) : 0,
+        roundRestSec: this.state.roundRestSec ? parseInt(this.state.roundRestSec) : 0,
         intervals: this.state.intervals
       });
     }
@@ -176,6 +202,9 @@ export default class TimerForm extends React.Component {
       this.props.onEditTimer(this.props.timer.id, {
         name: this.state.name,
         warmupTime: this.state.warmupTime,
+        rounds: this.state.rounds ? parseInt(this.state.rounds) : 1,
+        roundRestMin: this.state.roundRestMin ? parseInt(this.state.roundRestMin) : 0,
+        roundRestSec: this.state.roundRestSec ? parseInt(this.state.roundRestSec) : 0,
         intervals: this.state.intervals
       });
     }
@@ -303,7 +332,41 @@ export default class TimerForm extends React.Component {
             </button>
           </div>
         </div>
-        
+        {/* Round settings */}
+        <div className="form-timer-rounds">
+          <label className="int-form-input">
+            Number of rounds:
+            <input
+              type="text"
+              onChange={this.onRoundNoChange}
+              autoComplete="off"
+              className="time-input"
+              id="interval-minutes"
+              placeholder="1"
+              value={this.state.rounds} />
+          </label>
+          <div className="int-form-input">
+            <label>
+              Rest:
+              <input
+                type="text"
+                onChange={this.onRoundRestMinChange}
+                autoComplete="off"
+                className="time-input-right"
+                placeholder="min"
+                value={this.state.roundRestMin} />:
+            </label>
+            <label>
+              <input
+                type="text"
+                onChange={this.onRoundRestSecChange}
+                autoComplete="off"
+                className="time-input-left"
+                placeholder="sec"
+                value={this.state.roundRestSec} />
+            </label>
+          </div>
+        </div>
         {/* Submit/Cancel buttons */}
         <div className="form-submit">
           {!this.props.timer ?

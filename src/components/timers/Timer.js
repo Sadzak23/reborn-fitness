@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { formatSeconds } from '../Format';
 import { faForward, faBackward, faPause, faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { onExit } from '../Alerts'
+import { onExit } from '../Alerts';
+import { colorMap } from '../ColorMap';
 
 class Timer extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Timer extends React.Component {
         miliseconds: props.timer.warmupTime * 1000,
         seconds: props.timer.warmupTime,
         type: "warmup",
-        interval: null
+        timerRun: null
       }
     } else {
       this.state = {
@@ -28,52 +29,77 @@ class Timer extends React.Component {
         miliseconds: props.timer.intervals[0].intervalSec * 1000 + props.timer.intervals[0].intervalMin * 60000,
         seconds: props.timer.intervals[0].intervalSec + props.timer.intervals[0].intervalMin * 60,
         type: props.timer.intervals[0].intervalType,
-        interval: null
+        timerRun: null
       }
     };
   };
+
+  // Get all intervals
+  getIntervals = () => {
+    let intervals = []
+    for (let i = 1; i <= this.props.timer.rounds; i++) {
+      const rest = {
+        intervalColor: Object.keys(colorMap)[3],
+        intervalMin: this.props.timer.roundRestMin,
+        intervalName: `Round ${i} complete`,
+        intervalSec: this.props.timer.roundRestSec,
+        intervalType: "rest"
+      }
+      this.props.timer.intervals.map(e => intervals.push(e))
+      i < this.props.timer.rounds && intervals.push(rest)
+    }
+    return intervals
+  };
+  // All timer intervals
+  intervals = this.getIntervals();
+
+  // Load Sound
   beep = new Audio('../assets/beep.mp3');
   longBeep = new Audio('../assets/beep0.mp3');
+
   tick = () => {
-    this.setState({ miliseconds: this.state.miliseconds -= 100 })
+    this.setState({ miliseconds: this.state.miliseconds -= 100 });
     //Next interval
-    if (this.state.intervalNo + 1 < this.props.timer.intervals.length) {
-      if (this.state.miliseconds <= 0) {
-        this.setState({
-          color: this.props.timer.intervals[this.state.intervalNo + 1].intervalColor,
-          phase: this.props.timer.intervals[this.state.intervalNo + 1].intervalName,
-          miliseconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec * 1000 + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60000,
-          seconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60,
-          type: this.props.timer.intervals[this.state.intervalNo + 1].intervalType,
-          intervalNo: this.state.intervalNo + 1
-        });
-
-        // Play sound on 0
-        this.longBeep.play();
-      };
-    }
-
-    // Last interval
-    else {
-      if (this.state.miliseconds <= 0) {
-        clearInterval(this.state.interval);
-        // Play sound on 0
-        /////// END TIMER BEEP
-        this.longBeep.play();
-        this.setState({
-          paused: true
-        });
+    if (this.state.miliseconds === 0) {
+      this.handleNext();
+      this.longBeep.play();  // Play sound on 0
+      // Last interval
+      if (this.state.intervalNo + 1 === this.intervals.length) {
+        clearInterval(this.state.timerRun);
+        this.setState({ paused: true });
+        this.longBeep.play();  // Play sound on END TIMER
       };
     };
-
     // Play sound on 3,2,1
-    if (this.state.miliseconds === 3000 || this.state.miliseconds === 2000 || this.state.miliseconds === 1000) {
-      this.beep.play();
-    };
-
+    (this.state.miliseconds === 3000 || this.state.miliseconds === 2000 || this.state.miliseconds === 1000) && this.beep.play();
     // Play sound on 10
-    if (this.state.miliseconds === 10000 && this.state.seconds >= 15) {
-      this.beep.play();
+    (this.state.miliseconds === 10000 && this.state.seconds >= 15) && this.beep.play();
+  };
+
+  handleNext = () => {
+    if (this.state.intervalNo + 1 < this.intervals.length) {
+      this.setState({
+        color: this.intervals[this.state.intervalNo + 1].intervalColor,
+        phase: this.intervals[this.state.intervalNo + 1].intervalName,
+        miliseconds: this.intervals[this.state.intervalNo + 1].intervalSec * 1000 + this.intervals[this.state.intervalNo + 1].intervalMin * 60000,
+        seconds: this.intervals[this.state.intervalNo + 1].intervalSec + this.intervals[this.state.intervalNo + 1].intervalMin * 60,
+        type: this.intervals[this.state.intervalNo + 1].intervalType,
+        intervalNo: this.state.intervalNo + 1
+      });
+    };
+  };
+
+  handlePrevious = () => {
+    if (this.state.intervalNo > 0) {
+      const interval = this.intervals[this.state.intervalNo - 1]
+      this.setState({
+        color: interval.intervalColor,
+        phase: interval.intervalName,
+        miliseconds: interval.intervalSec * 1000 + interval.intervalMin * 60000,
+        seconds: interval.intervalSec + interval.intervalMin * 60,
+        type: interval.intervalType,
+        intervalNo: this.state.intervalNo - 1
+      });
     };
   };
 
@@ -82,36 +108,10 @@ class Timer extends React.Component {
       paused: !this.state.paused
     });
     if (!this.state.paused) {
-      clearInterval(this.state.interval);
+      clearInterval(this.state.timerRun);
     } else {
-      this.setState({ interval: setInterval(this.tick, 100) });
+      this.setState({ timerRun: setInterval(this.tick, 100) });
     }
-  };
-
-  handleNext = () => {
-    if (this.state.intervalNo + 1 < this.props.timer.intervals.length) {
-      this.setState({
-        color: this.props.timer.intervals[this.state.intervalNo + 1].intervalColor,
-        phase: this.props.timer.intervals[this.state.intervalNo + 1].intervalName,
-        miliseconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec * 1000 + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60000,
-        seconds: this.props.timer.intervals[this.state.intervalNo + 1].intervalSec + this.props.timer.intervals[this.state.intervalNo + 1].intervalMin * 60,
-        type: this.props.timer.intervals[this.state.intervalNo + 1].intervalType,
-        intervalNo: this.state.intervalNo + 1
-      });
-    };
-  };
-
-  handlePrevious = () => {
-    if (this.state.intervalNo > 0) {
-      this.setState({
-        color: this.props.timer.intervals[this.state.intervalNo - 1].intervalColor,
-        phase: this.props.timer.intervals[this.state.intervalNo - 1].intervalName,
-        miliseconds: this.props.timer.intervals[this.state.intervalNo - 1].intervalSec * 1000 + this.props.timer.intervals[this.state.intervalNo - 1].intervalMin * 60000,
-        seconds: this.props.timer.intervals[this.state.intervalNo - 1].intervalSec + this.props.timer.intervals[this.state.intervalNo - 1].intervalMin * 60,
-        type: this.props.timer.intervals[this.state.intervalNo - 1].intervalType,
-        intervalNo: this.state.intervalNo - 1
-      });
-    };
   };
 
   componentDidMount() {
@@ -121,27 +121,24 @@ class Timer extends React.Component {
     document.body.style.background = this.state.color;
   };
   componentWillUnmount() {
-    clearInterval(this.state.interval);
+    clearInterval(this.state.timerRun);
     document.body.style.background = null;
   };
 
   render() {
     //Exercise number calculator
-    const exerciseNo = this.props.timer.intervals.slice(0, this.state.intervalNo + 1).reduce((count, interval) =>
+    const exerciseNo = this.intervals.slice(0, this.state.intervalNo + 1).reduce((count, interval) =>
       interval.intervalType === "exercise" ? count + 1 : count, 0);
-
     //Total exercise number
-    const totalExercisesNo = this.props.timer.intervals.reduce((count, interval) =>
+    const totalExercisesNo = this.intervals.reduce((count, interval) =>
       interval.intervalType === "exercise" ? count + 1 : count, 0);
-
     //Elapsed Time
-    const elapsedTime = this.props.timer.intervals.slice(
+    const elapsedTime = this.intervals.slice(
       0, this.state.intervalNo + 1).reduce(
         (time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) -
       Math.ceil(this.state.miliseconds / 1000);
-
     //Remaining time
-    const remainingTime = this.props.timer.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) - elapsedTime;
+    const remainingTime = this.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) - elapsedTime; 
 
     return (
       <div>

@@ -26,6 +26,12 @@
   width: 45rem;
 }
 
+.form-timer-rounds {
+  display: flex;
+  justify-content: center;
+  margin-top: $s-size-em;
+}
+
 .form-edit-interval {
   background: $light-blue !important;
 }
