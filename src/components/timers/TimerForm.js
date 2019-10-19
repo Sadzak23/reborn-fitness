@@ -25,9 +25,9 @@ export default class TimerForm extends React.Component {
       currentIntervalType: "exercise",
       currentIntervalColor: Object.keys(colorMap)[0],
       editInterval: false,
-      rounds: props.timer.rounds ? props.timer.rounds : "",
-      roundRestMin: props.timer.roundRestMin ? props.timer.roundRestMin : "",
-      roundRestSec: props.timer.roundRestSec ? add0(props.timer.roundRestSec) : "",
+      rounds: props.timer && props.timer.rounds ? props.timer.rounds : "",
+      roundRestMin: props.timer && props.timer.roundRestMin ? props.timer.roundRestMin : "",
+      roundRestSec: props.timer && props.timer.roundRestSec ? add0(props.timer.roundRestSec) : "",
     };
   };
   onNameChange = (e) => {
