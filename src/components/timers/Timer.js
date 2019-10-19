@@ -65,9 +65,11 @@ class Timer extends React.Component {
       this.longBeep.play();  // Play sound on 0
       // Last interval
       if (this.state.intervalNo + 1 === this.intervals.length) {
-        clearInterval(this.state.timerRun);
-        this.setState({ paused: true });
-        this.longBeep.play();  // Play sound on END TIMER
+        if (this.state.miliseconds === 0) {
+          clearInterval(this.state.timerRun);
+          this.setState({ paused: true });
+          this.longBeep.play();  // Play sound on END TIMER
+        }
       };
     };
     // Play sound on 3,2,1
@@ -138,7 +140,7 @@ class Timer extends React.Component {
         (time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) -
       Math.ceil(this.state.miliseconds / 1000);
     //Remaining time
-    const remainingTime = this.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) - elapsedTime; 
+    const remainingTime = this.intervals.reduce((time, interval) => interval.intervalSec + interval.intervalMin * 60 + time, 0) - elapsedTime;
 
     return (
       <div>
