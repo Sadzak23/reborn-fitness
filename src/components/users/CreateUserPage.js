@@ -2,26 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { startCreateUser } from '../../actions/users'
 import UserForm from './UserForm';
+import { history } from '../../routers/AppRouter';
 
-export class CreateUserPage extends React.Component {
+export const CreateUserPage = ({ startCreateUser, user, location }) => {
 
-  onCreateUser = (user) => {
-    this.props.startCreateUser(user);
-    this.props.history.goBack();
+  const onCreateUser = (user) => {
+    startCreateUser(user);
+    history.goBack();
   };
 
-  render() {
     return (
       <div>
       <div className="content-container">
         <UserForm
-          onAddUser={this.onCreateUser}
+          onAddUser={onCreateUser}
+          userCount={location.userCount}
         />
       </div>
     </div>
     );
-  }
-};
+  };
 
 const mapDispatchToProps = (dispatch) => ({
   startCreateUser: (user) => dispatch(startCreateUser(user))

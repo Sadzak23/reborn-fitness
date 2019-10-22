@@ -63,10 +63,11 @@ export const startSetUsers = () => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
     return database.ref(`admins/${uid}/users`)
-      .once('value')
-      .then((snapshot) => {
-        const users = [];
-        snapshot.forEach((child) => {
+    .orderByChild('index')
+    .once('value')
+    .then((snapshot) => {
+      const users = [];
+      snapshot.forEach((child) => {
           users.push({
             id: child.key,
             ...child.val()

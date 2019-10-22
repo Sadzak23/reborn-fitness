@@ -1,5 +1,4 @@
 import React from 'react';
-import Swal from 'sweetalert2';
 import { userFormAlerts } from '../Alerts';
 import { Birthdate } from './Birthdate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -71,7 +70,8 @@ export default class UserForm extends React.Component {
       activeUser: false,
       workouts: {
         history: ""
-      }
+      },
+      index: this.props.userCount ? this.props.userCount : 0
     })
     userFormAlerts(
       this.state.firstName, 
@@ -79,7 +79,6 @@ export default class UserForm extends React.Component {
       this.state.birthdate,
       this.state.height,
       this.state.weight,
-      this.state.gender,
       onCreate
     )
   };
@@ -99,7 +98,6 @@ export default class UserForm extends React.Component {
       this.state.birthdate,
       this.state.height,
       this.state.weight,
-      this.state.gender,
       onEdit
     )
   };

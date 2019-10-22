@@ -1,7 +1,8 @@
 import { history } from '../routers/AppRouter';
 import Swal from 'sweetalert2';
+import { moveArrIndex } from './ExportFunctions';
 
-export const userFormAlerts = (firstName, lastName, birthdate, height, weight, gender, onAction) => {
+export const userFormAlerts = (firstName, lastName, birthdate, height, weight, onAction) => {
   const now = new Date();
   const title = "User form incomplete"
   if (!firstName || !lastName) {
@@ -50,8 +51,8 @@ export const onRemoveAlert = (startRemove, id, name) => Swal.fire({
 // 5x5 Workout done
 export const done5x5 = (workout, onSave) => {
   workout.exercise1.done !== "" &&
-  workout.exercise3.done !== "" &&
-  workout.exercise3.done !== "" ?
+    workout.exercise3.done !== "" &&
+    workout.exercise3.done !== "" ?
     Swal.fire({
       title: "Well done!",
       text: "Would you like to save your workout?!",
@@ -70,7 +71,7 @@ export const done5x5 = (workout, onSave) => {
           showConfirmButton: false,
           timer: 2000
         })
-          history.goBack()
+        history.goBack()
       } else {
         history.goBack()
       }
@@ -90,3 +91,19 @@ export const onExit = () => Swal.fire({
 })
   .then((result) => result.value && history.goBack()
   );
+
+export const onReorder = (arr, index, type, editAction, setAction) => Swal.fire({
+  title: `Move ${type} to...`,
+  text: "Enter new position",
+  input: "range",
+  inputAttributes: {
+    min: 1,
+    max: arr.length,
+    step: 1
+  },
+  inputValue: index+1,
+  showCancelButton: true,
+}).then((result) => {
+  result.value &&
+  moveArrIndex(arr, index, parseInt(result.value), editAction, setAction)
+})
