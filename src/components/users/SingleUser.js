@@ -10,7 +10,7 @@ import { add0 } from '../Format';
 
 export const SingleUser = ({ id, index, firstName, lastName, activeUser, path, startRemoveUser, startEditUser, editUser, startSetUsers, users }) => {
 
-  const onRemoveUser = () => onRemoveAlert(startRemoveUser, id, firstName);
+  const onRemoveUser = () => onRemoveAlert(startRemoveUser, id, firstName, users, index, startEditUser, startSetUsers);
   const onUserReorder = () => onReorder(users, index, firstName, startEditUser, startSetUsers);
 
   const handleIsActive = () => {
@@ -70,7 +70,7 @@ export const SingleUser = ({ id, index, firstName, lastName, activeUser, path, s
             className={multiSelect && !activeUser ? "btn-edit-m no-click" : "btn-edit-m"}
             onClick={onUserReorder}
           >
-            <FontAwesomeIcon icon={faSort} />
+            <FontAwesomeIcon icon={faSort} size="lg" />
           </button>
           {/* Delete user button */}
           <button

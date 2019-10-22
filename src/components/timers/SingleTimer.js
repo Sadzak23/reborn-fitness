@@ -10,7 +10,7 @@ import { add0 } from '../Format';
 
 export const SingleTimer = ({ id, index, name, rounds, intervals, startRemoveTimer, startEditTimer, startSetTimers, timers }) => {
   // Delete timer confirmation
-  const onRemoveTimer = () => onRemoveAlert(startRemoveTimer, id, name);
+  const onRemoveTimer = () => onRemoveAlert(startRemoveTimer, id, name, timers, index, startEditTimer, startSetTimers);
   const onTimerReorder = () => onReorder(timers, index, name, startEditTimer, startSetTimers);
   const exerciseNo = intervals.reduce((count, interval) => interval.intervalType === "exercise" ? count + 1 : count, 0)
   return (
@@ -35,7 +35,7 @@ export const SingleTimer = ({ id, index, name, rounds, intervals, startRemoveTim
             className="btn-edit-m"
             onClick={onTimerReorder}
           >
-            <FontAwesomeIcon icon={faSort} />
+            <FontAwesomeIcon icon={faSort} size="lg" />
           </button>
           {/* Delete timer button */}
         <button className="btn-remove-m" onClick={onRemoveTimer}>

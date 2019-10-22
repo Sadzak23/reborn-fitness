@@ -28,7 +28,7 @@ export const timerFormAlerts = {
   intDuration: "Please set valid duration!"
 };
 
-export const onRemoveAlert = (startRemove, id, name) => Swal.fire({
+export const onRemoveAlert = (startRemove, id, name, array, index, editAction, setAction) => Swal.fire({
   title: `Delete ${name}?!`,
   text: "You can't bring it back!",
   type: "error",
@@ -37,15 +37,16 @@ export const onRemoveAlert = (startRemove, id, name) => Swal.fire({
   showCancelButton: true
 })
   .then((result) => result.value &&
-    Swal.fire({
+      Swal.fire({
       type: 'success',
       title: `${name} has been deleted!`,
       toast: true,
       position: 'top',
       showConfirmButton: false,
-      timer: 3000
+      timer: 3500
     }) &&
-    startRemove(id)
+    startRemove(id),
+    moveArrIndex(array, index, array.length, editAction, setAction)
   );
 
 // 5x5 Workout done
@@ -92,8 +93,8 @@ export const onExit = () => Swal.fire({
   .then((result) => result.value && history.goBack()
   );
 
-export const onReorder = (arr, index, type, editAction, setAction) => Swal.fire({
-  title: `Move ${type} to...`,
+export const onReorder = (arr, index, name, editAction, setAction) => Swal.fire({
+  title: `Move ${name} to...`,
   text: "Enter new position",
   input: "range",
   inputAttributes: {
@@ -101,9 +102,9 @@ export const onReorder = (arr, index, type, editAction, setAction) => Swal.fire(
     max: arr.length,
     step: 1
   },
-  inputValue: index+1,
+  inputValue: index + 1,
   showCancelButton: true,
 }).then((result) => {
   result.value &&
-  moveArrIndex(arr, index, parseInt(result.value), editAction, setAction)
+    moveArrIndex(arr, index, parseInt(result.value), editAction, setAction)
 })
