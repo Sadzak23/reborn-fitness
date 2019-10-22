@@ -11,7 +11,7 @@ import { add0 } from '../Format';
 export const SingleUser = ({ id, index, firstName, lastName, activeUser, path, startRemoveUser, startEditUser, editUser, startSetUsers, users }) => {
 
   const onRemoveUser = () => onRemoveAlert(startRemoveUser, id, firstName);
-  const onUserReorder = () => onReorder(users, index, "User", startEditUser, startSetUsers);
+  const onUserReorder = () => onReorder(users, index, firstName, startEditUser, startSetUsers);
 
   const handleIsActive = () => {
     activeUser ? editUser(id, { activeUser: false }) : editUser(id, { activeUser: true });
