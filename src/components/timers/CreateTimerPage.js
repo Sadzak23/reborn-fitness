@@ -14,6 +14,7 @@ export class CreateTimerPage extends React.Component {
         <div className="content-container">
           <TimerForm
             onAddTimer={this.onCreateTimer}
+            timersCount={this.props.location.timersCount}
           />
         </div>
       </div>

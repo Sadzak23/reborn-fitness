@@ -6,7 +6,7 @@ import { onRemoveAlert } from '../Alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit, faUserTimes, faToggleOn, faToggleOff, faSort } from '@fortawesome/free-solid-svg-icons';
 import { onReorder } from '../Alerts';
-import { add0 } from '../Format'
+import { add0 } from '../Format';
 
 export const SingleUser = ({ id, index, firstName, lastName, activeUser, path, startRemoveUser, startEditUser, editUser, startSetUsers, users }) => {
 

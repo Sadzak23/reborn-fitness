@@ -13,7 +13,10 @@ const TimersListPage = (props) => (
           <FontAwesomeIcon icon={faStopwatch} size="2x" className="margin-right" />
           <h2>Select Timer Workout</h2>
         </div>
-        <Link to="/create-timer" onMouseDown={(e) => {e.preventDefault()}}>
+        <Link to={{
+          pathname: "/create-timer",
+          timersCount: props.timers.length
+        }} onMouseDown={(e) => {e.preventDefault()}}>
         <FontAwesomeIcon icon={faPlusCircle} style={{ color: '#fff' }} size="2x" />
         </Link>
       </div>
@@ -26,6 +29,7 @@ const TimersListPage = (props) => (
                 (<SingleTimer
                   key={timer.id}
                   {...timer}
+                  timers={props.timers}
                 />))
             )
         }

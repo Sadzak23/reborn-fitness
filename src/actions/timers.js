@@ -63,6 +63,7 @@ export const startSetTimers = () => {
   return (dispatch, setState) => {
     const uid = setState().auth.uid;
     return database.ref(`admins/${uid}/timers`)
+      .orderByChild('index')
       .once('value')
       .then((snapshot) => {
         const timers = [];

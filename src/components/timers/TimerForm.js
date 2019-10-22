@@ -183,11 +183,12 @@ export default class TimerForm extends React.Component {
     else {
       this.props.onAddTimer({
         name: this.state.name,
-        warmupTime: this.state.warmupTime ? parseInt(this.this.state.warmupTime) : 0,
+        warmupTime: this.state.warmupTime ? parseInt(this.state.warmupTime) : 0,
         rounds: this.state.rounds ? parseInt(this.state.rounds) : 1,
         roundRestMin: this.state.roundRestMin ? parseInt(this.state.roundRestMin) : 0,
         roundRestSec: this.state.roundRestSec ? parseInt(this.state.roundRestSec) : 0,
-        intervals: this.state.intervals
+        intervals: this.state.intervals,
+        index: this.props.timersCount ? this.props.timersCount : 0
       });
     }
   };
@@ -201,7 +202,7 @@ export default class TimerForm extends React.Component {
     else {
       this.props.onEditTimer(this.props.timer.id, {
         name: this.state.name,
-        warmupTime: this.state.warmupTime,
+        warmupTime: this.state.warmupTime? parseInt(this.state.warmupTime) : 0,
         rounds: this.state.rounds ? parseInt(this.state.rounds) : 1,
         roundRestMin: this.state.roundRestMin ? parseInt(this.state.roundRestMin) : 0,
         roundRestSec: this.state.roundRestSec ? parseInt(this.state.roundRestSec) : 0,
