@@ -174,13 +174,13 @@ export class ActivityCal extends React.Component {
           {this.state.checkDuration ?
             <div>
               <h2 className="cal-result">If you {ResultLabel[this.state.activity]} for {formatMinutes(this.state.duration ? this.state.duration : 0)} min,</h2>
-              <h1 className="cal-result">You would burn</h1>
+              <h2 className="cal-result">You would burn</h2>
               <h1 className="cal-result">{this.state.resultCal.toFixed().replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, '$&,')} kCal</h1>
             </div>
             :
             <div>
               <h2 className="cal-result">To burn {this.state.calNo ? this.state.calNo.replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, '$&,') : 0} kCal</h2>
-              <h1 className="cal-result">You have to {ResultLabel[this.state.activity]} for</h1>
+              <h2 className="cal-result">You have to {ResultLabel[this.state.activity]} for</h2>
               <h1 className="cal-result">{formatMinutes(this.state.resultDuration)} min</h1>
             </div>
           }
