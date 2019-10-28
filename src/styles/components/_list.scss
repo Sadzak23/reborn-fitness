@@ -8,6 +8,7 @@
   justify-content: space-between;
   padding: $s-size $l-size;
   p {
+    color: $off-white;
     font-size: $m-size-em;
     margin: 0px;
   }
@@ -16,7 +17,7 @@
   border: 2px solid darken($color: $off-white, $amount: 9%);
   border-radius: 0 0 15px 15px;
   background: $blue;
-  height: 20px;
+  height: 25px;
 }
 
 .list-item {

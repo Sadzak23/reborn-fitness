@@ -1,37 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell, faAddressBook, faUsers, faIdBadge } from '@fortawesome/free-solid-svg-icons';
+import { faDumbbell, faUsers, faIdBadge } from '@fortawesome/free-solid-svg-icons';
+import { ListHeader, ListBodyLinks, ListFooter } from '../Elements/List';
 
-export default class Dashboard5x5 extends React.Component {
-  render() {
-    return (
-      <div className="content-container">
-        <div className="list-header">
-          <div className="flex-between">
-            <div className="flex">
-              <FontAwesomeIcon icon={faDumbbell} size="2x" className="margin-right" />
-              <h2>Strong Lifts</h2>
-            </div>
-            <div className="flex">
-              <p className="margin-right">{this.props.location.state.firstName}</p>
-              <FontAwesomeIcon icon={faIdBadge} size="2x" />
-            </div>
-          </div>
-        </div>
-        <Link className="list-dashboard" to={`/workout5x5/${this.props.location.state.id}`} onMouseDown={(e) => { e.preventDefault() }}>
-          <FontAwesomeIcon icon={faDumbbell} /> Start Workout
-        </Link>
-        <Link className="list-dashboard" to="/user-select-5x5" onMouseDown={(e) => { e.preventDefault() }}>
-          <FontAwesomeIcon icon={faUsers} /> Change User
-        </Link>
-        <Link className="list-dashboard" to={{
-          pathname: '/history5x5',
-          state: { id: this.props.location.state.id }
-        }} onMouseDown={(e) => { e.preventDefault() }}>
-          <FontAwesomeIcon icon={faAddressBook} /> View History
-        </Link>
-      </div>
-    )
-  }
-};
+const Dashboard5x5 = ({ location }) => {
+  const list = [
+    {
+      linkPath: `/workout5x5/${location.state.id}`,
+      icon: faDumbbell,
+      text: "Start Workout",
+    }, {
+      linkPath: "/user-select-5x5",
+      icon: faUsers,
+      text: "Change User",
+    }, {
+      linkPath: "/history5x5",
+      linkState: { id: location.state.id },
+      icon: faDumbbell,
+      text: "View History",
+    },]
+  return (
+    <div className="content-container">
+      <ListHeader
+        titleIcon={faDumbbell}
+        titleTxt="Strong Lifts"
+        linkPath="/user-select-5x5"
+        linkIcon={faIdBadge}
+        linkTxt={location.state.firstName}
+      />
+      <ListBodyLinks list={list} />    
+      <ListFooter />
+    </div>
+  )
+}
+
+export default Dashboard5x5
