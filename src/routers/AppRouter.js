@@ -21,7 +21,7 @@ import WorkoutPage from '../components/5x5/WorkoutPage';
 // User
 import CreateUserPage from '../components/users/CreateUserPage';
 import EditUserPage from '../components/users/EditUserPage';
-import UsersList from '../components/Users/UsersList';
+import UsersList from '../components/users/UsersList';
 // Calculator
 import CalCalculator from '../components/calCalculator/CalCalculator';
 
