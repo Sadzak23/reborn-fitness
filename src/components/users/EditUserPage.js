@@ -10,13 +10,11 @@ export class EditUserPage extends React.Component {
   };
   render() {
     return (
-      <div>
-        <div className="content-container">
-          <UserForm
-            user={this.props.user}
-            onEditUser={this.onEdit}
-          />
-        </div>
+      <div className="content-container">
+        <UserForm
+          user={this.props.user}
+          onEditUser={this.onEdit}
+        />
       </div>
     );
   }

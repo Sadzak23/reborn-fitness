@@ -12,14 +12,12 @@ export const CreateUserPage = ({ startCreateUser, user, location }) => {
   };
 
     return (
-      <div>
       <div className="content-container">
         <UserForm
           onAddUser={onCreateUser}
-          userCount={location.userCount}
+          userCount={location.state.userCount}
         />
       </div>
-    </div>
     );
   };
 
