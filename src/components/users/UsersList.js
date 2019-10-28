@@ -5,7 +5,7 @@ import SingleUser from './SingleUser';
 import { ListHeader, ListBody, ListFooter } from '../Elements/List';
 import { BtnLinkCancel, BtnBackFullWidth } from '../Elements/Buttons';
 
-const UsersListSelect = ({ users, location }) => {
+const UsersList = ({ users, location }) => {
   const usersList = users.length === 0 ? (
     <p className="list-no-int">Please create user</p>
   ) : (
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => ({
   users: state.users
 });
 
-export default connect(mapStateToProps)(UsersListSelect);
+export default connect(mapStateToProps)(UsersList);
