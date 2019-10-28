@@ -7,6 +7,7 @@ import { onExit, done5x5 } from '../Alerts'
 import { formatSeconds } from '../Format';
 import { Exercise5x5 } from './Exercise5x5';
 import { startSetEditData5x5 } from '../../actions/users';
+import { BtnConfirmCancel } from '../Elements/Buttons';
 
 export class Workout5x5 extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ export class Workout5x5 extends React.Component {
 
     }
   };
-  
+
   ///////////////// Timer //////////////////////////////////////////
   beep = new Audio('../assets/beep.mp3');
   longBeep = new Audio('../assets/beep0.mp3');
@@ -284,14 +285,13 @@ export class Workout5x5 extends React.Component {
             onRepCount={this.onRepCount}
           />
         </div>
-        <div className="form-submit">
-          <button className="btn-save" onClick={this.onDone}>
-            <FontAwesomeIcon icon={faSave} /> Save workout
-          </button>
-          <button className="btn-cancel form-cancel" onClick={onExit}>
-            <FontAwesomeIcon icon={faBan} /> Quit
-          </button>
-        </div>
+        <BtnConfirmCancel
+          confirmFn={this.onDone}
+          confirmTxt="Save workout"
+          confirmIcon={faSave}
+          cancelTxt="Quit"
+          cancelFn={onExit}
+        />
       </div>
     )
   }

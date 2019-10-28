@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBan, faSave } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../../routers/AppRouter';
 import { startSetEditData5x5 } from '../../actions/users';
+import { BtnConfirmCancel } from '../Elements/Buttons';
 
 export class Workout5x5 extends React.Component {
   constructor(props) {
@@ -191,20 +192,11 @@ export class Workout5x5 extends React.Component {
         }
 
         {/* Action Buttons */}
-        <div className="form-submit">
-          {this.userData ?
-            <button className="btn-save" onClick={this.onEdit}>
-              <FontAwesomeIcon icon={faSave} /> Update data
-          </button>
-            :
-            <button className="btn-save" onClick={this.onSave}>
-              <FontAwesomeIcon icon={faSave} /> Save initial data
-          </button>
-          }
-          <button className="btn-cancel form-cancel" onClick={() => history.goBack()}>
-            <FontAwesomeIcon icon={faBan} /> Cancel
-          </button>
-        </div>
+        {this.userData ?
+          <BtnConfirmCancel confirmFn={this.onEdit} confirmTxt="Update data" confirmIcon={faSave} />
+          :
+          <BtnConfirmCancel confirmFn={this.onSave} confirmTxt="Save initial data" confirmIcon={faSave} />
+        }
       </div>
     )
   }

@@ -1,8 +1,9 @@
 import React from 'react';
 import { userFormAlerts } from '../Alerts';
-import { Birthdate } from './Birthdate'
+import { Birthdate } from './Birthdate';
+import { BtnConfirmCancel } from '../Elements/Buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFemale, faMale, faSave, faUserPlus, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faFemale, faMale, faSave, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../../routers/AppRouter';
 
 export default class UserForm extends React.Component {
@@ -61,7 +62,7 @@ export default class UserForm extends React.Component {
 
   onCreateUser = () => {
     const onCreate = () => this.props.onAddUser({
-      firstName: this.state.firstName, 
+      firstName: this.state.firstName,
       lastName: this.state.lastName,
       birthdate: this.state.birthdate,
       height: this.state.height,
@@ -74,7 +75,7 @@ export default class UserForm extends React.Component {
       index: this.props.userCount ? this.props.userCount : 0
     })
     userFormAlerts(
-      this.state.firstName, 
+      this.state.firstName,
       this.state.lastName,
       this.state.birthdate,
       this.state.height,
@@ -85,7 +86,7 @@ export default class UserForm extends React.Component {
 
   onEditUser = () => {
     const onEdit = () => this.props.onEditUser(this.props.user.id, {
-      firstName: this.state.firstName, 
+      firstName: this.state.firstName,
       lastName: this.state.lastName,
       birthdate: this.state.birthdate,
       height: this.state.height,
@@ -93,7 +94,7 @@ export default class UserForm extends React.Component {
       gender: this.state.gender
     })
     userFormAlerts(
-      this.state.firstName, 
+      this.state.firstName,
       this.state.lastName,
       this.state.birthdate,
       this.state.height,
@@ -176,17 +177,11 @@ export default class UserForm extends React.Component {
             </div>
           </div>
         </div>
-        <div className="form-submit">
           {!this.props.user ?
-            <button className="btn-save" onClick={this.onCreateUser}>
-              <FontAwesomeIcon icon={faUserPlus} /> Create New User</button> :
-            <button className="btn-save" onClick={this.onEditUser}>
-              <FontAwesomeIcon icon={faSave} /> Save Changes
-              </button>}
-          <button className="btn-cancel form-cancel" onClick={this.onCancel}>
-            <FontAwesomeIcon icon={faBan} /> Cancel
-              </button>
-        </div>
+            <BtnConfirmCancel confirmFn={this.onCreateUser} confirmTxt="Create New User" confirmIcon={faUserPlus} />
+            :
+            <BtnConfirmCancel confirmFn={this.onEditUser} confirmTxt="Save Changes" confirmIcon={faSave} />
+          }
       </div>
     );
   }

@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ExerciseChart, RadarWeightsChart } from './ExerciseChart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandPointLeft, faAddressBook } from '@fortawesome/free-solid-svg-icons';
-import { history } from '../../routers/AppRouter';
+import { faAddressBook } from '@fortawesome/free-solid-svg-icons';
+import { BtnBackFullWidth } from '../Elements/Buttons';
 
 export class History5x5 extends React.Component {
   constructor(props) {
@@ -77,9 +77,7 @@ export class History5x5 extends React.Component {
           <ExerciseChart data={getWorkouts()} type={this.state.chartViewType} lines={this.chartColors} />
           <RadarWeightsChart data={progress} />
           {/* Back button */}
-          <button className="btn-save" onClick={() => history.goBack()}>
-            <FontAwesomeIcon icon={faHandPointLeft} /> Back
-          </button>
+          <BtnBackFullWidth />
         </div>
       )
     } else {
@@ -93,9 +91,7 @@ export class History5x5 extends React.Component {
             <h2>You haven't done any trainings yet</h2>
             <h3>Go back and start a workout to make history</h3>
           </div>
-          <button className="btn-save margin-top" onClick={() => history.goBack()}>
-            <FontAwesomeIcon icon={faHandPointLeft} /> Back
-          </button>
+          <BtnBackFullWidth />
         </div>
       )
     }

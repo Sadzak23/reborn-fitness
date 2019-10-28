@@ -1,13 +1,14 @@
 import React from "react";
 import uuid from 'uuid';
 import Swal from "sweetalert2";
-import SingleInterval from "./SingleInterval";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSyncAlt, faPlusCircle, faSave, faClipboardList, faBan } from "@fortawesome/free-solid-svg-icons";
 import { history } from "../../routers/AppRouter";
 import { colorMap } from '../ColorMap';
 import { timerFormAlerts } from '../Alerts';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSyncAlt, faPlusCircle, faSave, faClipboardList, faBan } from "@fortawesome/free-solid-svg-icons";
 import { add0 } from "../Format";
+import { BtnConfirmCancel } from "../Elements/Buttons";
+import SingleInterval from "./SingleInterval";
 
 export default class TimerForm extends React.Component {
   constructor(props) {
@@ -57,7 +58,7 @@ export default class TimerForm extends React.Component {
   onRoundRestSecChange = (e) => {
     const roundRestSec = add0(e.target.value);
     if (roundRestSec.match(/^[0-5]?[0-9]?$/)) {
-      this.setState({ roundRestSec});
+      this.setState({ roundRestSec });
     }
   };
 
@@ -202,7 +203,7 @@ export default class TimerForm extends React.Component {
     else {
       this.props.onEditTimer(this.props.timer.id, {
         name: this.state.name,
-        warmupTime: this.state.warmupTime? parseInt(this.state.warmupTime) : 0,
+        warmupTime: this.state.warmupTime ? parseInt(this.state.warmupTime) : 0,
         rounds: this.state.rounds ? parseInt(this.state.rounds) : 1,
         roundRestMin: this.state.roundRestMin ? parseInt(this.state.roundRestMin) : 0,
         roundRestSec: this.state.roundRestSec ? parseInt(this.state.roundRestSec) : 0,
@@ -369,18 +370,11 @@ export default class TimerForm extends React.Component {
           </div>
         </div>
         {/* Submit/Cancel buttons */}
-        <div className="form-submit">
-          {!this.props.timer ?
-            <button className="btn-save" onClick={this.onAddTimer}>
-              <FontAwesomeIcon icon={faSave} /> Add New Timer
-          </button> :
-            <button className="btn-save" onClick={this.onEditTimer}>
-              <FontAwesomeIcon icon={faSave} /> Save Changes
-          </button>}
-          <button className="btn-cancel form-cancel" onClick={this.onCancel}>
-            <FontAwesomeIcon icon={faBan} /> Cancel
-          </button>
-        </div>
+        {!this.props.timer ?
+          <BtnConfirmCancel confirmFn={this.onAddTimer} confirmTxt="Create New Timer" confirmIcon={faSave} />
+          :
+          <BtnConfirmCancel confirmFn={this.onEditTimer} confirmTxt="Save Changes" confirmIcon={faSave} />
+        }
       </div>
     )
   }

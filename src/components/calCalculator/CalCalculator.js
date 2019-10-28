@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ActivityCal } from './ActivityCal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as moment from 'moment';
+import { BtnBackFullWidth } from '../Elements/Buttons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export class CalCalculator extends React.Component {
@@ -14,21 +15,15 @@ export class CalCalculator extends React.Component {
     }
   };
 
-  onExit = () => {
-    this.props.history.push("/");
-  }
-
   render() {
     return (
       <div className="content-container">
-        <button className="btn-x-header" onClick={this.onExit}>
-          <FontAwesomeIcon icon={faTimes} className="timer-x" />
-        </button>
-          <div className="cal-user-info">
-            <h1>Hi {this.state.user.firstName}</h1>
-            <h3>Age: {this.state.age} - Weight: {this.state.user.weight}kg</h3>
-          </div>
+        <div className="cal-user-info">
+          <h1>Hi {this.state.user.firstName}</h1>
+          <h3>Age: {this.state.age} - Weight: {this.state.user.weight}kg</h3>
+        </div>
         <ActivityCal user={this.state.user} />
+        <BtnBackFullWidth />
       </div>
     )
   }
