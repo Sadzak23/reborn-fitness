@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { faUserPlus, faUsers, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import SingleUser from './SingleUser';
 import { ListHeader, ListBody, ListFooter } from '../Elements/List';
-import { BtnLink } from '../Elements/Buttons';
+import { BtnLinkCancel, BtnBackFullWidth } from '../Elements/Buttons';
 
 const UsersListSelect = ({ users, location }) => {
   const usersList = users.length === 0 ? (
@@ -29,12 +29,15 @@ const UsersListSelect = ({ users, location }) => {
       <ListBody list={usersList} />
       <ListFooter />
 
-      {location.pathname == "/user-select-timer" &&
-        <BtnLink
+      {location.pathname == "/user-select-timer" ?
+        <BtnLinkCancel
+          linkTxt="Select Timer"
           linkPath="/timers"
           linkState={{ activeUsers: users.filter(user => user.activeUser) }}
-          icon={faStopwatch}
+          linkIcon={faStopwatch}
         />
+        :
+        <BtnBackFullWidth />
       }
     </div>
   )

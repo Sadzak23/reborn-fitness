@@ -39,7 +39,6 @@
 .form-submit {
   display: flex;
   align-items: center;
-  margin: $m-size 0;
   @media (max-width: $mobile-breakpoint) {
     display: grid;
   }

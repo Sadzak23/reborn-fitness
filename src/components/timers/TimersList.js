@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { faPlusCircle, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import SingleTimer from './SingleTimer';
 import { ListHeader, ListBody, ListFooter } from '../Elements/List';
+import { BtnBackFullWidth } from '../Elements/Buttons';
 
 const TimersListPage = ({ timers }) => {
   const timersList = timers.length === 0 ? (
@@ -26,6 +27,7 @@ const TimersListPage = ({ timers }) => {
       />
       <ListBody list={timersList} />
       <ListFooter />
+      <BtnBackFullWidth />
     </div>
   )
 };

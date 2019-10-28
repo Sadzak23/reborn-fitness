@@ -8,9 +8,13 @@ const onGoBack = () => {
   history.goBack();
 };
 
-export const BtnConfirmCancel = ({ confirmFn, confirmTxt = "Confirm", confirmIcon, cancelTxt = "Cancel", cancelFn = onGoBack }) => {
-
-  return (
+export const BtnConfirmCancel = ({
+  confirmFn,
+  confirmTxt = "Confirm",
+  confirmIcon,
+  cancelTxt = "Cancel",
+  cancelFn = onGoBack
+}) => (
     <div className="form-submit">
       <button className="btn-confirm" onClick={confirmFn}>
         <FontAwesomeIcon icon={confirmIcon} /> {confirmTxt}
@@ -19,26 +23,44 @@ export const BtnConfirmCancel = ({ confirmFn, confirmTxt = "Confirm", confirmIco
         <FontAwesomeIcon icon={faBan} /> {cancelTxt}
       </button>
     </div>
-  )
-};
+  );
 
-export const BtnBackFullWidth = () => {
-  return (
-    <button className="btn-confirm margin-top" onClick={onGoBack}>
-      <FontAwesomeIcon icon={faHandPointLeft} /> Back
+export const BtnBackFullWidth = () => (
+  <button className="btn-confirm" onClick={onGoBack}>
+    <FontAwesomeIcon icon={faHandPointLeft} /> Back
     </button>
-  )
-}
+);
 
-export const BtnLink = ({ linkPath, linkState, icon }) => {
-  return (
-    <Link to={{
-      pathname: linkPath,
-      state: linkState
-    }}>
-      <button className="btn-confirm margin-top">
-        <FontAwesomeIcon icon={icon} /> Select Timer
+export const BtnLink = ({ text, linkPath, state, icon }) => (
+  <Link to={{
+    pathname: linkPath,
+    state: state
+  }}>
+    <button className="btn-confirm">
+      <FontAwesomeIcon icon={icon} /> {text}
     </button>
-    </Link>
-  )
-}
+  </Link>
+);
+
+export const BtnLinkCancel = ({
+  linkTxt,
+  linkPath,
+  linkState,
+  linkIcon,
+  cancelTxt = "Cancel",
+  cancelFn = onGoBack
+}) => (
+    <div className="form-submit">
+      <Link to={{
+        pathname: linkPath,
+        state: linkState
+      }} style={{ width: "100%" }}>
+        <button className="btn-confirm">
+          <FontAwesomeIcon icon={linkIcon} /> {linkTxt}
+        </button>
+      </Link>
+      <button className="btn-cancel form-cancel" onClick={cancelFn}>
+        <FontAwesomeIcon icon={faBan} /> {cancelTxt}
+      </button>
+    </div>
+  );
