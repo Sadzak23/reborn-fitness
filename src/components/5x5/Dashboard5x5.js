@@ -1,5 +1,5 @@
 import React from 'react';
-import { faDumbbell, faUsers, faIdBadge } from '@fortawesome/free-solid-svg-icons';
+import { faDumbbell, faUsers, faIdBadge, faChartBar } from '@fortawesome/free-solid-svg-icons';
 import { ListHeader, ListBodyLinks, ListFooter } from '../Elements/List';
 
 const Dashboard5x5 = ({ location }) => {
@@ -15,7 +15,7 @@ const Dashboard5x5 = ({ location }) => {
     }, {
       linkPath: "/history5x5",
       linkState: { id: location.state.id },
-      icon: faDumbbell,
+      icon: faChartBar,
       text: "View History",
     },]
   return (
