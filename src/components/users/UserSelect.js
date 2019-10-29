@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { faUserPlus, faUsers, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faStopwatch, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { ListHeader, ListFooter } from '../Elements/List';
 import { BtnLinkCancel, BtnBackFullWidth } from '../Elements/Buttons';
 import UserBlock from './UserBlock';
-//import Male1 from '../../../public/images/avatars/1.png';
 
 const UserSelect = ({ users, location }) => {
   const usersList = users.length === 0 ? (
@@ -17,9 +16,9 @@ const UserSelect = ({ users, location }) => {
       <ListHeader
         titleIcon={faUsers}
         titleTxt="Please select user"
-        linkPath="/create-user"
+        linkPath="/users"
         linkState={{ userCount: users.length }}
-        linkIcon={faUserPlus}
+        linkIcon={faUserEdit}
       />
       <div className="table-user-blocks">
         {usersList}

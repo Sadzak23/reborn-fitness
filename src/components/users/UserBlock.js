@@ -9,7 +9,7 @@ const UserBlock = ({ user, location }) => {
           pathname: "calorie-calculator",
           state: user
         }
-      case "user-select-5x5":
+      case "/user-select-5x5":
         return {
           pathname: "/dashboard5x5",
           state: {

@@ -21,6 +21,7 @@ import WorkoutPage from '../components/5x5/WorkoutPage';
 // User
 import CreateUserPage from '../components/users/CreateUserPage';
 import EditUserPage from '../components/users/EditUserPage';
+import UserSelect from '../components/users/UserSelect';
 import UsersList from '../components/users/UsersList';
 // Calculator
 import CalCalculator from '../components/calCalculator/CalCalculator';
@@ -33,6 +34,7 @@ const AppRouter = () => (
       <Switch>
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
+        <PrivateRoute path="/user-select" component={UserSelect} />
         <PrivateRoute path="/create-user" component={CreateUserPage} />
         <PrivateRoute path="/users" component={UsersList} />
         <PrivateRoute path="/edit-user/:id" component={EditUserPage} />
@@ -45,9 +47,9 @@ const AppRouter = () => (
         <FullScreenRoute path="/workout5x5/:id" component={WorkoutPage} />
         <PrivateRoute path="/edit-data5x5/:id" component={EditUserData5x5} />
         <PrivateRoute path="/history5x5" component={History5x5} />
-        <PrivateRoute path="/user-select-5x5" component={UsersList} />
-        <PrivateRoute path="/tool-cal/:id" component={CalCalculator} />
-        <PrivateRoute path="/user-select-cal" component={UsersList} />
+        <PrivateRoute path="/user-select-5x5" component={UserSelect} />
+        <PrivateRoute path="/calorie-calculator" component={CalCalculator} />
+        <PrivateRoute path="/user-select-cal" component={UserSelect} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

@@ -1,38 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { ActivityCal } from './ActivityCal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as moment from 'moment';
 import { BtnBackFullWidth } from '../Elements/Buttons';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-export class CalCalculator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: props.user,
-      age: moment().diff(props.user.birthdate, 'years'),
-    }
-  };
+export const CalCalculator = ({ location }) => {
+  const user = location.state
+  const age = moment().diff(user.birthdate, 'years')
 
-  render() {
-    return (
-      <div className="content-container">
-        <div className="cal-user-info">
-          <h1>Hi {this.state.user.firstName}</h1>
-          <h3>Age: {this.state.age} - Weight: {this.state.user.weight}kg</h3>
-        </div>
-        <ActivityCal user={this.state.user} />
-        <BtnBackFullWidth />
+  return (
+    <div className="content-container">
+      <div className="cal-user-info">
+        <h1>Hi {user.firstName}</h1>
+        <h3>Age: {age} - Weight: {user.weight}kg</h3>
       </div>
-    )
-  }
-};
+      <ActivityCal user={user} />
+      <BtnBackFullWidth />
+    </div>
+  )
+}
 
-const mapStateToProps = (state, props) => {
-  return {
-    user: state.users.find((user) => user.id === props.match.params.id)
-  };
-};
-
-export default connect(mapStateToProps)(CalCalculator);
+export default CalCalculator;
