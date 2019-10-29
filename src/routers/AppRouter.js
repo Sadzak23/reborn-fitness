@@ -38,7 +38,7 @@ const AppRouter = () => (
         <PrivateRoute path="/create-user" component={CreateUserPage} />
         <PrivateRoute path="/users" component={UsersList} />
         <PrivateRoute path="/edit-user/:id" component={EditUserPage} />
-        <PrivateRoute path="/user-select-timer" component={UsersList} />
+        <PrivateRoute path="/user-select-timer" component={UserSelect} />
         <PrivateRoute path="/timers" component={TimersList} />
         <FullScreenRoute path="/timer/:id" component={Timer} />
         <PrivateRoute path="/create-timer" component={CreateTimerPage} />

@@ -28,17 +28,7 @@ const UsersList = ({ users, location }) => {
       />
       <ListBody list={usersList} />
       <ListFooter />
-
-      {location.pathname == "/user-select-timer" ?
-        <BtnLinkCancel
-          linkTxt="Select Timer"
-          linkPath="/timers"
-          linkState={{ activeUsers: users.filter(user => user.activeUser) }}
-          linkIcon={faStopwatch}
-        />
-        :
-        <BtnBackFullWidth />
-      }
+      <BtnBackFullWidth />      
     </div>
   )
 };
