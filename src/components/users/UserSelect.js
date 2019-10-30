@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { faUsers, faStopwatch, faUserEdit } from '@fortawesome/free-solid-svg-icons';
-import { ListHeader, ListFooter } from '../Elements/List';
+import { ListHeader, ListBody, ListFooter } from '../Elements/List';
 import { BtnLinkCancel, BtnBackFullWidth } from '../Elements/Buttons';
 import UserBlock from './UserBlock';
 
@@ -20,9 +20,7 @@ const UserSelect = ({ users, location }) => {
         linkState={{ userCount: users.length }}
         linkIcon={faUserEdit}
       />
-      <div className="table-user-blocks">
-        {usersList}
-      </div>
+      <ListBody list={usersList} className="table-user-blocks" />
       <ListFooter />
 
       {location.pathname == "/user-select-timer" ?

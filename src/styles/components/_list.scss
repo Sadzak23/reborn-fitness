@@ -117,6 +117,16 @@
   width: 100%;
 }
 
+.list-item-link {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+}
+
 .list-item-btns {
   width: 156px;
   display: flex;

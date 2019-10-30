@@ -76,17 +76,6 @@
   box-shadow: none;
 }
 
-.btn-activate {
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  height: 50px;
-  width: 100%;
-  &:active {
-    padding: 0px;
-  }
-}
 .icon-active {
   color: $ok-green;
   font-size: 2.4em;
