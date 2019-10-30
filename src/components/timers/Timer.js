@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { formatSeconds } from '../Format';
+import { formatSeconds } from '../Elements/ExportFunctions';
 import { faForward, faBackward, faPause, faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { onExit } from '../Alerts';
-import { colorMap } from '../ColorMap';
+import { onExit } from '../Elements/Alerts';
+import { colorMap } from '../Elements/ColorMap';
 
 class Timer extends React.Component {
   constructor(props) {

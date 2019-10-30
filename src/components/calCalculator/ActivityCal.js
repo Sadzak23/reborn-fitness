@@ -1,6 +1,6 @@
 import React from 'react';
 import { icons, metActivity, IntensityLabel, ResultLabel } from './CalMaps';
-import { formatMinutes } from '../Format';
+import { formatMinutes } from '../Elements/ExportFunctions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faToggleOn } from '@fortawesome/free-solid-svg-icons';
 

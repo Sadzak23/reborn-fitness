@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave, faBan } from '@fortawesome/free-solid-svg-icons';
-import { onExit, done5x5 } from '../Alerts'
-import { formatSeconds } from '../Format';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
+import { onExit, done5x5 } from '../Elements/Alerts'
+import { formatSeconds } from '../Elements/ExportFunctions';
 import { Exercise5x5 } from './Exercise5x5';
 import { startSetEditData5x5 } from '../../actions/users';
 import { BtnConfirmCancel } from '../Elements/Buttons';

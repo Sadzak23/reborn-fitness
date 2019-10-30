@@ -4,9 +4,9 @@ import Swal from "sweetalert2";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt, faPlusCircle, faSave, faClipboardList, faBan } from "@fortawesome/free-solid-svg-icons";
 import { history } from "../../routers/AppRouter";
-import { colorMap } from '../ColorMap';
-import { timerFormAlerts } from '../Alerts';
-import { add0 } from "../Format";
+import { colorMap } from '../Elements/ColorMap';
+import { timerFormAlerts } from '../Elements/Alerts';
+import { add0 } from "../Elements/ExportFunctions";
 import { BtnConfirmCancel } from "../Elements/Buttons";
 import SingleInterval from "./SingleInterval";
 

@@ -1,4 +1,4 @@
-import { history } from '../routers/AppRouter';
+import { history } from '../../routers/AppRouter';
 import Swal from 'sweetalert2';
 import { moveArrIndex } from './ExportFunctions';
 

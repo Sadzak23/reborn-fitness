@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { onRemoveAlert } from '../Alerts';
 import { startRemoveTimer, startSetTimers, startEditTimer } from '../../actions/timers';
-import { onReorder } from '../Alerts';
+import { onRemoveAlert, onReorder } from '../Elements/Alerts';
 import { ListItemIndex, ListItemTitle, ListItemBtns } from '../Elements/List';
 
 export const SingleTimer = ({ id, index, name, rounds, intervals, startRemoveTimer, startEditTimer, startSetTimers, timers }) => {

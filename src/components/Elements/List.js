@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faSort, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { add0 } from '../Format';
+import { add0 } from './ExportFunctions';
 
 export const ListHeader = ({
   titleIcon,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 import SingleUser from './SingleUser';
 import { ListHeader, ListBody, ListFooter } from '../Elements/List';
-import { BtnLinkCancel, BtnBackFullWidth } from '../Elements/Buttons';
+import { BtnBackFullWidth } from '../Elements/Buttons';
 
 const UsersList = ({ users, location }) => {
   const usersList = users.length === 0 ? (

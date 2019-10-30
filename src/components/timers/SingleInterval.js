@@ -1,5 +1,5 @@
 import React from 'react';
-import { colorMap } from '../ColorMap';
+import { colorMap } from '../Elements/ColorMap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faPen } from '@fortawesome/free-solid-svg-icons';
 

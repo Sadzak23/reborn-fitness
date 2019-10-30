@@ -1,5 +1,5 @@
 import React from 'react';
-import { userFormAlerts } from '../Alerts';
+import { userFormAlerts } from '../Elements/Alerts';
 import { Birthdate } from './Birthdate';
 import { BtnConfirmCancel } from '../Elements/Buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startRemoveUser, startEditUser, startSetUsers } from '../../actions/users';
-import { onRemoveAlert } from '../Alerts';
 import { faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
-import { onReorder } from '../Alerts';
+import { onRemoveAlert, onReorder } from '../Elements/Alerts';
 import { ListItemIndex, ListItemTitle, ListItemBtns } from '../Elements/List';
 
 export const SingleUser = ({ id, index, firstName, lastName, startRemoveUser, startEditUser, startSetUsers, users }) => {
