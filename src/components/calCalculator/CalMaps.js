@@ -1,4 +1,4 @@
-import { faSwimmer, faBiking, faWalking, faRunning, faHiking, faSkiing } from '@fortawesome/free-solid-svg-icons';
+import { faSwimmer, faBiking, faWalking, faRunning, faHiking, faSkiing, faSkating } from '@fortawesome/free-solid-svg-icons';
 
 ////////// METS //////////
 
@@ -57,41 +57,40 @@ const metSkiing = {
 ////////// Activities //////////
 
 export const metActivity = {
-  "Running": metRunning,
-  "Cycling": metCycling,
-  "Walking": metWalking,
-  "Swimming": metSwimming,
-  "Hiking": metHiking,
-  "Skiing": metSkiing,
+  "Running": {
+    met: metRunning,
+    icon: faRunning,
+    intensityLabel: "Running Pace",
+    resultLabel: "run"
+  },
+  "Cycling": {
+    met: metCycling,
+    icon: faBiking,
+    intensityLabel: "Cycling Speed",
+    resultLabel: "cycle"
+  },
+  "Walking": {
+    met: metWalking,
+    icon: faWalking,
+    intensityLabel: "Walking Speed",
+    resultLabel: "walk"
+  },
+  "Swimming": {
+    met: metSwimming,
+    icon: faSwimmer,
+    intensityLabel: "Swimming Style",
+    resultLabel: "swim"
+  },
+  "Hiking": {
+    met: metHiking,
+    icon: faHiking,
+    intensityLabel: "Hiking Style",
+    resultLabel: "hike"
+  },
+  "Skiing": {
+    met: metSkiing,
+    icon: faSkiing,
+    intensityLabel: "Skiing Effort",
+    resultLabel: "ski"
+  },
 };
-
-////////// Icons //////////
-
-export const icons = {
-  "Running": faRunning,
-  "Cycling": faBiking,
-  "Walking": faWalking,
-  "Swimming": faSwimmer,
-  "Hiking": faHiking,
-  "Skiing": faSkiing,
-};
-
-////////// Labels //////////
-
-export const IntensityLabel = {
-  "Running": "Running Pace",
-  "Cycling": "Cycling Speed",
-  "Walking": "Walking Speed",
-  "Swimming": "Swimming Style",
-  "Hiking": "Hiking Style",
-  "Skiing": "Skiing Effort",
-}
-
-export const ResultLabel = {
-  "Running": "run",
-  "Cycling": "cycle",
-  "Walking": "walk",
-  "Swimming": "swim",
-  "Hiking": "hike",
-  "Skiing": "ski",
-}
