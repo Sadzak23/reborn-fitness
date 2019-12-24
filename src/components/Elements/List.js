@@ -71,28 +71,40 @@ export const ListItemTitle = ({ linkPath, title, subtitle }) => (
 
 export const ListItemBtns = ({
   editLink,
+  onEdit,
   onSort,
   onRemove,
   editIcon = faPen,
   sortIcon = faSort,
-  removeIcon = faTimes
+  removeIcon = faTimes,
+  iconSize = "m"
 }) => (
     <div className="list-item-btns">
-      {/* Edit button */}
-      <Link to={editLink} onMouseDown={(e) => { e.preventDefault() }}>
-        <button className="btn-edit-m">
+      { // Edit button with Link
+        editLink &&
+        <Link to={editLink} onMouseDown={(e) => { e.preventDefault() }}>
+          <button className={`btn-edit-${iconSize}`}>
+            <FontAwesomeIcon icon={editIcon} />
+          </button>
+        </Link>
+      }
+      { // Edit button only
+        onEdit &&
+        <button className={`btn-edit-${iconSize}`} onClick={onEdit}>
           <FontAwesomeIcon icon={editIcon} />
         </button>
-      </Link>
-      {/* Sort button */}
-      <button
-        className="btn-edit-m"
-        onClick={onSort}
-      >
-        <FontAwesomeIcon icon={sortIcon} size="lg" />
-      </button>
+      }
+      { // Sort button
+        onSort &&
+        <button
+          className={`btn-edit-${iconSize}`}
+          onClick={onSort}
+        >
+          <FontAwesomeIcon icon={sortIcon} size="lg" />
+        </button>
+      }
       {/* Delete button */}
-      <button className="btn-remove-m" onClick={onRemove}>
+      <button className={`btn-remove-${iconSize}`} onClick={onRemove}>
         <FontAwesomeIcon icon={removeIcon} />
       </button>
     </div>
