@@ -54,11 +54,11 @@ export class Workout5x5 extends React.Component {
 
   onSave = () => {
     const exercises = {
-      Squat: this.state.squat ? Math.round(parseFloat(this.state.squat * 0.75 / 2.5)) * 2.5 : 20,
-      "Bench Press": this.state.benchPress ? Math.round(parseFloat(this.state.benchPress * 0.3)) * 2.5 : 20,
-      "Barbell Row": this.state.barbellRow ? Math.round(parseFloat(this.state.barbellRow * 0.3)) * 2.5 : 30,
-      "Overhead Press": this.state.overheadPress ? Math.round(parseFloat(this.state.overheadPress * 0.3)) * 2.5 : 20,
-      Deadlift: this.state.deadlift ? Math.round(parseFloat(this.state.deadlift * 0.3)) * 2.5 : 40
+      Squat: this.state.squat ? Math.round(this.state.squat * 0.75 / 2.5) * 2.5 : 20,
+      "Bench Press": this.state.benchPress ? Math.round(this.state.benchPress * 0.3) * 2.5 : 20,
+      "Barbell Row": this.state.barbellRow ? Math.round(this.state.barbellRow * 0.3) * 2.5 : 30,
+      "Overhead Press": this.state.overheadPress ? Math.round(this.state.overheadPress * 0.3) * 2.5 : 20,
+      Deadlift: this.state.deadlift ? Math.round(this.state.deadlift * 0.3) * 2.5 : 40
     }
     const data = {
       strongLifts: {

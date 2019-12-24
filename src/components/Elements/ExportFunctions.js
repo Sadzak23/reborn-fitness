@@ -41,6 +41,6 @@ export const moveArrIndex = (array, from, to, editAction, setAction) => {
       editAction(array.find(element => element.index === e).id, { index: i })
     })
     // Refresh UI
-    setAction();
+    !!setAction && setAction();
   }
 }
