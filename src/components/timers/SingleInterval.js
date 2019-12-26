@@ -1,15 +1,16 @@
 import React from 'react';
 import { colorMap } from '../Elements/ColorMap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faPen } from '@fortawesome/free-solid-svg-icons';
+import { ListItemBtns } from '../Elements/List';
+import { onReorder } from '../Elements/Alerts';
 
-const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, intervalColor, intervalSec, intervalType, editingClass }) => {
+const SingleInterval = ({ onRemove, onEdit, intervals, id, intervalName, intervalMin, intervalColor, intervalSec, intervalType, intervalIndex, editingClass }) => {
   const onRemoveInterval = () => {
     onRemove(id)
   };
   const onEditInterval = () => {
     onEdit(id, intervalName, intervalMin, intervalSec, intervalType, intervalColor)
   };
+  const onSortIntervals = () => onReorder(intervals, intervalIndex, intervalName, onEditInterval)
 
   return (
     <div className={`list-item ${editingClass}`}>
@@ -20,14 +21,12 @@ const SingleInterval = ({ onRemove, onEdit, id, intervalName, intervalMin, inter
           <p>{intervalType} - {colorMap[intervalColor]}</p>
         </div>
       </div>
-      <div>
-        <button className="btn-edit-s" onClick={onEditInterval}>
-          <FontAwesomeIcon icon={faPen} />
-        </button>
-        <button className="btn-remove-s" onClick={onRemoveInterval}>
-          <FontAwesomeIcon icon={faTimes} />
-        </button>
-      </div>
+      <ListItemBtns
+        onEdit={onEditInterval}
+        //onSort={onSortIntervals}
+        onRemove={onRemoveInterval}
+        iconSize="s"
+        />
     </div>
   )
 };
