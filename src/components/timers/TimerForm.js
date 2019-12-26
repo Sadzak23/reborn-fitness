@@ -315,13 +315,7 @@ export default class TimerForm extends React.Component {
                 onChange={this.onIntervalColorChange}
                 value={this.state.currentIntervalColor}
               >
-                <option value={Object.keys(colorMap)[0]}>{colorMap[Object.keys(colorMap)[0]]}</option>
-                <option value={Object.keys(colorMap)[1]}>{colorMap[Object.keys(colorMap)[1]]}</option>
-                <option value={Object.keys(colorMap)[2]}>{colorMap[Object.keys(colorMap)[2]]}</option>
-                <option value={Object.keys(colorMap)[3]}>{colorMap[Object.keys(colorMap)[3]]}</option>
-                <option value={Object.keys(colorMap)[4]}>{colorMap[Object.keys(colorMap)[4]]}</option>
-                <option value={Object.keys(colorMap)[5]}>{colorMap[Object.keys(colorMap)[5]]}</option>
-                <option value={Object.keys(colorMap)[6]}>{colorMap[Object.keys(colorMap)[6]]}</option>
+              {Object.keys(colorMap).map(color => <option value={color}>{colorMap[color]}</option>)}
               </select>
             </div>
           </div>
