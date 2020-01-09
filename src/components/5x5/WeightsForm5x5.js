@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBan, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../../routers/AppRouter';
 import { startSetEditData5x5 } from '../../actions/users';
 import { BtnConfirmCancel } from '../Elements/Buttons';
@@ -18,20 +17,22 @@ export class Workout5x5 extends React.Component {
     }
   };
 
+  getMaxWeight = (value) => Math.round(value / 2.5) * 2.5  // Getting max value that is divisible by 2.5
+  get75ofMaxWeight = (value) => Math.round(value * 0.3) * 2.5  // Getting 75% of max value that is divisible by 2.5
+  exerciseCheck75 = (exercise, elseValue) => exercise ? this.get75ofMaxWeight(exercise) : elseValue
+
   onSquatChange = (e) => {
     const squat = e.target.value;
     if (!squat || squat.match(/^\d{1,3}([.]\d{0,1})?$/)) {
       this.setState({ squat });
     }
   };
-
   onBenchPressChange = (e) => {
     const benchPress = e.target.value;
     if (!benchPress || benchPress.match(/^\d{1,3}([.]\d{0,1})?$/)) {
       this.setState({ benchPress });
     }
   };
-
   onBarbellRowChange = (e) => {
     const barbellRow = e.target.value;
     if (!barbellRow || barbellRow.match(/^\d{1,3}([.]\d{0,1})?$/)) {
@@ -44,7 +45,6 @@ export class Workout5x5 extends React.Component {
       this.setState({ overheadPress });
     }
   };
-
   onDeadliftChange = (e) => {
     const deadlift = e.target.value;
     if (!deadlift || deadlift.match(/^\d{1,3}([.]\d{0,1})?$/)) {
@@ -54,11 +54,11 @@ export class Workout5x5 extends React.Component {
 
   onSave = () => {
     const exercises = {
-      Squat: this.state.squat ? Math.round(this.state.squat * 0.75 / 2.5) * 2.5 : 20,
-      "Bench Press": this.state.benchPress ? Math.round(this.state.benchPress * 0.3) * 2.5 : 20,
-      "Barbell Row": this.state.barbellRow ? Math.round(this.state.barbellRow * 0.3) * 2.5 : 30,
-      "Overhead Press": this.state.overheadPress ? Math.round(this.state.overheadPress * 0.3) * 2.5 : 20,
-      Deadlift: this.state.deadlift ? Math.round(this.state.deadlift * 0.3) * 2.5 : 40
+      Squat: this.exerciseCheck75(this.state.squat, 20),
+      "Bench Press": this.exerciseCheck75(this.state.benchPress, 30),
+      "Barbell Row": this.exerciseCheck75(this.state.barbellRow, 20),
+      "Overhead Press": this.exerciseCheck75(this.state.overheadPress, 20),
+      Deadlift: this.exerciseCheck75(this.state.deadlift, 40)
     }
     const data = {
       strongLifts: {
@@ -70,18 +70,17 @@ export class Workout5x5 extends React.Component {
         [Date.now()]: exercises
       }
     };
-    const userId = this.props.user.id
-    this.props.startSetEditData5x5(userId, data)
+    this.props.startSetEditData5x5(this.props.user.id, data)
   };
 
   onEdit = () => {
     const data = {
       strongLifts: {
-        Squat: Math.floor(this.state.squat / 2.5) * 2.5,
-        "Bench Press": Math.floor(this.state.benchPress / 2.5) * 2.5,
-        "Barbell Row": Math.floor(this.state.barbellRow / 2.5) * 2.5,
-        "Overhead Press": Math.floor(this.state.overheadPress / 2.5) * 2.5,
-        Deadlift: Math.floor(this.state.deadlift / 2.5) * 2.5
+        Squat: this.getMaxWeight(this.state.squat),
+        "Bench Press": this.getMaxWeight(this.state.benchPress),
+        "Barbell Row": this.getMaxWeight(this.state.barbellRow),
+        "Overhead Press": this.getMaxWeight(this.state.overheadPress),
+        Deadlift: this.getMaxWeight(this.state.deadlift)
       }
     };
     const userId = this.props.user.id;
@@ -169,24 +168,13 @@ export class Workout5x5 extends React.Component {
         {!this.userData &&
           <div>
             <div className="flex-center">
-              <h3 className="margin-right">
-                Squat: {this.state.squat ?
-                  Math.round(this.state.squat * 0.75 / 2.5) * 2.5 // Getting 75% of max value that is divisible by 2.5
-                  : 20}kg</h3>
-              <h3 className="margin-right">Bench Press: {this.state.benchPress ?
-                Math.round(this.state.benchPress * 0.3) * 2.5
-                : 30}kg</h3>
-              <h3 className="margin-right">Barbell Row: {this.state.barbellRow ?
-                Math.round(this.state.barbellRow * 0.3) * 2.5
-                : 30}kg</h3>
+              <h3 className="margin-right">Squat: {this.exerciseCheck75(this.state.squat, 20)}</h3>
+              <h3 className="margin-right">Bench Press: {this.exerciseCheck75(this.state.benchPress, 30)}</h3>
+              <h3 className="margin-right">Barbell Row: {this.exerciseCheck75(this.state.barbellRow, 20)}</h3>
             </div>
             <div className="flex-center">
-              <h3 className="margin-right">Overhead Press: {this.state.overheadPress ?
-                Math.round(this.state.overheadPress * 0.3) * 2.5
-                : 20}kg</h3>
-              <h3 className="margin-right">Deadlift: {this.state.deadlift ?
-                Math.round(this.state.deadlift * 0.3) * 2.5
-                : 40}kg</h3>
+              <h3 className="margin-right">Overhead Press: {this.exerciseCheck75(this.state.overheadPress, 20)}</h3>
+              <h3 className="margin-right">Deadlift: {this.exerciseCheck75(this.state.deadlift, 40)}</h3>
             </div>
           </div>
         }
