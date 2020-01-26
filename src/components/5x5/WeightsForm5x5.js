@@ -17,7 +17,7 @@ export class Workout5x5 extends React.Component {
     }
   };
 
-  getMaxWeight = (value) => Math.round(value / 2.5) * 2.5  // Getting max value that is divisible by 2.5
+  getMaxWeight = (value) => Math.floor(value / 2.5) * 2.5  // Getting max value that is divisible by 2.5
   get75ofMaxWeight = (value) => Math.round(value * 0.3) * 2.5  // Getting 75% of max value that is divisible by 2.5
   exerciseCheck75 = (exercise, elseValue) => exercise ? this.get75ofMaxWeight(exercise) : elseValue
 

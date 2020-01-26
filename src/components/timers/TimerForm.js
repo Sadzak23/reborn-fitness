@@ -2,7 +2,7 @@ import React from "react";
 import uuid from 'uuid';
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSyncAlt, faPlusCircle, faSave, faClipboardList, faBan } from "@fortawesome/free-solid-svg-icons";
+import { faSyncAlt, faPlusCircle, faSave, faClipboardList } from "@fortawesome/free-solid-svg-icons";
 import { history } from "../../routers/AppRouter";
 import { colorMap } from '../Elements/ColorMap';
 import { timerFormAlerts } from '../Elements/Alerts';
